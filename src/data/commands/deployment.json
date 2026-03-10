@@ -1,0 +1,152 @@
+{
+  "id": "deployment",
+  "name": "部署指南",
+  "nameEn": "Deployment Guide",
+  "icon": "🚀",
+  "description": "OpenClaw 的安装、部署和生产环境配置指南",
+  "descriptionEn": "Installation, deployment, and production environment configuration for OpenClaw",
+  "commands": [
+    {
+      "name": "安装 OpenClaw",
+      "nameEn": "Install OpenClaw",
+      "description": "通过一键脚本或 npm 全局安装 OpenClaw CLI",
+      "descriptionEn": "Install OpenClaw CLI via quick script or npm global install",
+      "syntax": "curl -fsSL https://openclaw.ai/install.sh | bash",
+      "options": [],
+      "examples": [
+        { "description": "一键安装（推荐）", "descriptionEn": "Quick install (recommended)", "code": "curl -fsSL https://openclaw.ai/install.sh | bash" },
+        { "description": "通过 npm 安装", "descriptionEn": "Install via npm", "code": "npm install -g openclaw" },
+        { "description": "验证安装", "descriptionEn": "Verify installation", "code": "openclaw --version" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "系统要求",
+      "nameEn": "System Requirements",
+      "description": "运行 OpenClaw 的系统环境要求",
+      "descriptionEn": "System requirements for running OpenClaw",
+      "syntax": "node -v  # 需要 Node.js 18+（推荐 22+）",
+      "options": [
+        { "flag": "Node.js", "description": "版本 18 或更高（推荐 v22+）", "descriptionEn": "Version 18 or higher (v22+ recommended)" },
+        { "flag": "操作系统 / OS", "description": "macOS、Linux 或 Windows（推荐 WSL2）", "descriptionEn": "macOS, Linux, or Windows (WSL2 recommended)" },
+        { "flag": "内存 / RAM", "description": "至少 2 GB", "descriptionEn": "Minimum 2 GB" },
+        { "flag": "API Key", "description": "来自 OpenAI、Anthropic、DeepSeek 或其他 LLM 提供商", "descriptionEn": "From OpenAI, Anthropic, DeepSeek, or other LLM providers" }
+      ],
+      "examples": [
+        { "description": "检查 Node.js 版本", "descriptionEn": "Check Node.js version", "code": "node -v" },
+        { "description": "安装 Node.js (Ubuntu/Debian)", "descriptionEn": "Install Node.js (Ubuntu/Debian)", "code": "curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -\nsudo apt-get install -y nodejs" },
+        { "description": "安装 Node.js (macOS)", "descriptionEn": "Install Node.js (macOS)", "code": "brew install node@22" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "快速启动",
+      "nameEn": "Quick Start",
+      "description": "5 分钟内完成 OpenClaw 基本部署和首次对话",
+      "descriptionEn": "Deploy OpenClaw and start your first conversation in 5 minutes",
+      "syntax": "openclaw onboard --install-daemon",
+      "options": [],
+      "examples": [
+        { "description": "交互式完整引导（推荐首次使用）", "descriptionEn": "Interactive full setup (recommended for first use)", "code": "openclaw onboard --install-daemon" },
+        { "description": "快速模式引导", "descriptionEn": "Quickstart flow", "code": "openclaw onboard --flow quickstart" },
+        { "description": "高级手动配置", "descriptionEn": "Advanced manual configuration", "code": "openclaw onboard --flow manual" },
+        { "description": "启动 Web 仪表盘开始对话", "descriptionEn": "Start web dashboard for chatting", "code": "openclaw dashboard" },
+        { "description": "使用终端 UI 开始对话", "descriptionEn": "Start terminal UI for chatting", "code": "openclaw tui" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "配置 AI 模型",
+      "nameEn": "Configure AI Models",
+      "description": "在引导过程中或之后配置 LLM 提供商认证",
+      "descriptionEn": "Configure LLM provider authentication during or after onboarding",
+      "syntax": "openclaw models auth add",
+      "options": [],
+      "examples": [
+        { "description": "使用 OpenAI 密钥引导", "descriptionEn": "Onboard with OpenAI key", "code": "openclaw onboard --non-interactive \\\n  --auth-choice openai-api-key \\\n  --openai-api-key $OPENAI_API_KEY \\\n  --install-daemon" },
+        { "description": "使用 Anthropic 密钥引导", "descriptionEn": "Onboard with Anthropic key", "code": "openclaw onboard --non-interactive \\\n  --auth-choice anthropic-api-key \\\n  --anthropic-api-key $ANTHROPIC_API_KEY \\\n  --install-daemon" },
+        { "description": "使用自定义 API 兼容端点", "descriptionEn": "Use custom API-compatible endpoint", "code": "openclaw onboard --non-interactive \\\n  --auth-choice custom-api-key \\\n  --custom-base-url \"https://llm.example.com/v1\" \\\n  --custom-model-id \"my-model\" \\\n  --custom-api-key $CUSTOM_API_KEY \\\n  --custom-compatibility openai" },
+        { "description": "后续添加认证", "descriptionEn": "Add auth later", "code": "openclaw models auth add" },
+        { "description": "设置默认模型", "descriptionEn": "Set default model", "code": "openclaw models set gpt-4o" },
+        { "description": "扫描所有可用模型", "descriptionEn": "Scan all available models", "code": "openclaw models scan --set-default" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "接入聊天渠道",
+      "nameEn": "Connect Chat Channels",
+      "description": "连接 WhatsApp、Telegram、Discord 等聊天平台",
+      "descriptionEn": "Connect WhatsApp, Telegram, Discord, and other chat platforms",
+      "syntax": "openclaw channels add --channel <type> [options]",
+      "options": [
+        { "flag": "WhatsApp", "description": "通过 WhatsApp Web 登录", "descriptionEn": "Login via WhatsApp Web" },
+        { "flag": "Telegram", "description": "需要 Bot Token (从 @BotFather 获取)", "descriptionEn": "Requires Bot Token (from @BotFather)" },
+        { "flag": "Discord", "description": "需要 Bot Token", "descriptionEn": "Requires Bot Token" },
+        { "flag": "Slack", "description": "通过 Slack App 连接", "descriptionEn": "Connect via Slack App" },
+        { "flag": "Signal", "description": "通过 Signal 连接", "descriptionEn": "Connect via Signal" },
+        { "flag": "iMessage", "description": "仅 macOS", "descriptionEn": "macOS only" },
+        { "flag": "MS Teams", "description": "通过 Teams 连接", "descriptionEn": "Connect via Teams" }
+      ],
+      "examples": [
+        { "description": "添加 WhatsApp（交互式扫码登录）", "descriptionEn": "Add WhatsApp (interactive QR login)", "code": "openclaw channels add --channel whatsapp\nopenclaw channels login --channel whatsapp" },
+        { "description": "添加 Telegram Bot", "descriptionEn": "Add Telegram Bot", "code": "openclaw channels add --channel telegram --token $TELEGRAM_BOT_TOKEN" },
+        { "description": "添加 Discord Bot", "descriptionEn": "Add Discord Bot", "code": "openclaw channels add --channel discord --token $DISCORD_BOT_TOKEN" },
+        { "description": "检查所有渠道状态", "descriptionEn": "Check all channel statuses", "code": "openclaw channels status --probe" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "Gateway 服务管理",
+      "nameEn": "Gateway Service Management",
+      "description": "安装、管理和监控 Gateway 后台服务",
+      "descriptionEn": "Install, manage, and monitor the Gateway background service",
+      "syntax": "openclaw gateway install [options]",
+      "options": [
+        { "flag": "--port <port>", "description": "Gateway 监听端口 (默认 18789)", "descriptionEn": "Gateway listen port (default 18789)" },
+        { "flag": "--token <token>", "description": "认证令牌", "descriptionEn": "Auth token" },
+        { "flag": "--runtime <runtime>", "description": "运行时 (默认 Node，不推荐 Bun)", "descriptionEn": "Runtime (default Node; Bun not recommended)" },
+        { "flag": "--force", "description": "强制覆盖已有安装", "descriptionEn": "Force overwrite existing install" }
+      ],
+      "examples": [
+        { "description": "安装为系统服务", "descriptionEn": "Install as system service", "code": "openclaw gateway install --port 18789 --token mytoken" },
+        { "description": "查看服务状态", "descriptionEn": "Check service status", "code": "openclaw gateway status" },
+        { "description": "重启服务", "descriptionEn": "Restart service", "code": "openclaw gateway restart" },
+        { "description": "查看 Gateway 日志", "descriptionEn": "View Gateway logs", "code": "openclaw logs --follow" },
+        { "description": "运行健康检查", "descriptionEn": "Run health check", "code": "openclaw doctor" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "远程 Gateway 部署",
+      "nameEn": "Remote Gateway Deployment",
+      "description": "在远程服务器或 VPS 上部署 Gateway 并从本地连接",
+      "descriptionEn": "Deploy Gateway on a remote server or VPS and connect from local",
+      "syntax": "openclaw onboard --mode remote --remote-url <url>",
+      "options": [],
+      "examples": [
+        { "description": "在远程服务器上安装并启动 Gateway", "descriptionEn": "Install and start Gateway on remote server", "code": "# 在远程服务器上\nopenclaw onboard --install-daemon --gateway-auth token --gateway-token YOUR_TOKEN" },
+        { "description": "从本地连接到远程 Gateway", "descriptionEn": "Connect to remote Gateway from local", "code": "openclaw onboard --mode remote \\\n  --remote-url wss://your-server:18789 \\\n  --remote-token YOUR_TOKEN" },
+        { "description": "私有网络中使用 ws:// 协议", "descriptionEn": "Use ws:// in private network", "code": "OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1 \\\n  openclaw onboard --mode remote \\\n  --remote-url ws://192.168.1.100:18789 \\\n  --remote-token YOUR_TOKEN" },
+        { "description": "使用 Tailscale 连接", "descriptionEn": "Connect via Tailscale", "code": "openclaw gateway install --tailscale my-funnel-name" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "安全加固",
+      "nameEn": "Security Hardening",
+      "description": "生产环境的安全最佳实践",
+      "descriptionEn": "Security best practices for production environments",
+      "syntax": "openclaw security audit --fix",
+      "options": [],
+      "examples": [
+        { "description": "运行安全审计并自动修复", "descriptionEn": "Run security audit with auto-fix", "code": "openclaw security audit --fix" },
+        { "description": "深度安全审计", "descriptionEn": "Deep security audit", "code": "openclaw security audit --deep" },
+        { "description": "将密钥存储为环境变量引用（而非明文）", "descriptionEn": "Store keys as env refs (not plaintext)", "code": "openclaw onboard --non-interactive \\\n  --auth-choice openai-api-key \\\n  --secret-input-mode ref" },
+        { "description": "使用密码保护 Gateway", "descriptionEn": "Password-protect the Gateway", "code": "openclaw gateway install \\\n  --port 18789 \\\n  --token YOUR_SECURE_TOKEN" },
+        { "description": "审计密钥残留", "descriptionEn": "Audit for secret residues", "code": "openclaw secrets audit" },
+        { "description": "创建配置备份", "descriptionEn": "Create config backup", "code": "openclaw backup create" }
+      ],
+      "subcommands": []
+    }
+  ]
+}

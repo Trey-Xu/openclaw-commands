@@ -1,0 +1,49 @@
+{
+  "id": "models",
+  "name": "模型管理",
+  "nameEn": "Model Management",
+  "icon": "🧠",
+  "description": "管理 AI 模型配置、认证、别名和回退策略",
+  "descriptionEn": "Manage AI model configuration, auth, aliases, and fallback strategies",
+  "commands": [
+    {
+      "name": "models",
+      "description": "管理 AI 模型（models 根命令等同于 models status）",
+      "descriptionEn": "Manage AI models (root command equals models status)",
+      "syntax": "openclaw models <subcommand> [options]",
+      "options": [
+        { "flag": "--status-plain", "description": "models status --plain 的别名", "descriptionEn": "Alias for models status --plain" },
+        { "flag": "--status-json", "description": "models status --json 的别名", "descriptionEn": "Alias for models status --json" }
+      ],
+      "examples": [
+        { "description": "查看模型状态", "descriptionEn": "View model status", "code": "openclaw models status" },
+        { "description": "列出所有可用模型", "descriptionEn": "List all available models", "code": "openclaw models list --all" },
+        { "description": "设置默认模型", "descriptionEn": "Set default model", "code": "openclaw models set gpt-4o" },
+        { "description": "扫描可用模型", "descriptionEn": "Scan available models", "code": "openclaw models scan --set-default" },
+        { "description": "添加 Anthropic 认证", "descriptionEn": "Add Anthropic auth", "code": "openclaw models auth setup-token --provider anthropic" },
+        { "description": "添加模型别名", "descriptionEn": "Add model alias", "code": "openclaw models aliases add fast gpt-4o-mini" },
+        { "description": "添加回退模型", "descriptionEn": "Add fallback model", "code": "openclaw models fallbacks add claude-3.5-sonnet" },
+        { "description": "探测模型健康状态", "descriptionEn": "Probe model health", "code": "openclaw models status --probe" }
+      ],
+      "subcommands": [
+        { "name": "list", "description": "列出模型，支持 --provider、--local、--all、--json", "descriptionEn": "List models, supports --provider, --local, --all, --json" },
+        { "name": "status", "description": "状态概览，支持 --probe 实时探测、--check 退出码检查", "descriptionEn": "Status overview, supports --probe live probing, --check exit code" },
+        { "name": "set <model>", "description": "设置默认主模型", "descriptionEn": "Set default primary model" },
+        { "name": "set-image <model>", "description": "设置默认图像模型", "descriptionEn": "Set default image model" },
+        { "name": "scan", "description": "扫描可用模型，支持 --set-default、--provider 等", "descriptionEn": "Scan available models, supports --set-default, --provider, etc." },
+        { "name": "aliases list", "description": "列出别名", "descriptionEn": "List aliases" },
+        { "name": "aliases add <alias> <model>", "description": "添加模型别名", "descriptionEn": "Add model alias" },
+        { "name": "aliases remove <alias>", "description": "移除别名", "descriptionEn": "Remove alias" },
+        { "name": "fallbacks list", "description": "列出回退模型", "descriptionEn": "List fallback models" },
+        { "name": "fallbacks add <model>", "description": "添加回退模型", "descriptionEn": "Add fallback model" },
+        { "name": "fallbacks remove <model>", "description": "移除回退模型", "descriptionEn": "Remove fallback model" },
+        { "name": "fallbacks clear", "description": "清除所有回退", "descriptionEn": "Clear all fallbacks" },
+        { "name": "image-fallbacks list|add|remove|clear", "description": "图像模型回退管理", "descriptionEn": "Image model fallback management" },
+        { "name": "auth add", "description": "交互式认证助手", "descriptionEn": "Interactive auth helper" },
+        { "name": "auth setup-token", "description": "设置令牌认证 (默认 Anthropic)", "descriptionEn": "Setup token auth (default Anthropic)" },
+        { "name": "auth paste-token", "description": "粘贴令牌", "descriptionEn": "Paste token" },
+        { "name": "auth order get|set|clear", "description": "认证优先级管理", "descriptionEn": "Auth priority management" }
+      ]
+    }
+  ]
+}

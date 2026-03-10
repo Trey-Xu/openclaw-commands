@@ -1,0 +1,74 @@
+{
+  "id": "skills",
+  "name": "技能与插件",
+  "nameEn": "Skills & Plugins",
+  "icon": "🧩",
+  "description": "管理 OpenClaw 的技能、插件和钩子扩展",
+  "descriptionEn": "Manage OpenClaw skills, plugins, and hook extensions",
+  "commands": [
+    {
+      "name": "skills",
+      "description": "列出和检查可用技能及其就绪状态",
+      "descriptionEn": "List and inspect available skills and their readiness",
+      "syntax": "openclaw skills <subcommand> [options]",
+      "options": [
+        { "flag": "-v, --verbose", "description": "包含缺失需求的详细信息", "descriptionEn": "Include missing requirements detail" },
+        { "flag": "--json", "description": "JSON 输出（无样式）", "descriptionEn": "JSON output (no styling)" },
+        { "flag": "--eligible", "description": "仅显示就绪的技能", "descriptionEn": "Show only ready skills" }
+      ],
+      "examples": [
+        { "description": "列出所有技能", "descriptionEn": "List all skills", "code": "openclaw skills list" },
+        { "description": "查看某技能详情", "descriptionEn": "View skill details", "code": "openclaw skills info web-search" },
+        { "description": "检查技能就绪状态", "descriptionEn": "Check skill readiness", "code": "openclaw skills check" },
+        { "description": "使用 clawhub 搜索和安装技能", "descriptionEn": "Search and install skills via clawhub", "code": "npx clawhub" }
+      ],
+      "subcommands": [
+        { "name": "list", "description": "列出技能（无子命令时默认执行）", "descriptionEn": "List skills (default when no subcommand)" },
+        { "name": "info <name>", "description": "显示某个技能的详情", "descriptionEn": "Show details for a skill" },
+        { "name": "check", "description": "汇总就绪 vs 缺失需求", "descriptionEn": "Summary of ready vs missing requirements" }
+      ]
+    },
+    {
+      "name": "plugins",
+      "description": "管理扩展插件及其配置",
+      "descriptionEn": "Manage extension plugins and their config",
+      "syntax": "openclaw plugins <subcommand> [options]",
+      "options": [],
+      "examples": [
+        { "description": "列出已发现的插件", "descriptionEn": "List discovered plugins", "code": "openclaw plugins list --json" },
+        { "description": "安装插件", "descriptionEn": "Install a plugin", "code": "openclaw plugins install my-plugin" },
+        { "description": "启用/禁用插件", "descriptionEn": "Enable/disable a plugin", "code": "openclaw plugins enable my-plugin" },
+        { "description": "诊断插件加载错误", "descriptionEn": "Diagnose plugin load errors", "code": "openclaw plugins doctor" }
+      ],
+      "subcommands": [
+        { "name": "list", "description": "发现插件，支持 --json", "descriptionEn": "Discover plugins, supports --json" },
+        { "name": "info <name>", "description": "显示插件详情", "descriptionEn": "Show plugin details" },
+        { "name": "install <name>", "description": "安装插件或添加插件路径", "descriptionEn": "Install a plugin or add plugin path" },
+        { "name": "enable <name>", "description": "启用插件", "descriptionEn": "Enable a plugin" },
+        { "name": "disable <name>", "description": "禁用插件", "descriptionEn": "Disable a plugin" },
+        { "name": "doctor", "description": "报告插件加载错误", "descriptionEn": "Report plugin load errors" }
+      ]
+    },
+    {
+      "name": "hooks",
+      "description": "管理钩子扩展",
+      "descriptionEn": "Manage hook extensions",
+      "syntax": "openclaw hooks <subcommand> [options]",
+      "options": [],
+      "examples": [
+        { "description": "列出所有钩子", "descriptionEn": "List all hooks", "code": "openclaw hooks list" },
+        { "description": "查看钩子信息", "descriptionEn": "View hook info", "code": "openclaw hooks info my-hook" },
+        { "description": "安装钩子", "descriptionEn": "Install a hook", "code": "openclaw hooks install my-hook" }
+      ],
+      "subcommands": [
+        { "name": "list", "description": "列出钩子", "descriptionEn": "List hooks" },
+        { "name": "info <name>", "description": "显示钩子详情", "descriptionEn": "Show hook details" },
+        { "name": "check", "description": "检查钩子状态", "descriptionEn": "Check hook status" },
+        { "name": "enable <name>", "description": "启用钩子", "descriptionEn": "Enable a hook" },
+        { "name": "disable <name>", "description": "禁用钩子", "descriptionEn": "Disable a hook" },
+        { "name": "install <name>", "description": "安装钩子", "descriptionEn": "Install a hook" },
+        { "name": "update <name>", "description": "更新钩子", "descriptionEn": "Update a hook" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "id": "automation",
+  "name": "自动化",
+  "nameEn": "Automation",
+  "icon": "⏱️",
+  "description": "管理定时任务、Webhook 和沙箱环境",
+  "descriptionEn": "Manage scheduled tasks, webhooks, and sandbox environments",
+  "commands": [
+    {
+      "name": "cron",
+      "description": "管理定时任务（通过 Gateway RPC）",
+      "descriptionEn": "Manage scheduled jobs (via Gateway RPC)",
+      "syntax": "openclaw cron <subcommand> [options]",
+      "options": [
+        { "flag": "--url <url>", "description": "Gateway URL", "descriptionEn": "Gateway URL" },
+        { "flag": "--token <token>", "description": "Gateway 令牌", "descriptionEn": "Gateway token" },
+        { "flag": "--timeout <ms>", "description": "超时时间", "descriptionEn": "Timeout" },
+        { "flag": "--expect-final", "description": "等待最终结果", "descriptionEn": "Wait for final result" }
+      ],
+      "examples": [
+        { "description": "查看定时任务状态", "descriptionEn": "View cron status", "code": "openclaw cron status --json" },
+        { "description": "列出所有任务", "descriptionEn": "List all jobs", "code": "openclaw cron list --all" },
+        { "description": "添加系统事件定时任务", "descriptionEn": "Add system event cron job", "code": "openclaw cron add --name \"Daily Report\" --every 24h --system-event \"Generate daily summary\"" },
+        { "description": "添加消息定时任务", "descriptionEn": "Add message cron job", "code": "openclaw cron add --name \"Reminder\" --at \"09:00\" --message \"Time for meeting\"" },
+        { "description": "手动触发任务", "descriptionEn": "Manually trigger job", "code": "openclaw cron run my-job --force" },
+        { "description": "查看运行历史", "descriptionEn": "View run history", "code": "openclaw cron runs --id my-job --limit 10" }
+      ],
+      "subcommands": [
+        { "name": "status", "description": "定时任务状态，支持 --json", "descriptionEn": "Cron status, supports --json" },
+        { "name": "list", "description": "列出任务，支持 --all、--json", "descriptionEn": "List jobs, supports --all, --json" },
+        { "name": "add", "description": "添加任务 (别名: create)，需 --name 和时间表达式", "descriptionEn": "Add job (alias: create), requires --name and schedule" },
+        { "name": "edit <id>", "description": "编辑任务字段", "descriptionEn": "Edit job fields" },
+        { "name": "rm <id>", "description": "删除任务 (别名: remove, delete)", "descriptionEn": "Remove job (aliases: remove, delete)" },
+        { "name": "enable <id>", "description": "启用任务", "descriptionEn": "Enable job" },
+        { "name": "disable <id>", "description": "禁用任务", "descriptionEn": "Disable job" },
+        { "name": "runs", "description": "查看运行历史，需 --id", "descriptionEn": "View run history, requires --id" },
+        { "name": "run <id>", "description": "手动触发运行，支持 --force", "descriptionEn": "Manually trigger run, supports --force" }
+      ]
+    },
+    {
+      "name": "webhooks",
+      "description": "Webhook 集成（目前支持 Gmail Pub/Sub）",
+      "descriptionEn": "Webhook integration (currently supports Gmail Pub/Sub)",
+      "syntax": "openclaw webhooks gmail <subcommand> [options]",
+      "options": [],
+      "examples": [
+        { "description": "设置 Gmail Webhook", "descriptionEn": "Setup Gmail webhook", "code": "openclaw webhooks gmail setup --account me@gmail.com --project my-project" },
+        { "description": "运行 Gmail Webhook 监听", "descriptionEn": "Run Gmail webhook listener", "code": "openclaw webhooks gmail run" }
+      ],
+      "subcommands": [
+        { "name": "gmail setup", "description": "设置 Gmail Pub/Sub 钩子", "descriptionEn": "Setup Gmail Pub/Sub hook" },
+        { "name": "gmail run", "description": "运行 Webhook 监听器", "descriptionEn": "Run webhook listener" }
+      ]
+    },
+    {
+      "name": "sandbox",
+      "description": "管理沙箱环境",
+      "descriptionEn": "Manage sandbox environments",
+      "syntax": "openclaw sandbox <subcommand> [options]",
+      "options": [],
+      "examples": [
+        { "description": "列出沙箱", "descriptionEn": "List sandboxes", "code": "openclaw sandbox list" },
+        { "description": "重建沙箱", "descriptionEn": "Recreate sandbox", "code": "openclaw sandbox recreate" },
+        { "description": "查看沙箱说明", "descriptionEn": "Explain sandbox", "code": "openclaw sandbox explain" }
+      ],
+      "subcommands": [
+        { "name": "list", "description": "列出沙箱", "descriptionEn": "List sandboxes" },
+        { "name": "recreate", "description": "重建沙箱", "descriptionEn": "Recreate sandbox" },
+        { "name": "explain", "description": "查看沙箱工作原理说明", "descriptionEn": "Explain how sandbox works" }
+      ]
+    }
+  ]
+}

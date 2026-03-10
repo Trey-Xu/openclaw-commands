@@ -1,0 +1,102 @@
+{
+  "id": "agent",
+  "name": "Agent 与消息",
+  "nameEn": "Agent & Messaging",
+  "icon": "🤖",
+  "description": "管理 AI Agent、发送消息和 IDE 桥接",
+  "descriptionEn": "Manage AI agents, send messages, and IDE bridging",
+  "commands": [
+    {
+      "name": "agent",
+      "description": "通过 Gateway（或 --local 嵌入式）运行一次 Agent 回合",
+      "descriptionEn": "Run one agent turn via Gateway (or --local embedded)",
+      "syntax": "openclaw agent --message <msg> [options]",
+      "options": [
+        { "flag": "--message <msg>", "description": "发送给 Agent 的消息（必需）", "descriptionEn": "Message to send to agent (required)" },
+        { "flag": "--to <recipient>", "description": "用于会话键和可选投递", "descriptionEn": "For session key and optional delivery" },
+        { "flag": "--session-id <id>", "description": "会话 ID", "descriptionEn": "Session ID" },
+        { "flag": "--thinking <level>", "description": "思考模式（仅 GPT-5.2 + Codex）", "descriptionEn": "Thinking mode (GPT-5.2 + Codex only)" },
+        { "flag": "--channel <ch>", "description": "频道", "descriptionEn": "Channel" },
+        { "flag": "--local", "description": "本地嵌入式运行", "descriptionEn": "Run locally embedded" },
+        { "flag": "--deliver", "description": "投递消息", "descriptionEn": "Deliver message" },
+        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "JSON output" },
+        { "flag": "--verbose <level>", "description": "详细输出级别", "descriptionEn": "Verbose output level" },
+        { "flag": "--timeout <ms>", "description": "超时时间", "descriptionEn": "Timeout" }
+      ],
+      "examples": [
+        { "description": "发送消息给 Agent", "descriptionEn": "Send message to agent", "code": "openclaw agent --message \"What's the weather today?\"" },
+        { "description": "本地运行 Agent", "descriptionEn": "Run agent locally", "code": "openclaw agent --message \"Help me write a script\" --local" },
+        { "description": "投递消息到指定频道", "descriptionEn": "Deliver message to channel", "code": "openclaw agent --message \"Remind me about the meeting\" --deliver --channel telegram" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "agents",
+      "description": "管理隔离的 Agent（工作区 + 认证 + 路由）",
+      "descriptionEn": "Manage isolated agents (workspace + auth + routing)",
+      "syntax": "openclaw agents <subcommand> [options]",
+      "options": [],
+      "examples": [
+        { "description": "列出所有 Agent", "descriptionEn": "List all agents", "code": "openclaw agents list --json" },
+        { "description": "添加新 Agent", "descriptionEn": "Add new agent", "code": "openclaw agents add my-agent --workspace ~/agents/my-agent" },
+        { "description": "绑定 Agent 到频道", "descriptionEn": "Bind agent to channel", "code": "openclaw agents bind --agent my-agent --bind telegram:alerts" },
+        { "description": "删除 Agent", "descriptionEn": "Delete agent", "code": "openclaw agents delete my-agent --force" }
+      ],
+      "subcommands": [
+        { "name": "list", "description": "列出已配置的 Agent，支持 --bindings、--json", "descriptionEn": "List configured agents, supports --bindings, --json" },
+        { "name": "add [name]", "description": "添加隔离 Agent，需 --workspace（非交互模式）", "descriptionEn": "Add isolated agent, requires --workspace (non-interactive)" },
+        { "name": "delete <name>", "description": "删除 Agent 及其工作区和状态", "descriptionEn": "Delete agent and prune workspace + state" },
+        { "name": "bindings", "description": "列出路由绑定", "descriptionEn": "List routing bindings" },
+        { "name": "bind", "description": "为 Agent 添加路由绑定", "descriptionEn": "Add routing bindings for agent" },
+        { "name": "unbind", "description": "移除 Agent 路由绑定", "descriptionEn": "Remove routing bindings for agent" }
+      ]
+    },
+    {
+      "name": "message",
+      "description": "统一出站消息和频道操作",
+      "descriptionEn": "Unified outbound messaging and channel actions",
+      "syntax": "openclaw message <subcommand> [options]",
+      "options": [],
+      "examples": [
+        { "description": "发送消息", "descriptionEn": "Send message", "code": "openclaw message send --target +15555550123 --message \"Hi\"" },
+        { "description": "发送投票", "descriptionEn": "Send poll", "code": "openclaw message poll --channel discord --target channel:123 --poll-question \"Lunch?\" --poll-option Pizza --poll-option Sushi" }
+      ],
+      "subcommands": [
+        { "name": "send", "description": "发送消息", "descriptionEn": "Send message" },
+        { "name": "poll", "description": "发起投票", "descriptionEn": "Create poll" },
+        { "name": "react", "description": "添加反应", "descriptionEn": "Add reaction" },
+        { "name": "reactions", "description": "查看反应", "descriptionEn": "View reactions" },
+        { "name": "read", "description": "标记已读", "descriptionEn": "Mark as read" },
+        { "name": "edit", "description": "编辑消息", "descriptionEn": "Edit message" },
+        { "name": "delete", "description": "删除消息", "descriptionEn": "Delete message" },
+        { "name": "pin", "description": "置顶消息", "descriptionEn": "Pin message" },
+        { "name": "unpin", "description": "取消置顶", "descriptionEn": "Unpin message" },
+        { "name": "pins", "description": "查看置顶消息", "descriptionEn": "View pinned messages" },
+        { "name": "search", "description": "搜索消息", "descriptionEn": "Search messages" },
+        { "name": "thread", "description": "线程操作", "descriptionEn": "Thread operations" },
+        { "name": "emoji", "description": "表情操作", "descriptionEn": "Emoji operations" },
+        { "name": "sticker", "description": "贴纸操作", "descriptionEn": "Sticker operations" },
+        { "name": "role", "description": "角色操作", "descriptionEn": "Role operations" },
+        { "name": "channel", "description": "频道操作", "descriptionEn": "Channel operations" },
+        { "name": "event", "description": "事件操作", "descriptionEn": "Event operations" },
+        { "name": "voice status", "description": "语音状态", "descriptionEn": "Voice status" },
+        { "name": "member info", "description": "成员信息", "descriptionEn": "Member info" },
+        { "name": "permissions", "description": "权限管理", "descriptionEn": "Permission management" },
+        { "name": "timeout", "description": "超时设置", "descriptionEn": "Timeout settings" },
+        { "name": "kick", "description": "踢出成员", "descriptionEn": "Kick member" },
+        { "name": "ban", "description": "封禁成员", "descriptionEn": "Ban member" }
+      ]
+    },
+    {
+      "name": "acp",
+      "description": "运行 ACP 桥接，连接 IDE 到 Gateway",
+      "descriptionEn": "Run ACP bridge connecting IDE to Gateway",
+      "syntax": "openclaw acp [options]",
+      "options": [],
+      "examples": [
+        { "description": "启动 ACP 桥接", "descriptionEn": "Start ACP bridge", "code": "openclaw acp" }
+      ],
+      "subcommands": []
+    }
+  ]
+}

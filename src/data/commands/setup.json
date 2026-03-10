@@ -1,0 +1,120 @@
+{
+  "id": "setup",
+  "name": "初始化与配置",
+  "nameEn": "Setup & Configuration",
+  "icon": "⚙️",
+  "description": "初始化 OpenClaw 环境、配置工作区和运行健康检查",
+  "descriptionEn": "Initialize OpenClaw environment, configure workspace, and run health checks",
+  "commands": [
+    {
+      "name": "setup",
+      "description": "初始化配置和工作区",
+      "descriptionEn": "Initialize config and workspace",
+      "syntax": "openclaw setup [options]",
+      "options": [
+        { "flag": "--remote-token <token>", "description": "远程 Gateway 令牌", "descriptionEn": "Remote Gateway token" },
+        { "flag": "--remote-url <url>", "description": "远程 Gateway URL", "descriptionEn": "Remote Gateway URL" },
+        { "flag": "--mode <mode>", "description": "向导模式", "descriptionEn": "Wizard mode" },
+        { "flag": "--non-interactive", "description": "无交互模式运行向导", "descriptionEn": "Run wizard without prompts" },
+        { "flag": "--wizard", "description": "运行引导向导", "descriptionEn": "Run the onboarding wizard" },
+        { "flag": "--workspace <path>", "description": "Agent 工作区路径 (默认 ~/.openclaw/workspace)", "descriptionEn": "Agent workspace path (default ~/.openclaw/workspace)" }
+      ],
+      "examples": [
+        { "description": "交互式初始化", "descriptionEn": "Interactive setup", "code": "openclaw setup" },
+        { "description": "指定远程 Gateway 初始化", "descriptionEn": "Setup with remote Gateway", "code": "openclaw setup --remote-url https://gateway.example.com --remote-token mytoken" },
+        { "description": "无交互模式初始化", "descriptionEn": "Non-interactive setup", "code": "openclaw setup --non-interactive --workspace ~/my-workspace" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "onboard",
+      "description": "交互式向导，设置 Gateway、工作区和技能",
+      "descriptionEn": "Interactive wizard to set up Gateway, workspace, and skills",
+      "syntax": "openclaw onboard [options]",
+      "options": [
+        { "flag": "--install-daemon", "description": "安装 Gateway 守护进程为用户服务", "descriptionEn": "Install Gateway daemon as user service" },
+        { "flag": "--no-install-daemon", "description": "跳过守护进程安装 (别名: --skip-daemon)", "descriptionEn": "Skip daemon install (alias: --skip-daemon)" },
+        { "flag": "--node-manager <mgr>", "description": "Node 包管理器 (推荐 pnpm)", "descriptionEn": "Node package manager (pnpm recommended)" },
+        { "flag": "--skip-ui", "description": "跳过 UI 配置", "descriptionEn": "Skip UI configuration" },
+        { "flag": "--skip-health", "description": "跳过健康检查", "descriptionEn": "Skip health check" },
+        { "flag": "--skip-skills", "description": "跳过技能配置", "descriptionEn": "Skip skills configuration" },
+        { "flag": "--skip-channels", "description": "跳过频道配置", "descriptionEn": "Skip channels configuration" },
+        { "flag": "--non-interactive", "description": "无交互模式", "descriptionEn": "Non-interactive mode" },
+        { "flag": "--reset", "description": "向导前重置配置+凭据+会话", "descriptionEn": "Reset config+credentials+sessions before wizard" },
+        { "flag": "--flow <flow>", "description": "向导流程 (manual 为 advanced 别名)", "descriptionEn": "Wizard flow (manual is alias for advanced)" },
+        { "flag": "--auth-choice <choice>", "description": "认证选择", "descriptionEn": "Auth choice" },
+        { "flag": "--openai-api-key <key>", "description": "OpenAI API 密钥", "descriptionEn": "OpenAI API key" },
+        { "flag": "--anthropic-api-key <key>", "description": "Anthropic API 密钥", "descriptionEn": "Anthropic API key" },
+        { "flag": "--gemini-api-key <key>", "description": "Gemini API 密钥", "descriptionEn": "Gemini API key" },
+        { "flag": "--gateway-port <port>", "description": "Gateway 端口", "descriptionEn": "Gateway port" },
+        { "flag": "--gateway-auth <auth>", "description": "Gateway 认证方式", "descriptionEn": "Gateway auth method" },
+        { "flag": "--gateway-token <token>", "description": "Gateway 令牌", "descriptionEn": "Gateway token" },
+        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "JSON output" }
+      ],
+      "examples": [
+        { "description": "推荐的安装方式（含守护进程）", "descriptionEn": "Recommended setup (with daemon)", "code": "openclaw onboard --install-daemon" },
+        { "description": "使用 OpenAI 密钥非交互安装", "descriptionEn": "Non-interactive setup with OpenAI key", "code": "openclaw onboard --non-interactive --openai-api-key sk-xxx --install-daemon" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "configure",
+      "description": "交互式配置向导（模型、频道、技能、Gateway）",
+      "descriptionEn": "Interactive configuration wizard (models, channels, skills, Gateway)",
+      "syntax": "openclaw configure",
+      "options": [],
+      "examples": [
+        { "description": "启动配置向导", "descriptionEn": "Start configuration wizard", "code": "openclaw configure" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "config",
+      "description": "非交互式配置工具（获取/设置/删除/验证）",
+      "descriptionEn": "Non-interactive config helpers (get/set/unset/validate)",
+      "syntax": "openclaw config <subcommand> [options]",
+      "options": [],
+      "examples": [
+        { "description": "获取配置值", "descriptionEn": "Get config value", "code": "openclaw config get agents.defaults.model.primary" },
+        { "description": "设置配置值", "descriptionEn": "Set config value", "code": "openclaw config set agents.defaults.model.primary gpt-4o" },
+        { "description": "验证当前配置", "descriptionEn": "Validate current config", "code": "openclaw config validate --json" },
+        { "description": "查看配置文件路径", "descriptionEn": "Print config file path", "code": "openclaw config file" }
+      ],
+      "subcommands": [
+        { "name": "get <path>", "description": "获取配置值（支持 dot/bracket 路径）", "descriptionEn": "Get config value (dot/bracket path)" },
+        { "name": "set <path> <value>", "description": "设置配置值（JSON5 或原始字符串）", "descriptionEn": "Set config value (JSON5 or raw string)" },
+        { "name": "unset <path>", "description": "删除配置值", "descriptionEn": "Remove config value" },
+        { "name": "file", "description": "打印当前配置文件路径", "descriptionEn": "Print active config file path" },
+        { "name": "validate", "description": "验证配置，支持 --json 输出", "descriptionEn": "Validate config, supports --json output" }
+      ]
+    },
+    {
+      "name": "doctor",
+      "description": "健康检查和快速修复（配置 + Gateway + 遗留服务）",
+      "descriptionEn": "Health checks and quick fixes (config + Gateway + legacy services)",
+      "syntax": "openclaw doctor [options]",
+      "options": [
+        { "flag": "--deep", "description": "扫描系统服务查找额外的 Gateway 安装", "descriptionEn": "Scan system services for extra Gateway installs" },
+        { "flag": "--non-interactive", "description": "跳过提示，仅执行安全迁移", "descriptionEn": "Skip prompts, apply safe migrations only" },
+        { "flag": "--yes", "description": "接受默认值（无头模式）", "descriptionEn": "Accept defaults without prompting" },
+        { "flag": "--no-workspace-suggestions", "description": "禁用工作区内存提示", "descriptionEn": "Disable workspace memory hints" }
+      ],
+      "examples": [
+        { "description": "运行健康检查", "descriptionEn": "Run health check", "code": "openclaw doctor" },
+        { "description": "深度扫描", "descriptionEn": "Deep scan", "code": "openclaw doctor --deep" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "completion",
+      "description": "生成 Shell 自动补全脚本",
+      "descriptionEn": "Generate shell auto-completion script",
+      "syntax": "openclaw completion",
+      "options": [],
+      "examples": [
+        { "description": "生成补全脚本", "descriptionEn": "Generate completion script", "code": "openclaw completion" }
+      ],
+      "subcommands": []
+    }
+  ]
+}

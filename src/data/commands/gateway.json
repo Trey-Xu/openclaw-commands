@@ -1,0 +1,146 @@
+{
+  "id": "gateway",
+  "name": "Gateway 服务",
+  "nameEn": "Gateway & Services",
+  "icon": "🌐",
+  "description": "管理 WebSocket Gateway 服务、节点和设备",
+  "descriptionEn": "Manage WebSocket Gateway service, nodes, and devices",
+  "commands": [
+    {
+      "name": "gateway",
+      "description": "运行和管理 WebSocket Gateway",
+      "descriptionEn": "Run and manage the WebSocket Gateway",
+      "syntax": "openclaw gateway [subcommand] [options]",
+      "options": [
+        { "flag": "--port <port>", "description": "监听端口", "descriptionEn": "Listen port" },
+        { "flag": "--bind <addr>", "description": "绑定地址", "descriptionEn": "Bind address" },
+        { "flag": "--token <token>", "description": "认证令牌", "descriptionEn": "Auth token" },
+        { "flag": "--auth <auth>", "description": "认证方式", "descriptionEn": "Auth method" },
+        { "flag": "--password <pw>", "description": "密码", "descriptionEn": "Password" },
+        { "flag": "--dev", "description": "开发模式", "descriptionEn": "Dev mode" },
+        { "flag": "--force", "description": "强制终止已有端口监听", "descriptionEn": "Kill existing listener on port" },
+        { "flag": "--verbose", "description": "详细输出", "descriptionEn": "Verbose output" },
+        { "flag": "--tailscale <url>", "description": "Tailscale 配置", "descriptionEn": "Tailscale config" },
+        { "flag": "--compact", "description": "紧凑 WebSocket 日志", "descriptionEn": "Compact WebSocket log" }
+      ],
+      "examples": [
+        { "description": "直接运行 Gateway", "descriptionEn": "Run Gateway directly", "code": "openclaw gateway run --port 3000" },
+        { "description": "安装为系统服务", "descriptionEn": "Install as system service", "code": "openclaw gateway install --port 3000 --token mytoken" },
+        { "description": "查看 Gateway 状态", "descriptionEn": "Check Gateway status", "code": "openclaw gateway status --json" },
+        { "description": "调用 Gateway RPC", "descriptionEn": "Call Gateway RPC", "code": "openclaw gateway call config.get --params '{\"path\": \"agents\"}'" },
+        { "description": "发现网络中的 Gateway", "descriptionEn": "Discover Gateways on network", "code": "openclaw gateway discover" },
+        { "description": "探测 Gateway 健康", "descriptionEn": "Probe Gateway health", "code": "openclaw gateway probe" }
+      ],
+      "subcommands": [
+        { "name": "run", "description": "直接运行 Gateway 进程", "descriptionEn": "Run the Gateway process" },
+        { "name": "call <method>", "description": "调用 Gateway RPC 方法，支持 --params", "descriptionEn": "Call Gateway RPC method, supports --params" },
+        { "name": "health", "description": "检查 Gateway 健康状态", "descriptionEn": "Check Gateway health" },
+        { "name": "status", "description": "探测 Gateway RPC 状态，支持 --no-probe、--deep", "descriptionEn": "Probe Gateway RPC status, supports --no-probe, --deep" },
+        { "name": "probe", "description": "探测 Gateway", "descriptionEn": "Probe Gateway" },
+        { "name": "discover", "description": "发现网络上的 Gateway", "descriptionEn": "Discover Gateways on network" },
+        { "name": "install", "description": "安装为系统服务 (launchd/systemd/schtasks)", "descriptionEn": "Install as system service (launchd/systemd/schtasks)" },
+        { "name": "uninstall", "description": "卸载系统服务", "descriptionEn": "Uninstall system service" },
+        { "name": "start", "description": "启动服务", "descriptionEn": "Start service" },
+        { "name": "stop", "description": "停止服务", "descriptionEn": "Stop service" },
+        { "name": "restart", "description": "重启服务", "descriptionEn": "Restart service" }
+      ]
+    },
+    {
+      "name": "daemon",
+      "description": "遗留别名，用于 Gateway 服务命令",
+      "descriptionEn": "Legacy alias for Gateway service commands",
+      "syntax": "openclaw daemon <subcommand>",
+      "options": [],
+      "examples": [
+        { "description": "查看守护进程状态", "descriptionEn": "Check daemon status", "code": "openclaw daemon status" }
+      ],
+      "subcommands": [
+        { "name": "status", "description": "查看状态", "descriptionEn": "Check status" },
+        { "name": "install", "description": "安装服务", "descriptionEn": "Install service" },
+        { "name": "uninstall", "description": "卸载服务", "descriptionEn": "Uninstall service" },
+        { "name": "start", "description": "启动", "descriptionEn": "Start" },
+        { "name": "stop", "description": "停止", "descriptionEn": "Stop" },
+        { "name": "restart", "description": "重启", "descriptionEn": "Restart" }
+      ]
+    },
+    {
+      "name": "node",
+      "description": "运行无头节点主机或将其作为后台服务管理",
+      "descriptionEn": "Run headless node host or manage it as background service",
+      "syntax": "openclaw node <subcommand> [options]",
+      "options": [],
+      "examples": [
+        { "description": "运行节点主机", "descriptionEn": "Run node host", "code": "openclaw node run --host gateway.local --port 18789" },
+        { "description": "安装为服务", "descriptionEn": "Install as service", "code": "openclaw node install --host gateway.local --port 18789 --node-id mynode" },
+        { "description": "查看节点状态", "descriptionEn": "Check node status", "code": "openclaw node status" }
+      ],
+      "subcommands": [
+        { "name": "run", "description": "运行节点主机，需要 --host 和 --port", "descriptionEn": "Run node host, requires --host and --port" },
+        { "name": "status", "description": "查看节点状态", "descriptionEn": "Check node status" },
+        { "name": "install", "description": "安装为后台服务", "descriptionEn": "Install as background service" },
+        { "name": "uninstall", "description": "卸载服务", "descriptionEn": "Uninstall service" },
+        { "name": "start", "description": "启动", "descriptionEn": "Start" },
+        { "name": "stop", "description": "停止", "descriptionEn": "Stop" },
+        { "name": "restart", "description": "重启", "descriptionEn": "Restart" }
+      ]
+    },
+    {
+      "name": "nodes",
+      "description": "通过 Gateway 与已配对的节点通信",
+      "descriptionEn": "Communicate with paired nodes via Gateway",
+      "syntax": "openclaw nodes <subcommand> [options]",
+      "options": [
+        { "flag": "--url <url>", "description": "Gateway URL", "descriptionEn": "Gateway URL" },
+        { "flag": "--token <token>", "description": "Gateway 令牌", "descriptionEn": "Gateway token" },
+        { "flag": "--timeout <ms>", "description": "超时时间", "descriptionEn": "Timeout" },
+        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "JSON output" }
+      ],
+      "examples": [
+        { "description": "列出节点", "descriptionEn": "List nodes", "code": "openclaw nodes list --connected" },
+        { "description": "查看节点状态", "descriptionEn": "Check nodes status", "code": "openclaw nodes status" },
+        { "description": "在远程节点执行命令", "descriptionEn": "Run command on remote node", "code": "openclaw nodes run --node mynode -- ls -la" },
+        { "description": "远程截屏", "descriptionEn": "Remote camera snap", "code": "openclaw nodes camera snap --node myphone --facing back" },
+        { "description": "获取节点位置", "descriptionEn": "Get node location", "code": "openclaw nodes location get --node myphone" }
+      ],
+      "subcommands": [
+        { "name": "list", "description": "列出节点，支持 --connected", "descriptionEn": "List nodes, supports --connected" },
+        { "name": "status", "description": "节点状态概览", "descriptionEn": "Node status overview" },
+        { "name": "describe --node <id>", "description": "查看节点详情", "descriptionEn": "Describe a node" },
+        { "name": "pending", "description": "查看待审批节点", "descriptionEn": "View pending nodes" },
+        { "name": "approve <id>", "description": "批准节点配对", "descriptionEn": "Approve node pairing" },
+        { "name": "reject <id>", "description": "拒绝节点配对", "descriptionEn": "Reject node pairing" },
+        { "name": "rename", "description": "重命名节点", "descriptionEn": "Rename node" },
+        { "name": "invoke", "description": "在节点上调用命令", "descriptionEn": "Invoke command on node" },
+        { "name": "run", "description": "在节点上执行 Shell 命令", "descriptionEn": "Run shell command on node" },
+        { "name": "notify", "description": "发送通知到节点 (仅 macOS)", "descriptionEn": "Send notification to node (macOS only)" },
+        { "name": "camera snap", "description": "拍照", "descriptionEn": "Take photo" },
+        { "name": "camera clip", "description": "录制视频", "descriptionEn": "Record video" },
+        { "name": "camera list", "description": "列出摄像头", "descriptionEn": "List cameras" },
+        { "name": "screen record", "description": "屏幕录制", "descriptionEn": "Screen record" },
+        { "name": "canvas present", "description": "展示画布", "descriptionEn": "Present canvas" },
+        { "name": "canvas snapshot", "description": "画布截图", "descriptionEn": "Canvas snapshot" },
+        { "name": "location get", "description": "获取位置信息", "descriptionEn": "Get location" }
+      ]
+    },
+    {
+      "name": "devices",
+      "description": "管理 Gateway 设备配对和角色令牌",
+      "descriptionEn": "Manage Gateway device pairing and role tokens",
+      "syntax": "openclaw devices <subcommand> [options]",
+      "options": [],
+      "examples": [
+        { "description": "列出设备", "descriptionEn": "List devices", "code": "openclaw devices list --json" },
+        { "description": "批准最新请求", "descriptionEn": "Approve latest request", "code": "openclaw devices approve --latest" }
+      ],
+      "subcommands": [
+        { "name": "list", "description": "列出设备", "descriptionEn": "List devices" },
+        { "name": "approve <id>", "description": "批准配对请求", "descriptionEn": "Approve pairing request" },
+        { "name": "reject <id>", "description": "拒绝配对请求", "descriptionEn": "Reject pairing request" },
+        { "name": "remove <id>", "description": "移除设备", "descriptionEn": "Remove device" },
+        { "name": "clear", "description": "清除所有设备 (需 --yes)", "descriptionEn": "Clear all devices (requires --yes)" },
+        { "name": "rotate", "description": "轮换设备令牌", "descriptionEn": "Rotate device token" },
+        { "name": "revoke", "description": "撤销设备令牌", "descriptionEn": "Revoke device token" }
+      ]
+    }
+  ]
+}

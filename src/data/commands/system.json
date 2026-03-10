@@ -1,0 +1,318 @@
+{
+  "id": "system",
+  "name": "系统与维护",
+  "nameEn": "System & Maintenance",
+  "icon": "🔧",
+  "description": "系统监控、日志、安全、备份、更新和维护",
+  "descriptionEn": "System monitoring, logs, security, backup, updates, and maintenance",
+  "commands": [
+    {
+      "name": "status",
+      "description": "查看会话健康状态和最近的接收者",
+      "descriptionEn": "Show linked session health and recent recipients",
+      "syntax": "openclaw status [options]",
+      "options": [
+        { "flag": "--all", "description": "完整诊断（只读，可粘贴分享）", "descriptionEn": "Full diagnosis (read-only, pasteable)" },
+        { "flag": "--deep", "description": "探测频道", "descriptionEn": "Probe channels" },
+        { "flag": "--usage", "description": "显示模型提供商用量/配额", "descriptionEn": "Show model provider usage/quota" },
+        { "flag": "--verbose", "description": "详细输出", "descriptionEn": "Verbose output" },
+        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "JSON output" },
+        { "flag": "--timeout <ms>", "description": "超时时间", "descriptionEn": "Timeout" }
+      ],
+      "examples": [
+        { "description": "查看概览状态", "descriptionEn": "View status overview", "code": "openclaw status" },
+        { "description": "深度诊断", "descriptionEn": "Deep diagnosis", "code": "openclaw status --all" },
+        { "description": "查看用量", "descriptionEn": "View usage", "code": "openclaw status --usage" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "health",
+      "description": "从运行中的 Gateway 获取健康状态",
+      "descriptionEn": "Fetch health from running Gateway",
+      "syntax": "openclaw health [options]",
+      "options": [
+        { "flag": "--verbose", "description": "详细输出", "descriptionEn": "Verbose output" },
+        { "flag": "--timeout <ms>", "description": "超时时间", "descriptionEn": "Timeout" },
+        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "JSON output" }
+      ],
+      "examples": [
+        { "description": "检查健康状态", "descriptionEn": "Check health", "code": "openclaw health --json" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "sessions",
+      "description": "列出存储的对话会话",
+      "descriptionEn": "List stored conversation sessions",
+      "syntax": "openclaw sessions [options]",
+      "options": [
+        { "flag": "--active <filter>", "description": "活跃会话过滤", "descriptionEn": "Active session filter" },
+        { "flag": "--store <store>", "description": "指定存储", "descriptionEn": "Specify store" },
+        { "flag": "--verbose", "description": "详细输出", "descriptionEn": "Verbose output" },
+        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "JSON output" }
+      ],
+      "examples": [
+        { "description": "列出所有会话", "descriptionEn": "List all sessions", "code": "openclaw sessions --json" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "logs",
+      "description": "通过 RPC 尾随 Gateway 文件日志",
+      "descriptionEn": "Tail Gateway file logs via RPC",
+      "syntax": "openclaw logs [options]",
+      "options": [
+        { "flag": "--follow", "description": "持续跟踪日志", "descriptionEn": "Follow log output" },
+        { "flag": "--limit <n>", "description": "显示行数", "descriptionEn": "Number of lines" },
+        { "flag": "--plain", "description": "纯文本输出", "descriptionEn": "Plain text output" },
+        { "flag": "--json", "description": "JSON 行分隔输出", "descriptionEn": "JSON line-delimited output" },
+        { "flag": "--no-color", "description": "禁用颜色", "descriptionEn": "Disable colors" }
+      ],
+      "examples": [
+        { "description": "实时跟踪日志", "descriptionEn": "Follow logs in real-time", "code": "openclaw logs --follow" },
+        { "description": "查看最近 200 行", "descriptionEn": "View last 200 lines", "code": "openclaw logs --limit 200" },
+        { "description": "JSON 格式输出", "descriptionEn": "JSON format output", "code": "openclaw logs --json" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "system",
+      "description": "系统事件、心跳和在线状态管理",
+      "descriptionEn": "System events, heartbeat, and presence management",
+      "syntax": "openclaw system <subcommand> [options]",
+      "options": [
+        { "flag": "--url <url>", "description": "Gateway URL", "descriptionEn": "Gateway URL" },
+        { "flag": "--token <token>", "description": "Gateway 令牌", "descriptionEn": "Gateway token" },
+        { "flag": "--timeout <ms>", "description": "超时时间", "descriptionEn": "Timeout" },
+        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "JSON output" }
+      ],
+      "examples": [
+        { "description": "发送系统事件", "descriptionEn": "Send system event", "code": "openclaw system event --text \"Deployment complete\" --mode notify" },
+        { "description": "查看最近心跳", "descriptionEn": "View last heartbeat", "code": "openclaw system heartbeat last" },
+        { "description": "启用心跳", "descriptionEn": "Enable heartbeat", "code": "openclaw system heartbeat enable" },
+        { "description": "查看在线状态", "descriptionEn": "View presence", "code": "openclaw system presence" }
+      ],
+      "subcommands": [
+        { "name": "event", "description": "发送系统事件，需 --text", "descriptionEn": "Send system event, requires --text" },
+        { "name": "heartbeat last", "description": "查看最近心跳", "descriptionEn": "View last heartbeat" },
+        { "name": "heartbeat enable", "description": "启用心跳", "descriptionEn": "Enable heartbeat" },
+        { "name": "heartbeat disable", "description": "禁用心跳", "descriptionEn": "Disable heartbeat" },
+        { "name": "presence", "description": "列出系统在线状态", "descriptionEn": "List system presence" }
+      ]
+    },
+    {
+      "name": "update",
+      "description": "更新 OpenClaw",
+      "descriptionEn": "Update OpenClaw",
+      "syntax": "openclaw update",
+      "options": [],
+      "examples": [
+        { "description": "更新 OpenClaw", "descriptionEn": "Update OpenClaw", "code": "openclaw update" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "reset",
+      "description": "重置本地配置/状态（保留 CLI）",
+      "descriptionEn": "Reset local config/state (keeps CLI installed)",
+      "syntax": "openclaw reset [options]",
+      "options": [
+        { "flag": "--scope <scope>", "description": "重置范围", "descriptionEn": "Reset scope" },
+        { "flag": "--dry-run", "description": "试运行，不实际执行", "descriptionEn": "Dry run, no actual changes" },
+        { "flag": "--non-interactive", "description": "无交互模式（需配合 --scope 和 --yes）", "descriptionEn": "Non-interactive (requires --scope and --yes)" },
+        { "flag": "--yes", "description": "接受默认值", "descriptionEn": "Accept defaults" }
+      ],
+      "examples": [
+        { "description": "交互式重置", "descriptionEn": "Interactive reset", "code": "openclaw reset" },
+        { "description": "试运行查看影响", "descriptionEn": "Dry run to preview", "code": "openclaw reset --dry-run" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "uninstall",
+      "description": "卸载 Gateway 服务和本地数据（CLI 保留）",
+      "descriptionEn": "Uninstall Gateway service and local data (CLI remains)",
+      "syntax": "openclaw uninstall [options]",
+      "options": [
+        { "flag": "--all", "description": "卸载所有", "descriptionEn": "Uninstall all" },
+        { "flag": "--service", "description": "仅卸载服务", "descriptionEn": "Service only" },
+        { "flag": "--state", "description": "仅删除状态", "descriptionEn": "State only" },
+        { "flag": "--workspace", "description": "仅删除工作区", "descriptionEn": "Workspace only" },
+        { "flag": "--app", "description": "仅删除应用", "descriptionEn": "App only" },
+        { "flag": "--dry-run", "description": "试运行", "descriptionEn": "Dry run" },
+        { "flag": "--non-interactive", "description": "无交互（需 --yes 和范围）", "descriptionEn": "Non-interactive (requires --yes and scope)" },
+        { "flag": "--yes", "description": "确认", "descriptionEn": "Confirm" }
+      ],
+      "examples": [
+        { "description": "完全卸载", "descriptionEn": "Full uninstall", "code": "openclaw uninstall --all --yes" },
+        { "description": "仅卸载服务", "descriptionEn": "Uninstall service only", "code": "openclaw uninstall --service" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "backup",
+      "description": "备份配置和状态",
+      "descriptionEn": "Backup config and state",
+      "syntax": "openclaw backup <subcommand>",
+      "options": [],
+      "examples": [
+        { "description": "创建备份", "descriptionEn": "Create backup", "code": "openclaw backup create" },
+        { "description": "验证备份", "descriptionEn": "Verify backup", "code": "openclaw backup verify" }
+      ],
+      "subcommands": [
+        { "name": "create", "description": "创建备份", "descriptionEn": "Create backup" },
+        { "name": "verify", "description": "验证备份完整性", "descriptionEn": "Verify backup integrity" }
+      ]
+    },
+    {
+      "name": "security",
+      "description": "安全审计和加固",
+      "descriptionEn": "Security audit and hardening",
+      "syntax": "openclaw security audit [options]",
+      "options": [
+        { "flag": "--fix", "description": "收紧安全默认值并修复 chmod", "descriptionEn": "Tighten safe defaults and fix chmod" },
+        { "flag": "--deep", "description": "尽力探测 Gateway", "descriptionEn": "Best-effort live Gateway probe" }
+      ],
+      "examples": [
+        { "description": "安全审计", "descriptionEn": "Security audit", "code": "openclaw security audit" },
+        { "description": "自动修复", "descriptionEn": "Auto fix", "code": "openclaw security audit --fix" },
+        { "description": "深度审计", "descriptionEn": "Deep audit", "code": "openclaw security audit --deep" }
+      ],
+      "subcommands": [
+        { "name": "audit", "description": "审计配置和本地状态的常见安全问题", "descriptionEn": "Audit config and local state for common security issues" }
+      ]
+    },
+    {
+      "name": "secrets",
+      "description": "管理密钥和 SecretRef",
+      "descriptionEn": "Manage secrets and SecretRef",
+      "syntax": "openclaw secrets <subcommand> [options]",
+      "options": [],
+      "examples": [
+        { "description": "重新加载密钥", "descriptionEn": "Reload secrets", "code": "openclaw secrets reload" },
+        { "description": "交互式配置", "descriptionEn": "Interactive configure", "code": "openclaw secrets configure" },
+        { "description": "审计密钥", "descriptionEn": "Audit secrets", "code": "openclaw secrets audit" }
+      ],
+      "subcommands": [
+        { "name": "reload", "description": "重新解析引用并原子替换运行时快照", "descriptionEn": "Re-resolve refs and atomically swap runtime snapshot" },
+        { "name": "configure", "description": "交互式密钥提供商设置", "descriptionEn": "Interactive provider setup" },
+        { "name": "audit", "description": "扫描明文残留和未解析引用", "descriptionEn": "Scan for plaintext residues and unresolved refs" },
+        { "name": "apply", "description": "应用之前生成的计划，支持 --dry-run", "descriptionEn": "Apply previously generated plan, supports --dry-run" }
+      ]
+    },
+    {
+      "name": "approvals",
+      "description": "管理审批规则和允许列表",
+      "descriptionEn": "Manage approval rules and allowlist",
+      "syntax": "openclaw approvals <subcommand> [options]",
+      "options": [],
+      "examples": [
+        { "description": "获取审批设置", "descriptionEn": "Get approval settings", "code": "openclaw approvals get" },
+        { "description": "设置审批模式", "descriptionEn": "Set approval mode", "code": "openclaw approvals set auto" },
+        { "description": "添加允许列表", "descriptionEn": "Add to allowlist", "code": "openclaw approvals allowlist add user@example.com" }
+      ],
+      "subcommands": [
+        { "name": "get", "description": "获取审批设置", "descriptionEn": "Get approval settings" },
+        { "name": "set", "description": "设置审批模式", "descriptionEn": "Set approval mode" },
+        { "name": "allowlist add", "description": "添加到允许列表", "descriptionEn": "Add to allowlist" },
+        { "name": "allowlist remove", "description": "从允许列表移除", "descriptionEn": "Remove from allowlist" }
+      ]
+    },
+    {
+      "name": "pairing",
+      "description": "审批跨频道 DM 配对请求",
+      "descriptionEn": "Approve cross-channel DM pairing requests",
+      "syntax": "openclaw pairing <subcommand> [options]",
+      "options": [],
+      "examples": [
+        { "description": "列出配对请求", "descriptionEn": "List pairing requests", "code": "openclaw pairing list" },
+        { "description": "批准配对", "descriptionEn": "Approve pairing", "code": "openclaw pairing approve --channel telegram --notify" }
+      ],
+      "subcommands": [
+        { "name": "list", "description": "列出配对请求", "descriptionEn": "List pairing requests" },
+        { "name": "approve", "description": "批准配对请求", "descriptionEn": "Approve pairing request" }
+      ]
+    },
+    {
+      "name": "qr",
+      "description": "生成 QR 码",
+      "descriptionEn": "Generate QR code",
+      "syntax": "openclaw qr",
+      "options": [],
+      "examples": [
+        { "description": "生成 QR 码", "descriptionEn": "Generate QR code", "code": "openclaw qr" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "dns",
+      "description": "广域发现 DNS 助手（CoreDNS + Tailscale）",
+      "descriptionEn": "Wide-area discovery DNS helper (CoreDNS + Tailscale)",
+      "syntax": "openclaw dns setup [options]",
+      "options": [
+        { "flag": "--apply", "description": "安装/更新 CoreDNS 配置（需 sudo，仅 macOS）", "descriptionEn": "Install/update CoreDNS config (requires sudo, macOS only)" }
+      ],
+      "examples": [
+        { "description": "设置 DNS", "descriptionEn": "Setup DNS", "code": "openclaw dns setup" },
+        { "description": "应用 DNS 配置", "descriptionEn": "Apply DNS config", "code": "openclaw dns setup --apply" }
+      ],
+      "subcommands": [
+        { "name": "setup", "description": "DNS 设置助手", "descriptionEn": "DNS setup helper" }
+      ]
+    },
+    {
+      "name": "docs",
+      "description": "搜索在线文档索引",
+      "descriptionEn": "Search live docs index",
+      "syntax": "openclaw docs [query...]",
+      "options": [],
+      "examples": [
+        { "description": "搜索文档", "descriptionEn": "Search docs", "code": "openclaw docs gateway configuration" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "tui",
+      "description": "打开连接到 Gateway 的终端 UI",
+      "descriptionEn": "Open terminal UI connected to Gateway",
+      "syntax": "openclaw tui [options]",
+      "options": [
+        { "flag": "--url <url>", "description": "Gateway URL", "descriptionEn": "Gateway URL" },
+        { "flag": "--token <token>", "description": "Gateway 令牌", "descriptionEn": "Gateway token" },
+        { "flag": "--session <id>", "description": "会话 ID", "descriptionEn": "Session ID" },
+        { "flag": "--message <msg>", "description": "初始消息", "descriptionEn": "Initial message" },
+        { "flag": "--thinking <level>", "description": "思考模式", "descriptionEn": "Thinking mode" },
+        { "flag": "--deliver", "description": "投递消息", "descriptionEn": "Deliver message" },
+        { "flag": "--history-limit <n>", "description": "历史记录限制", "descriptionEn": "History limit" }
+      ],
+      "examples": [
+        { "description": "打开终端 UI", "descriptionEn": "Open terminal UI", "code": "openclaw tui" },
+        { "description": "带初始消息打开", "descriptionEn": "Open with initial message", "code": "openclaw tui --message \"Hello\"" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "dashboard",
+      "description": "打开 Web 仪表盘",
+      "descriptionEn": "Open web dashboard",
+      "syntax": "openclaw dashboard",
+      "options": [],
+      "examples": [
+        { "description": "打开仪表盘", "descriptionEn": "Open dashboard", "code": "openclaw dashboard" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "directory",
+      "description": "目录服务",
+      "descriptionEn": "Directory service",
+      "syntax": "openclaw directory",
+      "options": [],
+      "examples": [
+        { "description": "查看目录", "descriptionEn": "View directory", "code": "openclaw directory" }
+      ],
+      "subcommands": []
+    }
+  ]
+}
