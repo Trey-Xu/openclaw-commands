@@ -1,4 +1,5 @@
 <script setup>
+import { OPENCLAW_VERSION, OPENCLAW_RELEASE_URL } from '../config/version'
 import { categories, getAllCommands } from '../data/commands'
 import { useLocale, useUI } from '../composables/useLocale'
 import CommandCard from '../components/CommandCard.vue'
@@ -22,7 +23,10 @@ const globalFlags = [
 <template>
   <div class="home">
     <section class="hero">
-      <div class="hero-badge">{{ ui('heroBadge') }}</div>
+      <div class="hero-badges">
+        <span class="hero-badge">{{ ui('heroBadge') }}</span>
+        <a :href="OPENCLAW_RELEASE_URL" target="_blank" class="hero-version">v{{ OPENCLAW_VERSION }}</a>
+      </div>
       <h1 class="hero-title">
         <span class="hero-icon">🦞</span>
         {{ ui('heroTitle') }}
@@ -67,6 +71,13 @@ const globalFlags = [
   padding: 24px 0 32px;
 }
 
+.hero-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
 .hero-badge {
   display: inline-block;
   font-size: 11px;
@@ -76,8 +87,23 @@ const globalFlags = [
   background: rgba(255, 90, 45, 0.1);
   padding: 4px 12px;
   border-radius: 20px;
-  margin-bottom: 16px;
   font-weight: 600;
+}
+
+.hero-version {
+  display: inline-block;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--color-success);
+  background: rgba(47, 191, 113, 0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.hero-version:hover {
+  color: var(--color-success);
+  background: rgba(47, 191, 113, 0.18);
 }
 
 .hero-title {

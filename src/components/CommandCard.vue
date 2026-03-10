@@ -19,7 +19,7 @@ const { t } = useLocale()
           v-for="cmd in category.commands.slice(0, 4)"
           :key="cmd.name"
           class="card-cmd-tag"
-        >{{ cmd.name }}</span>
+        >{{ cmd.nameEn ? t(cmd, 'name') : cmd.name }}</span>
         <span v-if="category.commands.length > 4" class="card-cmd-more">
           +{{ category.commands.length - 4 }}
         </span>

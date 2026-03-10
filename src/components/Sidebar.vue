@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
-import { categories } from '../data/commands'
+import { categories, getCommandByName } from '../data/commands'
 import { useLocale, useUI } from '../composables/useLocale'
 
 defineProps({
@@ -28,6 +28,17 @@ function isActive(cmdName) {
 function onNavClick() {
   if (window.innerWidth <= 768) emit('close')
 }
+
+watch(() => route.params.name, async (name) => {
+  if (!name) return
+  const cmd = getCommandByName(name)
+  if (cmd) {
+    expanded.value[cmd.categoryId] = true
+    await nextTick()
+    const el = document.querySelector('.nav-item.active')
+    if (el) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+  }
+}, { immediate: true })
 </script>
 
 <template>
@@ -128,9 +139,7 @@ function onNavClick() {
   color: var(--color-text);
 }
 
-.nav-group-icon {
-  font-size: 15px;
-}
+.nav-group-icon { font-size: 15px; }
 
 .nav-group-title {
   flex: 1;

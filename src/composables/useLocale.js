@@ -51,6 +51,8 @@ const UI_STRINGS = {
     heroCommands: '个命令',
     heroSubcommands: '个子命令',
     heroSuffix: '的完整参考手册',
+    relatedCommands: '同类命令',
+    pageNotFound: '页面走丢了，找不到该路径',
     copied: '已复制 ✓',
     copy: '复制',
   },
@@ -78,6 +80,8 @@ const UI_STRINGS = {
     heroCommands: 'commands',
     heroSubcommands: 'subcommands',
     heroSuffix: '— Complete reference manual',
+    relatedCommands: 'Related Commands',
+    pageNotFound: 'Page not found — the path you requested does not exist.',
     copied: 'Copied ✓',
     copy: 'Copy',
   }

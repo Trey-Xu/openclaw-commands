@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { searchCommands } from '../data/commands'
 import { useLocale, useUI } from '../composables/useLocale'
@@ -10,6 +10,8 @@ const { locale, toggleLocale, t } = useLocale()
 const { ui } = useUI()
 const query = ref('')
 const showResults = ref(false)
+const selectedIndex = ref(-1)
+const searchInput = ref(null)
 
 const results = computed(() => searchCommands(query.value))
 
@@ -17,15 +19,50 @@ function selectCommand(cmd) {
   router.push({ name: 'command', params: { name: cmd.name } })
   query.value = ''
   showResults.value = false
+  selectedIndex.value = -1
 }
 
 watch(query, (val) => {
   showResults.value = val.length > 0
+  selectedIndex.value = -1
 })
 
 function onBlur() {
-  setTimeout(() => { showResults.value = false }, 200)
+  setTimeout(() => {
+    showResults.value = false
+    selectedIndex.value = -1
+  }, 200)
 }
+
+function onKeydown(e) {
+  const items = results.value.slice(0, 8)
+  if (!showResults.value || !items.length) return
+
+  if (e.key === 'ArrowDown') {
+    e.preventDefault()
+    selectedIndex.value = (selectedIndex.value + 1) % items.length
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault()
+    selectedIndex.value = selectedIndex.value <= 0 ? items.length - 1 : selectedIndex.value - 1
+  } else if (e.key === 'Enter' && selectedIndex.value >= 0) {
+    e.preventDefault()
+    selectCommand(items[selectedIndex.value])
+  } else if (e.key === 'Escape') {
+    showResults.value = false
+    selectedIndex.value = -1
+    searchInput.value?.blur()
+  }
+}
+
+function onGlobalKeydown(e) {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+    e.preventDefault()
+    searchInput.value?.focus()
+  }
+}
+
+onMounted(() => { document.addEventListener('keydown', onGlobalKeydown) })
+onUnmounted(() => { document.removeEventListener('keydown', onGlobalKeydown) })
 </script>
 
 <template>
@@ -50,21 +87,26 @@ function onBlur() {
             <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
           </svg>
           <input
+            ref="searchInput"
             v-model="query"
             type="text"
             :placeholder="ui('searchPlaceholder')"
             class="search-input"
             @focus="showResults = query.length > 0"
             @blur="onBlur"
+            @keydown="onKeydown"
           />
+          <kbd class="search-kbd" v-if="!query">Ctrl F</kbd>
         </div>
 
         <div class="search-results" v-if="showResults && results.length > 0">
           <div
-            v-for="cmd in results.slice(0, 8)"
+            v-for="(cmd, i) in results.slice(0, 8)"
             :key="cmd.name"
             class="search-result-item"
+            :class="{ selected: i === selectedIndex }"
             @mousedown.prevent="selectCommand(cmd)"
+            @mouseenter="selectedIndex = i"
           >
             <span class="result-name">{{ cmd.nameEn ? t(cmd, 'name') : cmd.name }}</span>
             <span class="result-category">{{ t(cmd, 'categoryName') }}</span>
@@ -144,13 +186,8 @@ function onBlur() {
   white-space: nowrap;
 }
 
-.logo-icon {
-  font-size: 22px;
-}
-
-.logo-text {
-  color: var(--color-accent);
-}
+.logo-icon { font-size: 22px; }
+.logo-text { color: var(--color-accent); }
 
 .logo-suffix {
   color: var(--color-text-secondary);
@@ -202,8 +239,18 @@ function onBlur() {
   min-width: 0;
 }
 
-.search-input::placeholder {
+.search-input::placeholder { color: var(--color-text-muted); }
+
+.search-kbd {
+  font-size: 10px;
   color: var(--color-text-muted);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: inherit;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .search-results {
@@ -222,9 +269,8 @@ function onBlur() {
 @media (max-width: 640px) {
   .search-results {
     width: calc(100vw - 32px);
-    right: auto;
-    left: auto;
     right: -60px;
+    left: auto;
   }
 }
 
@@ -238,7 +284,8 @@ function onBlur() {
   transition: background 0.15s;
 }
 
-.search-result-item:hover {
+.search-result-item:hover,
+.search-result-item.selected {
   background: var(--color-bg-hover);
 }
 
@@ -298,7 +345,5 @@ function onBlur() {
   transition: color 0.2s;
 }
 
-.github-link:hover {
-  color: var(--color-text);
-}
+.github-link:hover { color: var(--color-text); }
 </style>
