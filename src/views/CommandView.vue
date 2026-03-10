@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { getCommandByName } from '../data/commands'
+import { getCommandByName, getCategoryById } from '../data/commands'
 import { useLocale, useUI } from '../composables/useLocale'
 import CodeBlock from '../components/CodeBlock.vue'
 import OptionsTable from '../components/OptionsTable.vue'
@@ -10,6 +10,13 @@ const { t } = useLocale()
 const { ui } = useUI()
 
 const command = computed(() => getCommandByName(props.name))
+
+const relatedCommands = computed(() => {
+  if (!command.value) return []
+  const cat = getCategoryById(command.value.categoryId)
+  if (!cat) return []
+  return cat.commands.filter(c => c.name !== command.value.name)
+})
 </script>
 
 <template>
@@ -54,6 +61,21 @@ const command = computed(() => getCommandByName(props.name))
       <div v-for="(ex, i) in command.examples" :key="i" class="example-block">
         <p class="example-desc">{{ t(ex, 'description') }}</p>
         <CodeBlock :code="ex.code" language="bash" />
+      </div>
+    </section>
+
+    <section class="cmd-section related-section" v-if="relatedCommands.length">
+      <h2 class="section-heading">{{ ui('relatedCommands') }}</h2>
+      <div class="related-grid">
+        <router-link
+          v-for="rc in relatedCommands"
+          :key="rc.name"
+          :to="{ name: 'command', params: { name: rc.name } }"
+          class="related-item"
+        >
+          <code class="related-name">{{ rc.nameEn ? t(rc, 'name') : rc.name }}</code>
+          <span class="related-desc">{{ t(rc, 'description') }}</span>
+        </router-link>
       </div>
     </section>
   </div>
@@ -188,6 +210,46 @@ const command = computed(() => getCommandByName(props.name))
   margin-bottom: 16px;
 }
 
+.related-section {
+  margin-top: 16px;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 8px;
+}
+
+.related-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text);
+  transition: all 0.15s;
+}
+
+.related-item:hover {
+  border-color: var(--color-accent-dim);
+  background: var(--color-bg-hover);
+}
+
+.related-name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.related-desc {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @media (max-width: 768px) {
   .cmd-title { font-size: 22px; }
   .subcmd-item {
@@ -195,5 +257,6 @@ const command = computed(() => getCommandByName(props.name))
     gap: 4px;
   }
   .subcmd-name { min-width: auto; }
+  .related-grid { grid-template-columns: 1fr; }
 }
 </style>
