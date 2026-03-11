@@ -17,6 +17,7 @@ const relatedCommands = computed(() => {
   if (!cat) return []
   return cat.commands.filter(c => c.name !== command.value.name)
 })
+
 </script>
 
 <template>

@@ -18,7 +18,7 @@
 
 | 类别 | 包含命令 |
 |------|----------|
-| 部署指南 | 安装、系统要求、快速启动、AI 模型配置、接入聊天渠道、Gateway 管理、远程部署、安全加固 |
+| 部署指南 | 安装、卸载、系统要求、快速启动、AI 模型配置、接入聊天渠道、Gateway 管理、远程部署、安全加固 |
 | 初始化与配置 | `setup`, `onboard`, `configure`, `config`, `doctor`, `completion` |
 | 接入渠道 | `channels` (list/status/logs/add/remove/login/logout) |
 | 技能与插件 | `skills`, `plugins`, `hooks` |

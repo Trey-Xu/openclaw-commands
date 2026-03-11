@@ -55,6 +55,8 @@ const UI_STRINGS = {
     pageNotFound: '页面走丢了，找不到该路径',
     copied: '已复制 ✓',
     copy: '复制',
+    copyLink: '复制链接',
+    linkCopied: '链接已复制 ✓',
   },
   en: {
     searchPlaceholder: 'Search commands...',
@@ -84,6 +86,8 @@ const UI_STRINGS = {
     pageNotFound: 'Page not found — the path you requested does not exist.',
     copied: 'Copied ✓',
     copy: 'Copy',
+    copyLink: 'Copy link',
+    linkCopied: 'Link copied ✓',
   }
 }
 

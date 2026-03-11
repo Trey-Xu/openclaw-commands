@@ -18,7 +18,7 @@ A comprehensive CLI command reference website for [OpenClaw](https://github.com/
 
 | Category | Commands |
 |----------|----------|
-| Deployment Guide | Install, System Requirements, Quick Start, AI Models, Chat Channels, Gateway, Remote, Security |
+| Deployment Guide | Install, Uninstall, System Requirements, Quick Start, AI Models, Chat Channels, Gateway, Remote, Security |
 | Setup & Configuration | `setup`, `onboard`, `configure`, `config`, `doctor`, `completion` |
 | Channels | `channels` (list/status/logs/add/remove/login/logout) |
 | Skills & Plugins | `skills`, `plugins`, `hooks` |

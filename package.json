@@ -1,12 +1,13 @@
 {
   "name": "openclaw-commands",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint src --ext .vue,.js"
   },
   "dependencies": {
     "prismjs": "^1.30.0",
@@ -15,6 +16,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.4",
+    "eslint": "^8.57.1",
+    "eslint-plugin-vue": "^9.33.0",
     "vite": "^5.4.21"
   }
 }

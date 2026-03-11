@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { searchCommands } from '../data/commands'
 import { useLocale, useUI } from '../composables/useLocale'
@@ -14,6 +14,16 @@ const selectedIndex = ref(-1)
 const searchInput = ref(null)
 
 const results = computed(() => searchCommands(query.value))
+
+function highlightMatch(text, q) {
+  if (!text || !q || !q.trim()) return text
+  const escaped = String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+  const re = new RegExp(`(${q.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi')
+  return escaped.replace(re, '<mark>$1</mark>')
+}
 
 function selectCommand(cmd) {
   router.push({ name: 'command', params: { name: cmd.name } })
@@ -108,9 +118,9 @@ onUnmounted(() => { document.removeEventListener('keydown', onGlobalKeydown) })
             @mousedown.prevent="selectCommand(cmd)"
             @mouseenter="selectedIndex = i"
           >
-            <span class="result-name">{{ cmd.nameEn ? t(cmd, 'name') : cmd.name }}</span>
+            <span class="result-name" v-html="highlightMatch(cmd.nameEn ? t(cmd, 'name') : cmd.name, query)"></span>
             <span class="result-category">{{ t(cmd, 'categoryName') }}</span>
-            <span class="result-desc">{{ t(cmd, 'description') }}</span>
+            <span class="result-desc" v-html="highlightMatch(t(cmd, 'description'), query)"></span>
           </div>
         </div>
         <div class="search-results search-empty" v-if="showResults && query && results.length === 0">
@@ -122,7 +132,7 @@ onUnmounted(() => { document.removeEventListener('keydown', onGlobalKeydown) })
         {{ locale === 'zh' ? 'EN' : '中' }}
       </button>
 
-      <a href="https://github.com/openclaw/openclaw" target="_blank" class="github-link" aria-label="GitHub">
+      <a href="https://github.com/Trey-Xu/openclaw-commands" target="_blank" class="github-link" aria-label="GitHub">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
         </svg>
@@ -311,6 +321,14 @@ onUnmounted(() => { document.removeEventListener('keydown', onGlobalKeydown) })
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.result-name :deep(mark),
+.result-desc :deep(mark) {
+  background: rgba(255, 90, 45, 0.25);
+  color: var(--color-accent-bright);
+  padding: 0 2px;
+  border-radius: 2px;
 }
 
 .search-empty .search-result-item {

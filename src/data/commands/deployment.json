@@ -21,6 +21,30 @@
       "subcommands": []
     },
     {
+      "name": "卸载 OpenClaw",
+      "nameEn": "Uninstall OpenClaw",
+      "description": "卸载 Gateway 服务、本地数据，以及 CLI 本身",
+      "descriptionEn": "Uninstall Gateway service, local data, and the CLI itself",
+      "syntax": "openclaw uninstall [options]",
+      "options": [
+        { "flag": "--all", "description": "卸载 Gateway 服务 + 本地数据（CLI 保留）", "descriptionEn": "Uninstall Gateway + local data (CLI remains)" },
+        { "flag": "--service", "description": "仅卸载 Gateway 系统服务", "descriptionEn": "Uninstall Gateway system service only" },
+        { "flag": "--state", "description": "仅删除状态数据", "descriptionEn": "Remove state data only" },
+        { "flag": "--workspace", "description": "仅删除工作区", "descriptionEn": "Remove workspace only" },
+        { "flag": "--app", "description": "仅删除应用数据", "descriptionEn": "Remove app data only" },
+        { "flag": "--dry-run", "description": "试运行，不实际执行", "descriptionEn": "Dry run, no actual changes" },
+        { "flag": "--yes", "description": "跳过确认提示", "descriptionEn": "Skip confirmation prompt" }
+      ],
+      "examples": [
+        { "description": "完全卸载服务与数据（CLI 仍保留）", "descriptionEn": "Full uninstall of service and data (CLI remains)", "code": "openclaw uninstall --all --yes" },
+        { "description": "仅卸载 Gateway 服务", "descriptionEn": "Uninstall Gateway service only", "code": "openclaw uninstall --service" },
+        { "description": "试运行查看将删除内容", "descriptionEn": "Dry run to preview what will be removed", "code": "openclaw uninstall --all --dry-run" },
+        { "description": "npm 安装的 CLI 卸载", "descriptionEn": "Uninstall CLI (if installed via npm)", "code": "npm uninstall -g openclaw" },
+        { "description": "一键脚本安装的 CLI 卸载", "descriptionEn": "Uninstall CLI (if installed via install script)", "code": "rm -f $(which openclaw)\n# 或删除 ~/.local/bin/openclaw（视安装路径而定）" }
+      ],
+      "subcommands": []
+    },
+    {
       "name": "系统要求",
       "nameEn": "System Requirements",
       "description": "运行 OpenClaw 的系统环境要求",

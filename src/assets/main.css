@@ -67,7 +67,6 @@ a:hover {
 code {
   font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
   font-size: 0.9em;
-  background: var(--color-code-bg);
   padding: 2px 6px;
   border-radius: 4px;
   color: var(--color-accent-bright);
@@ -106,5 +105,60 @@ code {
     margin-left: 0;
     width: 100%;
     padding: 20px 16px;
+  }
+}
+
+@media print {
+  .app-header,
+  .sidebar,
+  .sidebar-overlay,
+  .back-to-top,
+  .copy-btn,
+  .copy-link-btn,
+  .search-wrapper,
+  .lang-btn,
+  .github-link,
+  .menu-btn,
+  .site-footer {
+    display: none !important;
+  }
+
+  .app-layout {
+    padding-top: 0;
+  }
+
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+    padding: 16px;
+  }
+
+  html, body {
+    background: #fff;
+    color: #111;
+  }
+
+  a {
+    color: #0066cc;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #666;
+  }
+
+  .code-block {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+  }
+
+  .code-header {
+    background: #eee;
+  }
+
+  code {
+    background: #f5f5f5;
+    color: #333;
   }
 }
