@@ -1,17 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { getCategoryById, getCommandByName } from '../data/commands'
-import HomeView from '../views/HomeView.vue'
-import CategoryView from '../views/CategoryView.vue'
-import CommandView from '../views/CommandView.vue'
-import NotFoundView from '../views/NotFoundView.vue'
 
 const BASE_TITLE = 'OpenClaw Command Reference'
 
 const routes = [
-  { path: '/', name: 'home', component: HomeView },
-  { path: '/category/:id', name: 'category', component: CategoryView, props: true },
-  { path: '/command/:name', name: 'command', component: CommandView, props: true },
-  { path: '/:pathMatch(.*)*', name: 'not-found', component: NotFoundView },
+  { path: '/', name: 'home', component: () => import('../views/HomeView.vue') },
+  { path: '/category/:id', name: 'category', component: () => import('../views/CategoryView.vue'), props: true },
+  { path: '/command/:name', name: 'command', component: () => import('../views/CommandView.vue'), props: true },
+  { path: '/:pathMatch(.*)*', name: 'not-found', component: () => import('../views/NotFoundView.vue') },
 ]
 
 const router = createRouter({

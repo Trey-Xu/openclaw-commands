@@ -6,13 +6,16 @@ A comprehensive CLI command reference website for [OpenClaw](https://github.com/
 
 ## Features
 
-- **40+ commands** organized into **10 categories** with full syntax, options, subcommands, and examples
+- **40+ commands** organized into **11 categories** with full syntax, options, subcommands, and examples
 - **Bilingual support** — switch between Chinese and English with one click
-- **Real-time search** — fuzzy search across command names, descriptions, and subcommands
+- **Real-time search** — search across command names, descriptions, and subcommands (substring match)
 - **Dark theme** — terminal-inspired design with OpenClaw's lobster color palette
 - **Responsive** — works on desktop, tablet, and mobile
 - **Copy to clipboard** — one-click code block copying
 - **GitHub Pages** — auto-deployed via GitHub Actions
+- **PWA** — installable, offline-capable
+- **RSS** — [feed.xml](https://trey-xu.github.io/openclaw-commands/feed.xml) for release updates
+- **Light/Dark theme** — toggle in header
 
 ## Command Categories
 
@@ -74,7 +77,7 @@ src/
 │   └── OptionsTable.vue      # Command options table
 ├── composables/
 │   └── useLocale.js          # i18n locale management
-├── data/commands/            # JSON command data (10 category files)
+├── data/commands/            # JSON command data (11 category files)
 ├── views/
 │   ├── HomeView.vue          # Homepage with category grid
 │   ├── CategoryView.vue      # Category detail page

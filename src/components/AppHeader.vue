@@ -3,11 +3,13 @@ import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { searchCommands } from '../data/commands'
 import { useLocale, useUI } from '../composables/useLocale'
+import { useTheme } from '../composables/useTheme'
 
 const emit = defineEmits(['toggle-sidebar'])
 const router = useRouter()
 const { locale, toggleLocale, t } = useLocale()
 const { ui } = useUI()
+const { theme, toggleTheme } = useTheme()
 const query = ref('')
 const showResults = ref(false)
 const selectedIndex = ref(-1)
@@ -127,6 +129,11 @@ onUnmounted(() => { document.removeEventListener('keydown', onGlobalKeydown) })
           <div class="search-result-item">{{ ui('searchNoResult') }}</div>
         </div>
       </div>
+
+      <button class="theme-btn" @click="toggleTheme" :title="theme === 'dark' ? ui('themeLight') : ui('themeDark')" aria-label="Toggle theme">
+        <span v-if="theme === 'dark'">☀️</span>
+        <span v-else>🌙</span>
+      </button>
 
       <button class="lang-btn" @click="toggleLocale" :title="locale === 'zh' ? 'Switch to English' : '切换到中文'">
         {{ locale === 'zh' ? 'EN' : '中' }}
@@ -352,6 +359,27 @@ onUnmounted(() => { document.removeEventListener('keydown', onGlobalKeydown) })
 }
 
 .lang-btn:hover {
+  border-color: var(--color-accent-dim);
+  color: var(--color-accent-bright);
+}
+
+.theme-btn {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  font-size: 16px;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-btn:hover {
   border-color: var(--color-accent-dim);
   color: var(--color-accent-bright);
 }

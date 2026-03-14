@@ -49,9 +49,9 @@
       "nameEn": "System Requirements",
       "description": "运行 OpenClaw 的系统环境要求",
       "descriptionEn": "System requirements for running OpenClaw",
-      "syntax": "node -v  # 需要 Node.js 18+（推荐 22+）",
+      "syntax": "node -v  # 需要 Node.js 22+",
       "options": [
-        { "flag": "Node.js", "description": "版本 18 或更高（推荐 v22+）", "descriptionEn": "Version 18 or higher (v22+ recommended)" },
+        { "flag": "Node.js", "description": "版本 22 或更高", "descriptionEn": "Version 22 or higher" },
         { "flag": "操作系统 / OS", "description": "macOS、Linux 或 Windows（推荐 WSL2）", "descriptionEn": "macOS, Linux, or Windows (WSL2 recommended)" },
         { "flag": "内存 / RAM", "description": "至少 2 GB", "descriptionEn": "Minimum 2 GB" },
         { "flag": "API Key", "description": "来自 OpenAI、Anthropic、DeepSeek 或其他 LLM 提供商", "descriptionEn": "From OpenAI, Anthropic, DeepSeek, or other LLM providers" }

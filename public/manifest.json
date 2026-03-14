@@ -1,0 +1,17 @@
+{
+  "name": "OpenClaw Command Reference",
+  "short_name": "OpenClaw CLI",
+  "description": "OpenClaw CLI 命令完整参考手册",
+  "start_url": "/openclaw-commands/",
+  "display": "standalone",
+  "background_color": "#0f1117",
+  "theme_color": "#FF5A2D",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

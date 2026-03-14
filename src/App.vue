@@ -11,10 +11,11 @@ const { locale } = useLocale()
 </script>
 
 <template>
+  <a href="#main-content" class="skip-link">{{ locale === 'zh' ? '跳到主内容' : 'Skip to main content' }}</a>
   <AppHeader @toggle-sidebar="sidebarOpen = !sidebarOpen" />
   <div class="app-layout">
     <Sidebar :open="sidebarOpen" @close="sidebarOpen = false" />
-    <main class="main-content">
+    <main id="main-content" class="main-content" tabindex="-1">
       <router-view v-slot="{ Component }">
         <Transition name="page" mode="out-in">
           <component :is="Component" />
@@ -38,6 +39,24 @@ const { locale } = useLocale()
 </template>
 
 <style>
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 8px;
+  z-index: 200;
+  padding: 8px 16px;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 14px;
+  border-radius: var(--radius);
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 12px;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
 .site-footer {
   margin-top: 48px;
   padding: 20px 0;

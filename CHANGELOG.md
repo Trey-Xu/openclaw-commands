@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **无障碍**: 键盘焦点 `:focus-visible` 样式、跳过主内容链接
+- **性能**: 首屏字体 preload、路由懒加载
+- **PWA**: manifest + Service Worker，可安装与离线访问
+- **RSS**: `feed.xml` 发布订阅
+- **主题**: 亮色/暗色切换（localStorage 记忆）
+- **维护**: `UPDATING.md` 随 OpenClaw 更新说明
+
+### Changed
+
+- **文案**: 移除未使用的 copyLink/linkCopied；README 11 大类、搜索说明改为「子串匹配」
+- **OpenClaw 版本**: 2026.3.8 → 2026.3.12（[Release](https://github.com/openclaw/openclaw/releases/tag/v2026.3.12)）
+- **系统要求**: Node.js 18+ 改为 Node.js 22+（与官方一致）
+
 ## [1.1.0] - 2025-03-11
 
 ### Added

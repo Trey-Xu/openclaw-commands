@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OpenClaw Command Reference - Changelog</title>
+    <link>https://trey-xu.github.io/openclaw-commands/</link>
+    <description>OpenClaw CLI 命令参考站更新与发布说明</description>
+    <atom:link href="https://trey-xu.github.io/openclaw-commands/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>v1.1.0</title>
+      <link>https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.1.0</link>
+      <description>Prism 语法高亮、搜索高亮、SEO、打印样式、ESLint、CI、部署指南卸载、无代码背景、GitHub 图标链接修正</description>
+      <pubDate>Tue, 11 Mar 2025 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>v1.0.0</title>
+      <link>https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.0.0</link>
+      <description>首次发布：Ctrl+F 搜索、侧边栏自动展开、动态标题、同类命令、回到顶部、404、路由过渡、集中版本配置</description>
+      <pubDate>Mon, 10 Mar 2025 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
