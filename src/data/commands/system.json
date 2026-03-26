@@ -16,6 +16,7 @@
         { "flag": "--deep", "description": "探测频道", "descriptionEn": "Probe channels" },
         { "flag": "--usage", "description": "显示模型提供商用量/配额", "descriptionEn": "Show model provider usage/quota" },
         { "flag": "--verbose", "description": "详细输出", "descriptionEn": "Verbose output" },
+        { "flag": "--debug", "description": "--verbose 的别名", "descriptionEn": "Alias for --verbose" },
         { "flag": "--json", "description": "JSON 输出", "descriptionEn": "JSON output" },
         { "flag": "--timeout <ms>", "description": "超时时间", "descriptionEn": "Timeout" }
       ],
@@ -33,6 +34,7 @@
       "syntax": "openclaw health [options]",
       "options": [
         { "flag": "--verbose", "description": "详细输出", "descriptionEn": "Verbose output" },
+        { "flag": "--debug", "description": "--verbose 的别名", "descriptionEn": "Alias for --verbose" },
         { "flag": "--timeout <ms>", "description": "超时时间", "descriptionEn": "Timeout" },
         { "flag": "--json", "description": "JSON 输出", "descriptionEn": "JSON output" }
       ],
@@ -47,15 +49,23 @@
       "descriptionEn": "List stored conversation sessions",
       "syntax": "openclaw sessions [options]",
       "options": [
-        { "flag": "--active <filter>", "description": "活跃会话过滤", "descriptionEn": "Active session filter" },
-        { "flag": "--store <store>", "description": "指定存储", "descriptionEn": "Specify store" },
+        { "flag": "--store <path>", "description": "会话存储路径（默认从配置解析）", "descriptionEn": "Session store path (default resolved from config)" },
+        { "flag": "--agent <id>", "description": "指定 Agent（默认使用默认 Agent）", "descriptionEn": "Agent id (default: configured default)" },
+        { "flag": "--all-agents", "description": "聚合所有 Agent 的会话", "descriptionEn": "Aggregate sessions across all configured agents" },
+        { "flag": "--active <minutes>", "description": "仅显示最近 N 分钟内更新的会话", "descriptionEn": "Only sessions updated within the past N minutes" },
         { "flag": "--verbose", "description": "详细输出", "descriptionEn": "Verbose output" },
-        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "JSON output" }
+        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "Output JSON" }
       ],
       "examples": [
-        { "description": "列出所有会话", "descriptionEn": "List all sessions", "code": "openclaw sessions --json" }
+        { "description": "列出所有会话", "descriptionEn": "List all sessions", "code": "openclaw sessions" },
+        { "description": "指定 Agent", "descriptionEn": "List sessions for one agent", "code": "openclaw sessions --agent work" },
+        { "description": "聚合所有 Agent", "descriptionEn": "Aggregate across agents", "code": "openclaw sessions --all-agents" },
+        { "description": "仅显示最近 2 小时", "descriptionEn": "Only last 2 hours", "code": "openclaw sessions --active 120" },
+        { "description": "JSON 输出", "descriptionEn": "Machine-readable output", "code": "openclaw sessions --json" }
       ],
-      "subcommands": []
+      "subcommands": [
+        { "name": "cleanup", "description": "立即运行会话存储维护（清理/保留策略）", "descriptionEn": "Run session-store maintenance now" }
+      ]
     },
     {
       "name": "logs",
@@ -103,14 +113,29 @@
     },
     {
       "name": "update",
-      "description": "更新 OpenClaw",
-      "descriptionEn": "Update OpenClaw",
-      "syntax": "openclaw update",
-      "options": [],
-      "examples": [
-        { "description": "更新 OpenClaw", "descriptionEn": "Update OpenClaw", "code": "openclaw update" }
+      "description": "更新 OpenClaw（支持更新渠道/目标 tag、试运行、非交互）；执行全局 npm 安装前会预检目标包的 engines.node",
+      "descriptionEn": "Update OpenClaw (channels/tags, dry-run, non-interactive); preflights target npm package engines.node before global install",
+      "syntax": "openclaw update [options] [subcommand]",
+      "options": [
+        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "Output JSON" },
+        { "flag": "--no-restart", "description": "更新成功后不重启 Gateway 服务", "descriptionEn": "Skip restarting the gateway service after update" },
+        { "flag": "--dry-run", "description": "试运行（仅预览，不做实际更改）", "descriptionEn": "Preview update actions without making changes" },
+        { "flag": "--channel <stable|beta|dev>", "description": "持久化更新渠道（git + npm）", "descriptionEn": "Persist update channel (git + npm)" },
+        { "flag": "--tag <tag|version|spec>", "description": "一次性覆盖更新目标（dist-tag/版本/包 spec）", "descriptionEn": "Override the update target (dist-tag/version/package spec)" },
+        { "flag": "--timeout <seconds>", "description": "每步超时（秒，默认 1200）", "descriptionEn": "Timeout per step in seconds (default: 1200)" },
+        { "flag": "--yes", "description": "无交互接受确认（例如降级确认）", "descriptionEn": "Skip confirmation prompts (non-interactive)" }
       ],
-      "subcommands": []
+      "examples": [
+        { "description": "更新 OpenClaw", "descriptionEn": "Update OpenClaw", "code": "openclaw update" },
+        { "description": "切换到 beta 渠道", "descriptionEn": "Switch to beta channel", "code": "openclaw update --channel beta" },
+        { "description": "试运行预览更新动作", "descriptionEn": "Preview update plan", "code": "openclaw update --dry-run" },
+        { "description": "交互式更新向导", "descriptionEn": "Interactive update wizard", "code": "openclaw update wizard" },
+        { "description": "查看更新渠道与版本状态", "descriptionEn": "Show update status", "code": "openclaw update status" }
+      ],
+      "subcommands": [
+        { "name": "wizard", "description": "交互式更新向导", "descriptionEn": "Interactive update wizard" },
+        { "name": "status", "description": "查看更新渠道与版本状态", "descriptionEn": "Show update channel and version status" }
+      ]
     },
     {
       "name": "reset",
@@ -152,17 +177,26 @@
     },
     {
       "name": "backup",
-      "description": "备份配置和状态",
-      "descriptionEn": "Backup config and state",
-      "syntax": "openclaw backup <subcommand>",
-      "options": [],
+      "description": "创建和验证 OpenClaw 本地状态备份包",
+      "descriptionEn": "Create and verify local backup archives for OpenClaw state",
+      "syntax": "openclaw backup <subcommand> [options]",
+      "options": [
+        { "flag": "--output <path>", "description": "输出文件或目录（create）", "descriptionEn": "Archive path or destination directory (create)" },
+        { "flag": "--json", "description": "JSON 输出（create/verify）", "descriptionEn": "Output JSON (create/verify)" },
+        { "flag": "--dry-run", "description": "预览备份计划不写入（create）", "descriptionEn": "Print the backup plan without writing (create)" },
+        { "flag": "--verify", "description": "创建后立即校验（create）", "descriptionEn": "Verify the archive after writing it (create)" },
+        { "flag": "--only-config", "description": "仅备份当前 JSON 配置文件（create）", "descriptionEn": "Back up only the active JSON config file (create)" },
+        { "flag": "--no-include-workspace", "description": "不包含工作区目录（create）", "descriptionEn": "Exclude workspace directories from the backup (create)" }
+      ],
       "examples": [
         { "description": "创建备份", "descriptionEn": "Create backup", "code": "openclaw backup create" },
-        { "description": "验证备份", "descriptionEn": "Verify backup", "code": "openclaw backup verify" }
+        { "description": "验证备份", "descriptionEn": "Verify backup", "code": "openclaw backup verify ./openclaw-backup.tar.gz" },
+        { "description": "预览备份计划（不写入）", "descriptionEn": "Preview plan without writing", "code": "openclaw backup create --dry-run --json" },
+        { "description": "创建后立即校验", "descriptionEn": "Create and verify immediately", "code": "openclaw backup create --verify" }
       ],
       "subcommands": [
-        { "name": "create", "description": "创建备份", "descriptionEn": "Create backup" },
-        { "name": "verify", "description": "验证备份完整性", "descriptionEn": "Verify backup integrity" }
+        { "name": "create", "description": "创建备份（可选输出路径、是否包含工作区等）", "descriptionEn": "Write a backup archive (output path, include workspace, etc.)" },
+        { "name": "verify <archive>", "description": "验证备份包及其内置清单", "descriptionEn": "Validate a backup archive and its embedded manifest" }
       ]
     },
     {
@@ -236,14 +270,39 @@
     },
     {
       "name": "qr",
-      "description": "生成 QR 码",
-      "descriptionEn": "Generate QR code",
-      "syntax": "openclaw qr",
-      "options": [],
+      "description": "生成 iOS 配对二维码与 setup code",
+      "descriptionEn": "Generate an iOS pairing QR code and setup code",
+      "syntax": "openclaw qr [options]",
+      "options": [
+        { "flag": "--remote", "description": "使用 gateway.remote.url 与远程 token/password 生成 payload", "descriptionEn": "Use gateway.remote.url and remote token/password" },
+        { "flag": "--url <url>", "description": "覆盖 setup payload 中使用的 Gateway URL", "descriptionEn": "Override gateway URL used in setup payload" },
+        { "flag": "--public-url <url>", "description": "覆盖 setup payload 的公开 URL", "descriptionEn": "Override gateway public URL used in setup payload" },
+        { "flag": "--token <token>", "description": "覆盖 setup payload 的 token（与 --password 二选一）", "descriptionEn": "Override gateway token (use either --token or --password)" },
+        { "flag": "--password <password>", "description": "覆盖 setup payload 的 password（与 --token 二选一）", "descriptionEn": "Override gateway password (use either --token or --password)" },
+        { "flag": "--setup-code-only", "description": "仅输出 setup code（不渲染二维码）", "descriptionEn": "Print only the setup code" },
+        { "flag": "--no-ascii", "description": "跳过 ASCII 二维码渲染", "descriptionEn": "Skip ASCII QR rendering" },
+        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "Output JSON" }
+      ],
       "examples": [
-        { "description": "生成 QR 码", "descriptionEn": "Generate QR code", "code": "openclaw qr" }
+        { "description": "生成配对二维码", "descriptionEn": "Generate pairing QR", "code": "openclaw qr" },
+        { "description": "仅输出 setup code", "descriptionEn": "Print setup code only", "code": "openclaw qr --setup-code-only" },
+        { "description": "使用远程 Gateway 配对", "descriptionEn": "Use remote gateway pairing payload", "code": "openclaw qr --remote" },
+        { "description": "JSON 输出", "descriptionEn": "JSON output", "code": "openclaw qr --json" }
       ],
       "subcommands": []
+    },
+    {
+      "name": "clawbot",
+      "description": "遗留 clawbot 命令别名（兼容旧用法）",
+      "descriptionEn": "Legacy clawbot command aliases",
+      "syntax": "openclaw clawbot <subcommand>",
+      "options": [],
+      "examples": [
+        { "description": "在 clawbot 下生成配对二维码", "descriptionEn": "Generate pairing QR under clawbot", "code": "openclaw clawbot qr" }
+      ],
+      "subcommands": [
+        { "name": "qr", "description": "同 openclaw qr", "descriptionEn": "Same as openclaw qr" }
+      ]
     },
     {
       "name": "dns",
@@ -305,14 +364,29 @@
     },
     {
       "name": "directory",
-      "description": "目录服务",
-      "descriptionEn": "Directory service",
-      "syntax": "openclaw directory",
-      "options": [],
-      "examples": [
-        { "description": "查看目录", "descriptionEn": "View directory", "code": "openclaw directory" }
+      "description": "查询各聊天渠道的联系人/群组 ID（self/peers/groups）",
+      "descriptionEn": "Lookup contact and group IDs (self, peers, groups) for supported chat channels",
+      "syntax": "openclaw directory <subcommand> [options]",
+      "options": [
+        { "flag": "--channel <channel>", "description": "渠道（仅配置一个渠道时可自动推断）", "descriptionEn": "Channel (auto when only one is configured)" },
+        { "flag": "--account <id>", "description": "账号 ID（accountId）", "descriptionEn": "Account id (accountId)" },
+        { "flag": "--query <query>", "description": "可选搜索关键词（peers/groups list）", "descriptionEn": "Optional search query (peers/groups list)" },
+        { "flag": "--limit <n>", "description": "限制返回数量（peers/groups list、members）", "descriptionEn": "Limit results (peers/groups list, members)" },
+        { "flag": "--group-id <id>", "description": "群组/频道 ID（groups members）", "descriptionEn": "Group id (groups members)" },
+        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "Output JSON" }
       ],
-      "subcommands": []
+      "examples": [
+        { "description": "查看当前账号身份", "descriptionEn": "Show connected account identity", "code": "openclaw directory self --channel slack" },
+        { "description": "按名称搜索联系人", "descriptionEn": "Search peers by name", "code": "openclaw directory peers list --channel slack --query \"alice\"" },
+        { "description": "列出群组/频道", "descriptionEn": "List groups/channels", "code": "openclaw directory groups list --channel discord" },
+        { "description": "列出某群组成员", "descriptionEn": "List group members", "code": "openclaw directory groups members --channel discord --group-id 123 --limit 50" }
+      ],
+      "subcommands": [
+        { "name": "self", "description": "显示当前账号用户信息", "descriptionEn": "Show the current account user" },
+        { "name": "peers list", "description": "列出联系人/用户（支持 --query、--limit）", "descriptionEn": "List peers (supports --query, --limit)" },
+        { "name": "groups list", "description": "列出群组/频道（支持 --query、--limit）", "descriptionEn": "List groups (supports --query, --limit)" },
+        { "name": "groups members", "description": "列出群组成员（需 --group-id，可选 --limit）", "descriptionEn": "List group members (requires --group-id, optional --limit)" }
+      ]
     }
   ]
 }

@@ -1,0 +1,32 @@
+{
+  "releases": [
+    {
+      "tagName": "v2026.3.24",
+      "version": "2026.3.24",
+      "publishedAt": "2026-03-25",
+      "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.3.24",
+      "sections": [
+        { "title": "Breaking", "items": [] },
+        {
+          "title": "Changes",
+          "items": [
+            {
+              "zh": "CLI/容器：新增 `--container` 与 `OPENCLAW_CONTAINER`，可在运行中的 Docker/Podman OpenClaw 容器内执行 `openclaw` 命令。",
+              "en": "CLI/containers: add `--container` and `OPENCLAW_CONTAINER` to run `openclaw` commands inside a running Docker or Podman OpenClaw container."
+            },
+            {
+              "zh": "运行时/安装：Node 22 最低版本降至 `22.14+`（仍推荐 Node 24）。",
+              "en": "Runtime/install: lower Node 22 minimum to `22.14+` while continuing to recommend Node 24."
+            },
+            {
+              "zh": "CLI/update：`openclaw update` 在全局 npm 安装前会预检目标包的 `engines.node`，Node 过旧时给出明确升级提示。",
+              "en": "CLI/update: preflight target npm package `engines.node` before `openclaw update` runs a global package install."
+            }
+          ]
+        },
+        { "title": "Fixes", "items": [] }
+      ]
+    }
+  ]
+}
+

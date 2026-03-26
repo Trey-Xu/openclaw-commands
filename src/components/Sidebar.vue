@@ -25,6 +25,10 @@ function isActive(cmdName) {
   return route.params.name === cmdName
 }
 
+function isReleasesActive() {
+  return route.name === 'releases'
+}
+
 function onNavClick() {
   if (window.innerWidth <= 768) emit('close')
 }
@@ -45,6 +49,16 @@ watch(() => route.params.name, async (name) => {
   <div class="sidebar-overlay" :class="{ active: open }" @click="emit('close')"></div>
   <aside class="sidebar" :class="{ open }">
     <nav class="sidebar-nav">
+      <div class="nav-top">
+        <router-link
+          :to="{ name: 'releases' }"
+          class="nav-item nav-item-top"
+          :class="{ active: isReleasesActive() }"
+          @click="onNavClick"
+        >
+          <span class="nav-item-name">{{ ui('releaseNotes') }}</span>
+        </router-link>
+      </div>
       <div v-for="cat in categories" :key="cat.id" class="nav-group">
         <div class="nav-group-header" @click="toggle(cat.id)">
           <span class="nav-group-icon">{{ cat.icon }}</span>
@@ -116,6 +130,18 @@ watch(() => route.params.name, async (name) => {
 .sidebar-nav {
   flex: 1;
   padding: 12px 0;
+}
+
+.nav-top {
+  padding: 0 0 8px;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 8px;
+}
+
+.nav-item-top {
+  padding-left: 16px;
+  font-family: inherit;
+  color: var(--color-text-secondary);
 }
 
 .nav-group {

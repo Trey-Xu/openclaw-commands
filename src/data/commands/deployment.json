@@ -49,17 +49,33 @@
       "nameEn": "System Requirements",
       "description": "运行 OpenClaw 的系统环境要求",
       "descriptionEn": "System requirements for running OpenClaw",
-      "syntax": "node -v  # 需要 Node.js 22+",
+      "syntax": "node -v  # 需要 Node.js 24（推荐）或 22.14+",
       "options": [
-        { "flag": "Node.js", "description": "版本 22 或更高", "descriptionEn": "Version 22 or higher" },
+        { "flag": "Node.js", "description": "Node 24（推荐）或 22.14 及以上", "descriptionEn": "Node 24 (recommended) or 22.14+" },
         { "flag": "操作系统 / OS", "description": "macOS、Linux 或 Windows（推荐 WSL2）", "descriptionEn": "macOS, Linux, or Windows (WSL2 recommended)" },
         { "flag": "内存 / RAM", "description": "至少 2 GB", "descriptionEn": "Minimum 2 GB" },
         { "flag": "API Key", "description": "来自 OpenAI、Anthropic、DeepSeek 或其他 LLM 提供商", "descriptionEn": "From OpenAI, Anthropic, DeepSeek, or other LLM providers" }
       ],
       "examples": [
         { "description": "检查 Node.js 版本", "descriptionEn": "Check Node.js version", "code": "node -v" },
-        { "description": "安装 Node.js (Ubuntu/Debian)", "descriptionEn": "Install Node.js (Ubuntu/Debian)", "code": "curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -\nsudo apt-get install -y nodejs" },
-        { "description": "安装 Node.js (macOS)", "descriptionEn": "Install Node.js (macOS)", "code": "brew install node@22" }
+        { "description": "安装 Node.js (Ubuntu/Debian，推荐 24)", "descriptionEn": "Install Node.js (Ubuntu/Debian, Node 24 recommended)", "code": "curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -\nsudo apt-get install -y nodejs" },
+        { "description": "安装 Node.js (macOS，推荐 24)", "descriptionEn": "Install Node.js (macOS, Node 24 recommended)", "code": "brew install node@24" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "容器内运行 CLI",
+      "nameEn": "Run CLI inside a container",
+      "description": "在已运行的 Docker 或 Podman OpenClaw 容器内执行 CLI（无需在宿主机重复装依赖）",
+      "descriptionEn": "Run the CLI inside a running Docker or Podman OpenClaw container",
+      "syntax": "openclaw --container <name|id> <subcommand> [args]",
+      "options": [
+        { "flag": "--container <name|id>", "description": "目标容器名称或 ID", "descriptionEn": "Target container name or ID" },
+        { "flag": "OPENCLAW_CONTAINER", "description": "环境变量：默认使用的容器（等效于反复传 --container）", "descriptionEn": "Default container env var (same as repeating --container)" }
+      ],
+      "examples": [
+        { "description": "在指定容器内执行子命令", "descriptionEn": "Run a subcommand inside the container", "code": "openclaw --container my-openclaw status" },
+        { "description": "用环境变量固定容器", "descriptionEn": "Pin container via environment", "code": "export OPENCLAW_CONTAINER=my-openclaw\nopenclaw doctor" }
       ],
       "subcommands": []
     },
