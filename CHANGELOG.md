@@ -13,15 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **版本注记**: 新增「Release Notes」页面（GitHub Releases 拉取 + 离线 fallback），支持按版本切换与中英文显示
 - **同步校验**: 新增 `check:cli-sync` / `check:cli-deep-sync` 并接入 CI，防止命令参考与官方差异扩大
-
-### Changed
-
-- **OpenClaw 版本**: 跟踪至 [v2026.3.24](https://github.com/openclaw/openclaw/releases/tag/v2026.3.24)（Latest）
-- **系统要求**: 与官方一致 — Node **24**（推荐）或 **22.14+**
-- **命令参考**: 补齐并对齐 `update/backup/sessions/directory/mcp/qr` 等常用子命令与 flags
-
-### Added
-
 - **无障碍**: 键盘焦点 `:focus-visible` 样式、跳过主内容链接
 - **性能**: 首屏字体 preload、路由懒加载
 - **PWA**: manifest + Service Worker，可安装与离线访问
@@ -34,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **文案**: 移除未使用的 copyLink/linkCopied；README 11 大类、搜索说明改为「子串匹配」
 - **OpenClaw 版本**: 跟踪至 [v2026.3.24](https://github.com/openclaw/openclaw/releases/tag/v2026.3.24)（Latest）
 - **系统要求**: 与官方一致 — Node **24**（推荐）或 **22.14+**（见 [openclaw/openclaw](https://github.com/openclaw/openclaw) README）
-- **命令参考**: 同步 [v2026.3.24](https://github.com/openclaw/openclaw/releases/tag/v2026.3.24) — `openclaw update` 预检 Node、`--container`/`OPENCLAW_CONTAINER`、skills「needs setup」与 `skills info` 指引
+- **命令参考**: 同步 [v2026.3.24](https://github.com/openclaw/openclaw/releases/tag/v2026.3.24) — `openclaw update` 预检 Node、`--container`/`OPENCLAW_CONTAINER`、skills「needs setup」与 `skills info` 指引；补齐并对齐 `update/backup/sessions/directory/mcp/qr` 等常用子命令与 flags
 
 ## [1.1.0] - 2025-03-11
 
