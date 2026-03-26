@@ -57,6 +57,12 @@ const UI_STRINGS = {
     copy: '复制',
     themeLight: '亮色',
     themeDark: '暗色',
+    releaseNotes: '版本注记',
+    latest: '最新',
+    version: '版本',
+    refresh: '刷新',
+    loading: '加载中…',
+    loadFailed: '加载失败',
   },
   en: {
     searchPlaceholder: 'Search commands...',
@@ -88,6 +94,12 @@ const UI_STRINGS = {
     copy: 'Copy',
     themeLight: 'Light',
     themeDark: 'Dark',
+    releaseNotes: 'Release Notes',
+    latest: 'Latest',
+    version: 'Version',
+    refresh: 'Refresh',
+    loading: 'Loading…',
+    loadFailed: 'Load failed',
   }
 }
 

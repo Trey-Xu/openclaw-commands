@@ -89,19 +89,49 @@
       ]
     },
     {
+      "name": "mcp",
+      "description": "管理内嵌 MCP 服务器配置（列出/查看/设置/删除）",
+      "descriptionEn": "Manage embedded MCP server config (list/show/set/unset)",
+      "syntax": "openclaw mcp <subcommand> [options]",
+      "options": [
+        { "flag": "--json", "description": "JSON 输出（list/show）", "descriptionEn": "Print JSON (list/show)" }
+      ],
+      "examples": [
+        { "description": "列出已配置的 MCP 服务器", "descriptionEn": "List configured MCP servers", "code": "openclaw mcp list" },
+        { "description": "查看某个 MCP 服务器配置", "descriptionEn": "Show one MCP server config", "code": "openclaw mcp show my-server" },
+        {
+          "description": "设置 MCP 服务器（JSON 对象）",
+          "descriptionEn": "Set one MCP server from JSON",
+          "code": "openclaw mcp set my-server '{\"command\":\"uvx\",\"args\":[\"context7-mcp\"]}'"
+        },
+        { "description": "删除 MCP 服务器", "descriptionEn": "Remove one MCP server", "code": "openclaw mcp unset my-server" }
+      ],
+      "subcommands": [
+        { "name": "list", "description": "列出已配置的 MCP 服务器", "descriptionEn": "List configured MCP servers" },
+        { "name": "show [name]", "description": "查看某个 MCP 服务器或整个 MCP 配置", "descriptionEn": "Show one MCP server or the full MCP config" },
+        { "name": "set <name> <json>", "description": "写入 MCP 服务器配置（JSON 对象）", "descriptionEn": "Set one MCP server from a JSON object" },
+        { "name": "unset <name>", "description": "删除某个 MCP 服务器配置", "descriptionEn": "Remove one configured MCP server" }
+      ]
+    },
+    {
       "name": "doctor",
       "description": "健康检查和快速修复（配置 + Gateway + 遗留服务）",
       "descriptionEn": "Health checks and quick fixes (config + Gateway + legacy services)",
       "syntax": "openclaw doctor [options]",
       "options": [
-        { "flag": "--deep", "description": "扫描系统服务查找额外的 Gateway 安装", "descriptionEn": "Scan system services for extra Gateway installs" },
-        { "flag": "--non-interactive", "description": "跳过提示，仅执行安全迁移", "descriptionEn": "Skip prompts, apply safe migrations only" },
+        { "flag": "--no-workspace-suggestions", "description": "禁用工作区记忆系统建议", "descriptionEn": "Disable workspace memory system suggestions" },
         { "flag": "--yes", "description": "接受默认值（无头模式）", "descriptionEn": "Accept defaults without prompting" },
-        { "flag": "--no-workspace-suggestions", "description": "禁用工作区内存提示", "descriptionEn": "Disable workspace memory hints" }
+        { "flag": "--repair", "description": "不提示直接应用推荐修复", "descriptionEn": "Apply recommended repairs without prompting" },
+        { "flag": "--fix", "description": "--repair 的别名", "descriptionEn": "Alias for --repair" },
+        { "flag": "--force", "description": "更激进的修复（可能覆盖自定义服务配置）", "descriptionEn": "Apply aggressive repairs (may overwrite custom service config)" },
+        { "flag": "--non-interactive", "description": "无交互模式（仅执行安全迁移）", "descriptionEn": "Run without prompts (safe migrations only)" },
+        { "flag": "--generate-gateway-token", "description": "生成并配置 Gateway token", "descriptionEn": "Generate and configure a gateway token" },
+        { "flag": "--deep", "description": "扫描系统服务查找额外的 Gateway 安装", "descriptionEn": "Scan system services for extra gateway installs" }
       ],
       "examples": [
         { "description": "运行健康检查", "descriptionEn": "Run health check", "code": "openclaw doctor" },
-        { "description": "深度扫描", "descriptionEn": "Deep scan", "code": "openclaw doctor --deep" }
+        { "description": "深度扫描", "descriptionEn": "Deep scan", "code": "openclaw doctor --deep" },
+        { "description": "自动修复（不提示）", "descriptionEn": "Apply recommended repairs", "code": "openclaw doctor --repair" }
       ],
       "subcommands": []
     },

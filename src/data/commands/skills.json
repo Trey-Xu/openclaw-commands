@@ -12,7 +12,7 @@
       "descriptionEn": "List and inspect available skills and their readiness",
       "syntax": "openclaw skills <subcommand> [options]",
       "options": [
-        { "flag": "-v, --verbose", "description": "包含缺失需求的详细信息", "descriptionEn": "Include missing requirements detail" },
+        { "flag": "-v, --verbose", "description": "包含「需配置」需求的详细信息（界面用语为 needs setup）", "descriptionEn": "Include detail for skills that need setup (needs setup)" },
         { "flag": "--json", "description": "JSON 输出（无样式）", "descriptionEn": "JSON output (no styling)" },
         { "flag": "--eligible", "description": "仅显示就绪的技能", "descriptionEn": "Show only ready skills" }
       ],
@@ -24,8 +24,8 @@
       ],
       "subcommands": [
         { "name": "list", "description": "列出技能（无子命令时默认执行）", "descriptionEn": "List skills (default when no subcommand)" },
-        { "name": "info <name>", "description": "显示某个技能的详情", "descriptionEn": "Show details for a skill" },
-        { "name": "check", "description": "汇总就绪 vs 缺失需求", "descriptionEn": "Summary of ready vs missing requirements" }
+        { "name": "info <name>", "description": "显示某个技能的详情（含 API 密钥获取与保存路径等指引）", "descriptionEn": "Show skill details (includes API key guidance and storage path hints where applicable)" },
+        { "name": "check", "description": "汇总就绪 vs 需配置需求", "descriptionEn": "Summary of ready vs needs-setup requirements" }
       ]
     },
     {

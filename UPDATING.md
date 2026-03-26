@@ -5,13 +5,13 @@
 ## 1. 更新版本号
 
 - **`src/config/version.js`**  
-  修改 `OPENCLAW_VERSION` 为最新版本（如 `2026.3.12`）。  
+  修改 `OPENCLAW_VERSION` 为最新版本（如 `2026.3.24`）。  
   全站「基于 OpenClaw vX.X.X」和版本徽章链接会自动同步。
 
 ## 2. 更新系统要求（如有变更）
 
 - **`src/data/commands/deployment.json`**  
-  在「系统要求」命令中，根据官方 README 更新 Node.js 等要求（如 Node 18+ → Node 22+）。
+  在「系统要求」命令中，根据官方 README 更新 Node.js 等要求（当前为 Node 24 推荐或 22.14+）。
 
 ## 3. 核对命令数据
 

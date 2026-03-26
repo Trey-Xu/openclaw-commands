@@ -19,8 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **文案**: 移除未使用的 copyLink/linkCopied；README 11 大类、搜索说明改为「子串匹配」
-- **OpenClaw 版本**: 2026.3.8 → 2026.3.12（[Release](https://github.com/openclaw/openclaw/releases/tag/v2026.3.12)）
-- **系统要求**: Node.js 18+ 改为 Node.js 22+（与官方一致）
+- **OpenClaw 版本**: 跟踪至 [v2026.3.24](https://github.com/openclaw/openclaw/releases/tag/v2026.3.24)（Latest）
+- **系统要求**: 与官方一致 — Node **24**（推荐）或 **22.14+**（见 [openclaw/openclaw](https://github.com/openclaw/openclaw) README）
+- **命令参考**: 同步 [v2026.3.24](https://github.com/openclaw/openclaw/releases/tag/v2026.3.24) — `openclaw update` 预检 Node、`--container`/`OPENCLAW_CONTAINER`、skills「needs setup」与 `skills info` 指引
 
 ## [1.1.0] - 2025-03-11
 
