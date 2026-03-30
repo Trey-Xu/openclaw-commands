@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Cursor — 项目规则仅本地使用，不提交到 GitHub
+.cursor/rules/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
