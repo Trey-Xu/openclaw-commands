@@ -6,7 +6,7 @@ A comprehensive CLI command reference website for [OpenClaw](https://github.com/
 
 ## Features
 
-- **40+ commands** organized into **11 categories** with full syntax, options, subcommands, and examples
+- **40+ commands** organized into **9 categories** with full syntax, options, subcommands, and examples
 - **Bilingual support** — switch between Chinese and English with one click
 - **Real-time search** — search across command names, descriptions, and subcommands (substring match)
 - **Dark theme** — terminal-inspired design with OpenClaw's lobster color palette
@@ -28,10 +28,10 @@ A comprehensive CLI command reference website for [OpenClaw](https://github.com/
 | Gateway & Services | `gateway`, `daemon`, `node`, `nodes`, `devices` |
 | Agent & Messaging | `agent`, `agents`, `message`, `acp` |
 | Model Management | `models` (list/status/set/scan/auth/aliases/fallbacks) |
-| Memory & Search | `memory` (status/index/search) |
-| Browser Control | `browser` (20+ subcommands) |
 | Automation | `cron`, `webhooks`, `sandbox` |
 | System & Maintenance | `status`, `health`, `logs`, `system`, `update`, `reset`, `security`, `secrets`, and more |
+
+OpenClaw **v2026.3.28+** no longer exposes top-level `openclaw browser` or `openclaw memory` CLI commands; browser control and memory features are integrated via the Gateway and agent tools (see [official docs](https://docs.openclaw.ai/)).
 
 ## Tech Stack
 

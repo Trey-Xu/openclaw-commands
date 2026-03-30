@@ -6,7 +6,7 @@
 
 ## 功能特性
 
-- **40+ 命令** 分为 **11 大类**，包含完整的语法、选项、子命令和使用示例
+- **40+ 命令** 分为 **9 大类**，包含完整的语法、选项、子命令和使用示例
 - **双语支持** —— 中英文一键切换
 - **实时搜索** —— 按命令名、描述和子命令关键词搜索（子串匹配）
 - **暗色主题** —— 终端风格设计，采用 OpenClaw 龙虾配色方案
@@ -28,10 +28,10 @@
 | Gateway 服务 | `gateway`, `daemon`, `node`, `nodes`, `devices` |
 | Agent 与消息 | `agent`, `agents`, `message`, `acp` |
 | 模型管理 | `models` (list/status/set/scan/auth/aliases/fallbacks) |
-| 记忆与搜索 | `memory` (status/index/search) |
-| 浏览器控制 | `browser` (20+ 子命令) |
 | 自动化 | `cron`, `webhooks`, `sandbox` |
 | 系统与维护 | `status`, `health`, `logs`, `system`, `update`, `reset`, `security`, `secrets` 等 |
+
+自 OpenClaw **v2026.3.28** 起，官方 CLI 已不再提供顶层 `openclaw browser`、`openclaw memory`；浏览器与记忆能力通过 Gateway / Agent 工具使用，详见[官方文档](https://docs.openclaw.ai/)。
 
 ## 技术栈
 

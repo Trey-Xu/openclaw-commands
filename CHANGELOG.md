@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.2] - 2026-03-30
+
+### Fixed
+
+- **PWA**: Service Worker 缓存版本升为 `openclaw-commands-v3`，避免已安装用户长期命中旧缓存
+
+### Changed
+
+- **OpenClaw 版本**: 跟踪至 [v2026.3.28](https://github.com/openclaw/openclaw/releases/tag/v2026.3.28)
+- **命令参考**: 新增 `config schema`；`gateway run` 补充 `--cli-backend-logs` / `--claude-cli-logs`（弃用别名）、`--password-file`、`--ws-log`、`--raw-stream` 等；移除已不在官方 CLI 中的顶层 `browser`、`memory` 分类（见 README 说明）
+- **校验脚本**: 默认对比官方 tag `v2026.3.28`；支持 `OPENCLAW_LOCAL_REPO` 从本机 openclaw 源码目录读取，便于离线对照
+
+### Documentation
+
+- **UPDATING.md**: 补充本地源码目录与校验命令的用法
+
 ## [1.2.1] - 2026-03-26
 
 ### Fixed
@@ -84,3 +100,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.0]: https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.0.0
 [1.2.0]: https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.0
 [1.2.1]: https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.1
+[1.2.2]: https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.2

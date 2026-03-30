@@ -5,8 +5,13 @@
 ## 1. 更新版本号
 
 - **`src/config/version.js`**  
-  修改 `OPENCLAW_VERSION` 为最新版本（如 `2026.3.24`）。  
+  修改 `OPENCLAW_VERSION` 为最新版本（如 `2026.3.28`）。  
   全站「基于 OpenClaw vX.X.X」和版本徽章链接会自动同步。
+
+- **本地对照官方源码（可选）**  
+  若已 `git clone` [openclaw/openclaw](https://github.com/openclaw/openclaw) 到本机，可设置环境变量后离线跑校验，无需拉 raw GitHub：  
+  `OPENCLAW_LOCAL_REPO=/path/to/openclaw npm run check:cli-sync`  
+  可与 `OPENCLAW_OFFICIAL_TAG=v2026.3.28` 联用，表示检出到该 tag 的目录。
 
 ## 2. 更新系统要求（如有变更）
 
@@ -17,6 +22,7 @@
 
 - 本地安装新版本 CLI：  
   `npm install -g openclaw@latest`
+- 运行 `npm run check:cli-sync` / `check:cli-deep-sync`（或加上 `OPENCLAW_LOCAL_REPO` 指向上游仓库）。
 - 运行 `openclaw --help` 及各子命令的 `--help`，对照 **`src/data/commands/*.json`**：
   - 新增命令：在对应分类 JSON 中新增条目。
   - 删除/重命名命令：删除或修改对应条目。

@@ -3,8 +3,8 @@
   "name": "Agent 与消息",
   "nameEn": "Agent & Messaging",
   "icon": "🤖",
-  "description": "管理 AI Agent、发送消息和 IDE 桥接",
-  "descriptionEn": "Manage AI agents, send messages, and IDE bridging",
+  "description": "管理 AI Agent、发送消息和 IDE 桥接（浏览器自动化等为 Agent 工具，非独立 openclaw browser CLI）",
+  "descriptionEn": "Manage AI agents, send messages, and IDE bridging (browser automation is an agent tool, not a top-level openclaw browser CLI)",
   "commands": [
     {
       "name": "agent",

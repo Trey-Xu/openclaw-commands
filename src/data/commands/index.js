@@ -5,8 +5,6 @@ import skills from './skills.json'
 import gateway from './gateway.json'
 import agent from './agent.json'
 import models from './models.json'
-import memory from './memory.json'
-import browser from './browser.json'
 import automation from './automation.json'
 import system from './system.json'
 
@@ -18,8 +16,6 @@ export const categories = [
   gateway,
   agent,
   models,
-  memory,
-  browser,
   automation,
   system
 ]

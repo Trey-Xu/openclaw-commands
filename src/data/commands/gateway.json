@@ -17,11 +17,17 @@
         { "flag": "--token <token>", "description": "认证令牌", "descriptionEn": "Auth token" },
         { "flag": "--auth <auth>", "description": "认证方式", "descriptionEn": "Auth method" },
         { "flag": "--password <pw>", "description": "密码", "descriptionEn": "Password" },
+        { "flag": "--password-file <path>", "description": "从文件读取 Gateway 密码（run）", "descriptionEn": "Read gateway password from file (run)" },
         { "flag": "--dev", "description": "开发模式", "descriptionEn": "Dev mode" },
         { "flag": "--force", "description": "强制终止已有端口监听", "descriptionEn": "Kill existing listener on port" },
         { "flag": "--verbose", "description": "详细输出", "descriptionEn": "Verbose output" },
         { "flag": "--tailscale <url>", "description": "Tailscale 配置", "descriptionEn": "Tailscale config" },
-        { "flag": "--compact", "description": "紧凑 WebSocket 日志", "descriptionEn": "Compact WebSocket log" }
+        { "flag": "--compact", "description": "等同于 --ws-log compact（WebSocket 日志）", "descriptionEn": "Alias for --ws-log compact (WebSocket log)" },
+        { "flag": "--ws-log <style>", "description": "WebSocket 日志样式 auto|full|compact（run）", "descriptionEn": "WebSocket log style: auto, full, or compact (run)" },
+        { "flag": "--cli-backend-logs", "description": "打印 CLI 后端日志（run；原 Claude/Codex/Gemini CLI）", "descriptionEn": "Log CLI backend output (run; Claude/Codex/Gemini CLI backends)" },
+        { "flag": "--claude-cli-logs", "description": "已弃用，等同于 --cli-backend-logs", "descriptionEn": "Deprecated alias for --cli-backend-logs" },
+        { "flag": "--raw-stream", "description": "将原始模型流事件写入 jsonl（run）", "descriptionEn": "Log raw model stream events to jsonl (run)" },
+        { "flag": "--raw-stream-path <path>", "description": "原始流 jsonl 输出路径（run）", "descriptionEn": "Raw stream jsonl path (run)" }
       ],
       "examples": [
         { "description": "直接运行 Gateway", "descriptionEn": "Run Gateway directly", "code": "openclaw gateway run --port 3000" },

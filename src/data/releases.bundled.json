@@ -1,6 +1,45 @@
 {
   "releases": [
     {
+      "tagName": "v2026.3.28",
+      "version": "2026.3.28",
+      "publishedAt": "2026-03-29",
+      "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.3.28",
+      "sections": [
+        {
+          "title": "Breaking",
+          "items": [
+            {
+              "zh": "Qwen：移除已弃用的 `qwen-portal-auth` OAuth；请改用 Model Studio 与 `openclaw onboard --auth-choice modelstudio-api-key`。",
+              "en": "Qwen: remove deprecated `qwen-portal-auth` OAuth; migrate to Model Studio with `openclaw onboard --auth-choice modelstudio-api-key`."
+            },
+            {
+              "zh": "Doctor：超过两个月的旧配置自动迁移已移除，极老键可能在校验时直接报错而非静默改写。",
+              "en": "Doctor: automatic config migrations older than two months are dropped; very old keys may fail validation instead of being rewritten."
+            }
+          ]
+        },
+        {
+          "title": "Changes",
+          "items": [
+            {
+              "zh": "CLI：新增 `openclaw config schema`，输出 `openclaw.json` 的生成 JSON Schema。",
+              "en": "CLI: add `openclaw config schema` to print the generated JSON schema for `openclaw.json`."
+            },
+            {
+              "zh": "Gateway：`gateway run` 使用 `--cli-backend-logs` 查看 CLI 后端日志；`--claude-cli-logs` 为兼容别名。",
+              "en": "Gateway: `gateway run` uses `--cli-backend-logs` for CLI backend logs; `--claude-cli-logs` remains a compatibility alias."
+            },
+            {
+              "zh": "顶层 CLI 不再包含 `openclaw browser` / `openclaw memory`（浏览器与记忆经 Gateway/Agent 工具提供）。",
+              "en": "Top-level `openclaw browser` / `openclaw memory` commands are removed (browser and memory via Gateway/agent tools)."
+            }
+          ]
+        },
+        { "title": "Fixes", "items": [] }
+      ]
+    },
+    {
       "tagName": "v2026.3.24",
       "version": "2026.3.24",
       "publishedAt": "2026-03-25",
@@ -29,4 +68,3 @@
     }
   ]
 }
-

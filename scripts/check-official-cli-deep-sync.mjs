@@ -3,7 +3,8 @@ import path from "node:path";
 
 const OFFICIAL_OWNER = process.env.OPENCLAW_OFFICIAL_OWNER ?? "openclaw";
 const OFFICIAL_REPO = process.env.OPENCLAW_OFFICIAL_REPO ?? "openclaw";
-const OFFICIAL_TAG = process.env.OPENCLAW_OFFICIAL_TAG ?? "v2026.3.24";
+const OFFICIAL_TAG = process.env.OPENCLAW_OFFICIAL_TAG ?? "v2026.3.28";
+const LOCAL_REPO = process.env.OPENCLAW_LOCAL_REPO?.trim();
 const COMMANDS_DIR = process.env.OPENCLAW_COMMANDS_DIR ?? "src/data/commands";
 
 function fail(message) {
@@ -38,6 +39,19 @@ async function fetchText(url) {
     throw new Error(`Fetch failed ${res.status} ${res.statusText}: ${url}`);
   }
   return await res.text();
+}
+
+function readOfficialSource(relPath) {
+  if (!LOCAL_REPO) return null;
+  const abs = path.join(LOCAL_REPO, relPath);
+  return fs.readFileSync(abs, "utf8");
+}
+
+async function loadOfficialText(relPath) {
+  const local = readOfficialSource(relPath);
+  if (local != null) return local;
+  const url = `https://raw.githubusercontent.com/${OFFICIAL_OWNER}/${OFFICIAL_REPO}/${OFFICIAL_TAG}/${relPath}`;
+  return fetchText(url);
 }
 
 function extractOptionFlags(tsText) {
@@ -165,9 +179,7 @@ function diffSets(label, expected, actual) {
 }
 
 async function main() {
-  const base = `https://raw.githubusercontent.com/${OFFICIAL_OWNER}/${OFFICIAL_REPO}/${OFFICIAL_TAG}`;
-
-  // Hard requirements (we still fetch official files, but we validate against these
+  // Hard requirements (we still load official files, but we validate against these
   // to avoid over/under-attributing flags in multi-command registrars).
   const REQUIRED = {
     update: {
@@ -222,13 +234,13 @@ async function main() {
 
   const targets = [
     // Core
-    { name: "backup", url: `${base}/src/cli/program/register.backup.ts` },
-    { name: "sessions", url: `${base}/src/cli/program/register.status-health-sessions.ts` },
+    { name: "backup", rel: "src/cli/program/register.backup.ts" },
+    { name: "sessions", rel: "src/cli/program/register.status-health-sessions.ts" },
     // SubCLIs
-    { name: "update", url: `${base}/src/cli/update-cli.ts` },
-    { name: "directory", url: `${base}/src/cli/directory-cli.ts` },
-    { name: "mcp", url: `${base}/src/cli/mcp-cli.ts` },
-    { name: "qr", url: `${base}/src/cli/qr-cli.ts` },
+    { name: "update", rel: "src/cli/update-cli.ts" },
+    { name: "directory", rel: "src/cli/directory-cli.ts" },
+    { name: "mcp", rel: "src/cli/mcp-cli.ts" },
+    { name: "qr", rel: "src/cli/qr-cli.ts" },
   ];
 
   const local = readLocalCommandsIndex();
@@ -240,11 +252,11 @@ async function main() {
       continue;
     }
 
-    const text = await fetchText(t.url);
+    const text = await loadOfficialText(t.rel);
     // Sanity: ensure official file actually mentions the command name at least once.
     const paths = extractCommandPaths(text);
     if (![...paths].some((p) => p === t.name || p.startsWith(`${t.name} `))) {
-      fail(`[${t.name}] official source parse: did not find command in ${t.url}`);
+      fail(`[${t.name}] official source parse: did not find command in ${t.rel}`);
     }
 
     const localSub = collectLocalSubcommands(localCmd);

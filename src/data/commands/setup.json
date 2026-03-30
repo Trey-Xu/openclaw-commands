@@ -70,22 +70,24 @@
     },
     {
       "name": "config",
-      "description": "非交互式配置工具（获取/设置/删除/验证）",
-      "descriptionEn": "Non-interactive config helpers (get/set/unset/validate)",
+      "description": "非交互式配置工具（获取/设置/删除/验证/Schema）",
+      "descriptionEn": "Non-interactive config helpers (get/set/unset/file/validate/schema)",
       "syntax": "openclaw config <subcommand> [options]",
       "options": [],
       "examples": [
         { "description": "获取配置值", "descriptionEn": "Get config value", "code": "openclaw config get agents.defaults.model.primary" },
         { "description": "设置配置值", "descriptionEn": "Set config value", "code": "openclaw config set agents.defaults.model.primary gpt-4o" },
         { "description": "验证当前配置", "descriptionEn": "Validate current config", "code": "openclaw config validate --json" },
-        { "description": "查看配置文件路径", "descriptionEn": "Print config file path", "code": "openclaw config file" }
+        { "description": "查看配置文件路径", "descriptionEn": "Print config file path", "code": "openclaw config file" },
+        { "description": "打印配置 JSON Schema", "descriptionEn": "Print generated openclaw.json schema", "code": "openclaw config schema" }
       ],
       "subcommands": [
         { "name": "get <path>", "description": "获取配置值（支持 dot/bracket 路径）", "descriptionEn": "Get config value (dot/bracket path)" },
         { "name": "set <path> <value>", "description": "设置配置值（JSON5 或原始字符串）", "descriptionEn": "Set config value (JSON5 or raw string)" },
         { "name": "unset <path>", "description": "删除配置值", "descriptionEn": "Remove config value" },
         { "name": "file", "description": "打印当前配置文件路径", "descriptionEn": "Print active config file path" },
-        { "name": "validate", "description": "验证配置，支持 --json 输出", "descriptionEn": "Validate config, supports --json output" }
+        { "name": "validate", "description": "验证配置，支持 --json 输出", "descriptionEn": "Validate config, supports --json output" },
+        { "name": "schema", "description": "打印 openclaw.json 的生成 JSON Schema", "descriptionEn": "Print generated JSON schema for openclaw.json" }
       ]
     },
     {
