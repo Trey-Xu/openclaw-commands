@@ -2,6 +2,8 @@
 
 本文档说明当 [OpenClaw](https://github.com/openclaw/openclaw) 发布新版本时，如何更新本命令参考网站。
 
+供 Cursor Agent 使用的逐步清单（Skill）：[`.cursor/skills/openclaw-reference-sync/SKILL.md`](.cursor/skills/openclaw-reference-sync/SKILL.md)。
+
 ## 1. 更新版本号
 
 - **`src/config/version.js`**  
