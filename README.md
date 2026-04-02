@@ -29,9 +29,9 @@ A comprehensive CLI command reference website for [OpenClaw](https://github.com/
 | Agent & Messaging | `agent`, `agents`, `message`, `acp` |
 | Model Management | `models` (list/status/set/scan/auth/aliases/fallbacks) |
 | Automation | `cron`, `webhooks`, `sandbox` |
-| System & Maintenance | `status`, `health`, `logs`, `system`, `update`, `reset`, `security`, `secrets`, and more |
+| System & Maintenance | `status`, `health`, `sessions`, `tasks`, `logs`, `system`, `update`, `reset`, `security`, `secrets`, and more |
 
-OpenClaw **v2026.3.28+** no longer exposes top-level `openclaw browser` or `openclaw memory` CLI commands; browser control and memory features are integrated via the Gateway and agent tools (see [official docs](https://docs.openclaw.ai/)).
+OpenClaw **v2026.3.28+** (current reference **v2026.4.1**) no longer exposes top-level `openclaw browser` or `openclaw memory` CLI commands; browser control and memory features are integrated via the Gateway and agent tools (see [official docs](https://docs.openclaw.ai/)).
 
 ## Tech Stack
 

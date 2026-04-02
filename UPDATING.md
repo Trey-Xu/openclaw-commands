@@ -7,7 +7,7 @@
 ## 1. 更新版本号
 
 - **`src/config/version.js`**  
-  修改 `OPENCLAW_VERSION` 为最新版本（如 `2026.3.28`）。  
+  修改 `OPENCLAW_VERSION` 为最新版本（如 `2026.4.1`）。  
   全站「基于 OpenClaw vX.X.X」和版本徽章链接会自动同步。
 
 - **本地对照官方源码（可选）**  

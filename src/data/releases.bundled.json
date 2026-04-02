@@ -1,6 +1,33 @@
 {
   "releases": [
     {
+      "tagName": "v2026.4.1",
+      "version": "2026.4.1",
+      "publishedAt": "2026-04-01",
+      "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.4.1",
+      "sections": [
+        { "title": "Breaking", "items": [] },
+        {
+          "title": "Changes",
+          "items": [
+            {
+              "zh": "CLI：新增顶层 `openclaw tasks`（list、audit、maintenance、show、notify、cancel），用于查看与管理持久化后台任务。",
+              "en": "CLI: add top-level `openclaw tasks` (list, audit, maintenance, show, notify, cancel) for durable background task state."
+            },
+            {
+              "zh": "Cron：`openclaw cron add` 等支持 `--tools <csv>` 按任务配置工具白名单。",
+              "en": "Cron: per-job tool allowlists via `--tools <csv>` on `openclaw cron add` and related flows."
+            },
+            {
+              "zh": "聊天：会话内 `/tasks` 原生后台任务看板（与 Gateway 任务注册相关）。",
+              "en": "Chat: `/tasks` as a chat-native background task board for the current session."
+            }
+          ]
+        },
+        { "title": "Fixes", "items": [] }
+      ]
+    },
+    {
       "tagName": "v2026.3.28",
       "version": "2026.3.28",
       "publishedAt": "2026-03-29",

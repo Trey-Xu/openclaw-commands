@@ -68,6 +68,48 @@
       ]
     },
     {
+      "name": "tasks",
+      "description": "查看与管理持久化后台任务状态",
+      "descriptionEn": "Inspect durable background task state",
+      "syntax": "openclaw tasks [options] | openclaw tasks <subcommand> [options]",
+      "options": [
+        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "Output as JSON" },
+        { "flag": "--runtime <name>", "description": "按类型筛选：subagent、acp、cron、cli", "descriptionEn": "Filter by kind (subagent, acp, cron, cli)" },
+        {
+          "flag": "--status <name>",
+          "description": "按状态筛选：queued、running、succeeded、failed、timed_out、cancelled、lost",
+          "descriptionEn": "Filter by status (queued, running, succeeded, failed, timed_out, cancelled, lost)"
+        }
+      ],
+      "examples": [
+        { "description": "列出后台任务", "descriptionEn": "List background tasks", "code": "openclaw tasks --json" },
+        { "description": "仅看运行中", "descriptionEn": "Only running tasks", "code": "openclaw tasks list --status running" },
+        { "description": "审计异常任务", "descriptionEn": "Audit stale or broken runs", "code": "openclaw tasks audit --json" },
+        { "description": "查看单条任务", "descriptionEn": "Show one task by id", "code": "openclaw tasks show <task-or-run-or-session>" },
+        { "description": "取消任务", "descriptionEn": "Cancel a task", "code": "openclaw tasks cancel <lookup>" }
+      ],
+      "subcommands": [
+        { "name": "list", "description": "列出已跟踪的后台任务（支持与根级相同的 --json/--runtime/--status）", "descriptionEn": "List tracked background tasks" },
+        {
+          "name": "audit",
+          "description": "显示陈旧或异常的后台任务运行；支持 --severity、--code、--limit",
+          "descriptionEn": "Show stale or broken background task runs (--severity, --code, --limit)"
+        },
+        {
+          "name": "maintenance",
+          "description": "预览或执行任务台账维护；可加 --apply 应用对账/清理",
+          "descriptionEn": "Preview or apply task ledger maintenance (--apply)"
+        },
+        { "name": "show <lookup>", "description": "按 task id、run id 或 session key 查看单条任务", "descriptionEn": "Show one task by task id, run id, or session key" },
+        {
+          "name": "notify <lookup> <notify>",
+          "description": "设置通知策略：done_only、state_changes、silent",
+          "descriptionEn": "Set notify policy (done_only, state_changes, silent)"
+        },
+        { "name": "cancel <lookup>", "description": "取消正在运行的后台任务", "descriptionEn": "Cancel a running background task" }
+      ]
+    },
+    {
       "name": "logs",
       "description": "通过 RPC 尾随 Gateway 文件日志",
       "descriptionEn": "Tail Gateway file logs via RPC",

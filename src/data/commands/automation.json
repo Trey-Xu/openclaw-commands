@@ -15,7 +15,8 @@
         { "flag": "--url <url>", "description": "Gateway URL", "descriptionEn": "Gateway URL" },
         { "flag": "--token <token>", "description": "Gateway 令牌", "descriptionEn": "Gateway token" },
         { "flag": "--timeout <ms>", "description": "超时时间", "descriptionEn": "Timeout" },
-        { "flag": "--expect-final", "description": "等待最终结果", "descriptionEn": "Wait for final result" }
+        { "flag": "--expect-final", "description": "等待最终结果", "descriptionEn": "Wait for final result" },
+        { "flag": "--tools <csv>", "description": "定时任务工具白名单，逗号分隔（如 exec,read,write；与 add/edit 等子命令配合）", "descriptionEn": "Comma-separated tool allow-list for jobs (e.g. exec,read,write; used with add/edit)" }
       ],
       "examples": [
         { "description": "查看定时任务状态", "descriptionEn": "View cron status", "code": "openclaw cron status --json" },

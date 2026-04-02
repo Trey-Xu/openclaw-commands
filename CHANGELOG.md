@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.3] - 2026-04-01
+
+### Fixed
+
+- **PWA**: Service Worker 缓存版本升为 `openclaw-commands-v4`
+
+### Changed
+
+- **OpenClaw 版本**: 跟踪至 [v2026.4.1](https://github.com/openclaw/openclaw/releases/tag/v2026.4.1)
+- **命令参考**: 新增顶层 `tasks`（list / audit / maintenance / show / notify / cancel）；`cron` 补充 `--tools` 工具白名单说明；校验脚本默认 tag `v2026.4.1`
+
 ## [1.2.2] - 2026-03-30
 
 ### Fixed
@@ -101,3 +112,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.2.0]: https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.0
 [1.2.1]: https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.1
 [1.2.2]: https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.2
+[1.2.3]: https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.3
