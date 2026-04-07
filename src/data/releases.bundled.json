@@ -1,6 +1,41 @@
 {
   "releases": [
     {
+      "tagName": "v2026.4.5",
+      "version": "2026.4.5",
+      "publishedAt": "2026-04-06",
+      "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.4.5",
+      "sections": [
+        {
+          "title": "Breaking",
+          "items": [
+            {
+              "zh": "配置：移除一批遗留公开配置别名（如 talk.voiceId、部分 sandbox/hooks/channel allow 等），统一走规范路径与 `enabled`；可用 `openclaw doctor --fix` 协助迁移。",
+              "en": "Config: drop legacy public aliases in favor of canonical paths and `enabled`; `openclaw doctor --fix` can migrate."
+            }
+          ]
+        },
+        {
+          "title": "Changes",
+          "items": [
+            {
+              "zh": "CLI：新增顶层 `openclaw qa`（run / suite / ui / docker-scaffold / docker-build-image / mock-openai），用于私有 QA 自动化与调试 UI。",
+              "en": "CLI: add top-level `openclaw qa` (run, suite, ui, docker-scaffold, docker-build-image, mock-openai) for private QA flows."
+            },
+            {
+              "zh": "插件：`openclaw plugins install --force` 可在无需危险代码覆盖开关时替换已有目标。",
+              "en": "Plugins: `openclaw plugins install --force` replaces existing targets without the dangerous-code override flag."
+            },
+            {
+              "zh": "配置：`openclaw config schema` 导出的 JSON Schema 增强字段 title/description，便于编辑器与 Agent 消费。",
+              "en": "Config: exported `openclaw config schema` JSON Schema gains titles and descriptions for tooling."
+            }
+          ]
+        },
+        { "title": "Fixes", "items": [] }
+      ]
+    },
+    {
       "tagName": "v2026.4.1",
       "version": "2026.4.1",
       "publishedAt": "2026-04-01",

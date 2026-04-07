@@ -37,13 +37,14 @@
       "examples": [
         { "description": "列出已发现的插件", "descriptionEn": "List discovered plugins", "code": "openclaw plugins list --json" },
         { "description": "安装插件", "descriptionEn": "Install a plugin", "code": "openclaw plugins install my-plugin" },
+        { "description": "强制覆盖已存在的插件目标", "descriptionEn": "Replace existing plugin target without dangerous-code override", "code": "openclaw plugins install my-plugin --force" },
         { "description": "启用/禁用插件", "descriptionEn": "Enable/disable a plugin", "code": "openclaw plugins enable my-plugin" },
         { "description": "诊断插件加载错误", "descriptionEn": "Diagnose plugin load errors", "code": "openclaw plugins doctor" }
       ],
       "subcommands": [
         { "name": "list", "description": "发现插件，支持 --json", "descriptionEn": "Discover plugins, supports --json" },
         { "name": "info <name>", "description": "显示插件详情", "descriptionEn": "Show plugin details" },
-        { "name": "install <name>", "description": "安装插件或添加插件路径", "descriptionEn": "Install a plugin or add plugin path" },
+        { "name": "install <name>", "description": "安装插件或添加插件路径；可加 --force 覆盖已有插件/钩子包目标", "descriptionEn": "Install or add plugin path; use --force to replace existing plugin/hook-pack targets" },
         { "name": "enable <name>", "description": "启用插件", "descriptionEn": "Enable a plugin" },
         { "name": "disable <name>", "description": "禁用插件", "descriptionEn": "Disable a plugin" },
         { "name": "doctor", "description": "报告插件加载错误", "descriptionEn": "Report plugin load errors" }

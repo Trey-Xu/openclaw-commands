@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.4] - 2026-04-06
+
+### Fixed
+
+- **PWA**: Service Worker 缓存版本升为 `openclaw-commands-v5`
+
+### Changed
+
+- **OpenClaw 版本**: 跟踪至 [v2026.4.5](https://github.com/openclaw/openclaw/releases/tag/v2026.4.5)
+- **命令参考**: 新增顶层 `qa` 及子命令；`plugins install` 说明 `--force`；校验脚本默认 tag `v2026.4.5`
+
 ## [1.2.3] - 2026-04-01
 
 ### Fixed
@@ -113,3 +124,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.2.1]: https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.1
 [1.2.2]: https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.2
 [1.2.3]: https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.3
+[1.2.4]: https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.4

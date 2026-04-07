@@ -374,6 +374,38 @@
       "subcommands": []
     },
     {
+      "name": "qa",
+      "description": "运行 QA 场景并启动私有 QA 调试器界面",
+      "descriptionEn": "Run QA scenarios and launch the private QA debugger UI",
+      "syntax": "openclaw qa <subcommand> [options]",
+      "options": [],
+      "examples": [
+        { "description": "运行内置自检并生成 Markdown 报告", "descriptionEn": "Run bundled self-check and write Markdown report", "code": "openclaw qa run --output ./qa-report.md" },
+        { "description": "启动 QA 调试 UI", "descriptionEn": "Start QA debugger UI", "code": "openclaw qa ui --host 127.0.0.1" },
+        { "description": "本地 mock OpenAI 服务（供套件使用）", "descriptionEn": "Run local mock OpenAI for QA", "code": "openclaw qa mock-openai --port 9999" }
+      ],
+      "subcommands": [
+        { "name": "run", "description": "运行捆绑 QA 自检并输出报告；支持 --output <path>", "descriptionEn": "Run bundled QA self-check; supports --output" },
+        {
+          "name": "suite",
+          "description": "对真实 QA Gateway 跑全量场景；--output-dir、--provider-mode、--model、--alt-model、--fast",
+          "descriptionEn": "Run all repo-backed QA scenarios; --output-dir, --provider-mode, --model, --alt-model, --fast"
+        },
+        {
+          "name": "ui",
+          "description": "启动私有 QA 调试器 UI 与本地 QA bus；含 --host/--port、Control UI 嵌入与代理等选项",
+          "descriptionEn": "Start private QA debugger UI and local bus; --host/--port, Control UI embed/proxy options"
+        },
+        {
+          "name": "docker-scaffold",
+          "description": "生成 Docker Compose 脚手架（需 --output-dir）；可选 --gateway-port、--qa-lab-port、--provider-base-url、--image、--use-prebuilt-image",
+          "descriptionEn": "Write Docker scaffold (requires --output-dir); optional ports, provider URL, image flags"
+        },
+        { "name": "docker-build-image", "description": "构建预置 QA 镜像；可选 --image", "descriptionEn": "Build prebaked QA image; optional --image" },
+        { "name": "mock-openai", "description": "本地 mock OpenAI Responses API；--host、--port", "descriptionEn": "Local mock OpenAI Responses API; --host, --port" }
+      ]
+    },
+    {
       "name": "tui",
       "description": "打开连接到 Gateway 的终端 UI",
       "descriptionEn": "Open terminal UI connected to Gateway",

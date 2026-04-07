@@ -1,4 +1,4 @@
-const CACHE = 'openclaw-commands-v4'
+const CACHE = 'openclaw-commands-v5'
 const BASE = '/openclaw-commands/'
 
 self.addEventListener('install', (e) => {

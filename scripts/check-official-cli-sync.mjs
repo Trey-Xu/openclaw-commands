@@ -3,7 +3,7 @@ import path from "node:path";
 
 const OFFICIAL_OWNER = process.env.OPENCLAW_OFFICIAL_OWNER ?? "openclaw";
 const OFFICIAL_REPO = process.env.OPENCLAW_OFFICIAL_REPO ?? "openclaw";
-const OFFICIAL_TAG = process.env.OPENCLAW_OFFICIAL_TAG ?? "v2026.4.1";
+const OFFICIAL_TAG = process.env.OPENCLAW_OFFICIAL_TAG ?? "v2026.4.5";
 const LOCAL_REPO = process.env.OPENCLAW_LOCAL_REPO?.trim();
 const COMMANDS_DIR = process.env.OPENCLAW_COMMANDS_DIR ?? "src/data/commands";
 
