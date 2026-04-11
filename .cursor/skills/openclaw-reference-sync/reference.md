@@ -16,8 +16,9 @@
 
 ## 官方对照源（校验脚本拉取或 LOCAL_REPO）
 
-- `src/cli/program/command-registry.ts` — 顶层 core 命令  
-- `src/cli/program/register.subclis.ts` — 其余顶层子 CLI  
+- `src/cli/program/command-registry.ts` + `command-registry-core.ts` — 顶层命令注册（含 core 拆分）  
+- `src/cli/program/register.subclis.ts` + `register.subclis-core.ts` — 子 CLI 注册  
+- `src/cli/program/core-command-descriptors.ts` + `subcli-descriptors.ts` — 命令名/别名等描述符（顶层名常在此出现）  
 - 深度校验还读：`register.backup.ts`, `register.status-health-sessions.ts`, `update-cli.ts`, `directory-cli.ts`, `mcp-cli.ts`, `qr-cli.ts`
 
 ## 提交信息示例
