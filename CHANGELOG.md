@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.5] - 2026-04-11
+
+### Fixed
+
+- **PWA**: Service Worker 缓存版本升为 `openclaw-commands-v6`
+
+### Changed
+
+- **OpenClaw 版本**: 跟踪至 [v2026.4.10](https://github.com/openclaw/openclaw/releases/tag/v2026.4.10)
+- **命令参考**: 新增 `infer` / `capability`、`exec-policy`；`qa` 补充 matrix/telegram/suite multipass；`qr` 文案与官方一致；**CLI 同步脚本**支持上游拆分后的 `core-command-descriptors.ts`、`subcli-descriptors.ts`、`command-registry-core.ts`、`register.subclis-core.ts`
+- **校验脚本**: 默认 tag `v2026.4.10`
+
 ## [1.2.4] - 2026-04-06
 
 ### Fixed
@@ -125,3 +137,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.2.2]: https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.2
 [1.2.3]: https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.3
 [1.2.4]: https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.4
+[1.2.5]: https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.5

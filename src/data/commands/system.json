@@ -296,6 +296,27 @@
       ]
     },
     {
+      "name": "exec-policy",
+      "description": "查看或同步请求的 exec 策略与主机 exec 审批文件",
+      "descriptionEn": "Show or synchronize requested exec policy with host approvals",
+      "syntax": "openclaw exec-policy <subcommand> [options]",
+      "options": [],
+      "examples": [
+        { "description": "查看合并后的有效策略", "descriptionEn": "Show effective merged policy", "code": "openclaw exec-policy show" },
+        { "description": "应用预设 cautious", "descriptionEn": "Apply cautious preset", "code": "openclaw exec-policy preset cautious" },
+        { "description": "显式设置 ask 模式", "descriptionEn": "Set ask mode explicitly", "code": "openclaw exec-policy set --ask on-miss --json" }
+      ],
+      "subcommands": [
+        { "name": "show", "description": "展示本地配置、审批文件与有效合并结果；支持 --json", "descriptionEn": "Show local config, approvals, effective merge; --json" },
+        { "name": "preset <name>", "description": "应用同步预设：yolo、cautious、deny-all", "descriptionEn": "Apply preset: yolo, cautious, deny-all" },
+        {
+          "name": "set",
+          "description": "用显式值同步配置与审批；支持 --host、--security、--ask、--ask-fallback、--json",
+          "descriptionEn": "Sync with explicit --host, --security, --ask, --ask-fallback, --json"
+        }
+      ]
+    },
+    {
       "name": "pairing",
       "description": "审批跨频道 DM 配对请求",
       "descriptionEn": "Approve cross-channel DM pairing requests",
@@ -312,8 +333,8 @@
     },
     {
       "name": "qr",
-      "description": "生成 iOS 配对二维码与 setup code",
-      "descriptionEn": "Generate an iOS pairing QR code and setup code",
+      "description": "生成移动端配对二维码与 setup code",
+      "descriptionEn": "Generate a mobile pairing QR code and setup code",
       "syntax": "openclaw qr [options]",
       "options": [
         { "flag": "--remote", "description": "使用 gateway.remote.url 与远程 token/password 生成 payload", "descriptionEn": "Use gateway.remote.url and remote token/password" },
@@ -381,28 +402,45 @@
       "options": [],
       "examples": [
         { "description": "运行内置自检并生成 Markdown 报告", "descriptionEn": "Run bundled self-check and write Markdown report", "code": "openclaw qa run --output ./qa-report.md" },
+        { "description": "套件使用 multipass 运行器", "descriptionEn": "Suite with multipass runner", "code": "openclaw qa suite --runner multipass --output-dir ./qa-out" },
         { "description": "启动 QA 调试 UI", "descriptionEn": "Start QA debugger UI", "code": "openclaw qa ui --host 127.0.0.1" },
         { "description": "本地 mock OpenAI 服务（供套件使用）", "descriptionEn": "Run local mock OpenAI for QA", "code": "openclaw qa mock-openai --port 9999" }
       ],
       "subcommands": [
-        { "name": "run", "description": "运行捆绑 QA 自检并输出报告；支持 --output <path>", "descriptionEn": "Run bundled QA self-check; supports --output" },
+        { "name": "run", "description": "运行捆绑 QA 自检并输出报告；支持 --repo-root、--output", "descriptionEn": "Bundled self-check; --repo-root, --output" },
         {
           "name": "suite",
-          "description": "对真实 QA Gateway 跑全量场景；--output-dir、--provider-mode、--model、--alt-model、--fast",
-          "descriptionEn": "Run all repo-backed QA scenarios; --output-dir, --provider-mode, --model, --alt-model, --fast"
+          "description": "仓库场景；--runner host|multipass、--output-dir、--provider-mode、--scenario（可重复）、--concurrency、--image/--cpus/--memory/--disk（multipass）等",
+          "descriptionEn": "Repo scenarios; --runner, --output-dir, --provider-mode, repeatable --scenario, multipass sizing flags, etc."
+        },
+        { "name": "matrix / telegram / …", "description": "由 LIVE_TRANSPORT 注册的实时通道子命令（随版本扩展）", "descriptionEn": "Live transport lanes (matrix, telegram, …) registered dynamically" },
+        {
+          "name": "character-eval",
+          "description": "角色评测场景与评委模型；多组 --model、--judge-model 等",
+          "descriptionEn": "Character eval across models with judges; --model, --judge-model, …"
+        },
+        {
+          "name": "manual",
+          "description": "单次 QA 提示；需 --message，可选 --provider-mode、--model、--timeout-ms",
+          "descriptionEn": "One-off QA prompt; requires --message"
         },
         {
           "name": "ui",
-          "description": "启动私有 QA 调试器 UI 与本地 QA bus；含 --host/--port、Control UI 嵌入与代理等选项",
-          "descriptionEn": "Start private QA debugger UI and local bus; --host/--port, Control UI embed/proxy options"
+          "description": "私有 QA 调试器 UI；--repo-root、--host/--port、Control UI 嵌入、--ui-dist-dir 等",
+          "descriptionEn": "QA debugger UI; --repo-root, bind/advertise, Control UI options, --ui-dist-dir"
         },
         {
           "name": "docker-scaffold",
-          "description": "生成 Docker Compose 脚手架（需 --output-dir）；可选 --gateway-port、--qa-lab-port、--provider-base-url、--image、--use-prebuilt-image",
-          "descriptionEn": "Write Docker scaffold (requires --output-dir); optional ports, provider URL, image flags"
+          "description": "生成 Docker 脚手架；需 --output-dir；可选 --bind-ui-dist",
+          "descriptionEn": "Write Docker scaffold; --output-dir; optional --bind-ui-dist"
         },
-        { "name": "docker-build-image", "description": "构建预置 QA 镜像；可选 --image", "descriptionEn": "Build prebaked QA image; optional --image" },
-        { "name": "mock-openai", "description": "本地 mock OpenAI Responses API；--host、--port", "descriptionEn": "Local mock OpenAI Responses API; --host, --port" }
+        { "name": "docker-build-image", "description": "构建预置镜像；--repo-root、--image", "descriptionEn": "Build QA image" },
+        {
+          "name": "up",
+          "description": "构建并启动 Docker QA 栈并打印 QA Lab URL；可选 --skip-ui-build",
+          "descriptionEn": "Build/start Docker QA stack; optional --skip-ui-build"
+        },
+        { "name": "mock-openai", "description": "本地 mock OpenAI Responses API；--host、--port", "descriptionEn": "Local mock OpenAI server" }
       ]
     },
     {

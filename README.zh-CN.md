@@ -27,11 +27,11 @@
 | 技能与插件 | `skills`, `plugins`, `hooks` |
 | Gateway 服务 | `gateway`, `daemon`, `node`, `nodes`, `devices` |
 | Agent 与消息 | `agent`, `agents`, `message`, `acp` |
-| 模型管理 | `models` (list/status/set/scan/auth/aliases/fallbacks) |
+| 模型管理 | `models`、`infer`、`capability`（模型管理与 provider 能力 CLI） |
 | 自动化 | `cron`, `webhooks`, `sandbox` |
-| 系统与维护 | `status`, `health`, `sessions`, `tasks`, `logs`, `system`, `update`, `reset`, `security`, `secrets`、`qa` 等 |
+| 系统与维护 | `status`, `health`, `sessions`, `tasks`, `logs`, `system`, `update`, `reset`, `security`, `secrets`、`exec-policy`、`qa` 等 |
 
-自 OpenClaw **v2026.3.28** 起（本站当前跟踪 **v2026.4.5**），官方 CLI 已不再提供顶层 `openclaw browser`、`openclaw memory`；浏览器与记忆能力通过 Gateway / Agent 工具使用，详见[官方文档](https://docs.openclaw.ai/)。
+自 OpenClaw **v2026.3.28** 起（本站当前跟踪 **v2026.4.10**），官方 CLI 已不再提供顶层 `openclaw browser`、`openclaw memory`；浏览器与记忆能力通过 Gateway / Agent 工具使用，详见[官方文档](https://docs.openclaw.ai/)。
 
 ## 技术栈
 

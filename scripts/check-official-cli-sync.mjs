@@ -3,7 +3,7 @@ import path from "node:path";
 
 const OFFICIAL_OWNER = process.env.OPENCLAW_OFFICIAL_OWNER ?? "openclaw";
 const OFFICIAL_REPO = process.env.OPENCLAW_OFFICIAL_REPO ?? "openclaw";
-const OFFICIAL_TAG = process.env.OPENCLAW_OFFICIAL_TAG ?? "v2026.4.5";
+const OFFICIAL_TAG = process.env.OPENCLAW_OFFICIAL_TAG ?? "v2026.4.10";
 const LOCAL_REPO = process.env.OPENCLAW_LOCAL_REPO?.trim();
 const COMMANDS_DIR = process.env.OPENCLAW_COMMANDS_DIR ?? "src/data/commands";
 
@@ -80,6 +80,55 @@ function parseCommandDescriptorObjects(tsText) {
   return out;
 }
 
+function parseLooseBraceNames(tsText) {
+  // Newer layouts use multiline `description:`; match `{ name: "foo",` anywhere in descriptor catalogs.
+  const out = [];
+  const re = /\{\s*name:\s*"([^"]+)"\s*,/g;
+  for (;;) {
+    const m = re.exec(tsText);
+    if (!m) break;
+    out.push(m[1]);
+  }
+  return out;
+}
+
+function parseCommandNamesArrays(tsText) {
+  // e.g. commandNames: ["setup"], or commandNames: ["agent", "agents"],
+  const out = [];
+  const re = /commandNames:\s*\[([\s\S]*?)\]/g;
+  for (;;) {
+    const m = re.exec(tsText);
+    if (!m) break;
+    const inner = m[1];
+    const qre = /"([^"]+)"/g;
+    for (;;) {
+      const q = qre.exec(inner);
+      if (!q) break;
+      out.push(q[1]);
+    }
+  }
+  return out;
+}
+
+function mergeOfficialNames(...chunks) {
+  const official = new Set();
+  for (const text of chunks) {
+    if (!text) continue;
+    for (const n of parseCommandDescriptorObjects(text)) official.add(n);
+    for (const n of parseLooseBraceNames(text)) official.add(n);
+    for (const n of parseCommandNamesArrays(text)) official.add(n);
+  }
+  return official;
+}
+
+async function loadOptionalOfficialText(relPath) {
+  try {
+    return await loadOfficialText(relPath);
+  } catch {
+    return "";
+  }
+}
+
 function readLocalTopLevelCommands() {
   const abs = path.resolve(COMMANDS_DIR);
   const files = fs.readdirSync(abs).filter((f) => f.endsWith(".json"));
@@ -99,14 +148,22 @@ function readLocalTopLevelCommands() {
 }
 
 async function main() {
-  const coreRel = "src/cli/program/command-registry.ts";
-  const subRel = "src/cli/program/register.subclis.ts";
-  const [coreText, subText] = await Promise.all([loadOfficialText(coreRel), loadOfficialText(subRel)]);
-
-  const official = new Set([
-    ...parseCommandDescriptorObjects(coreText),
-    ...parseCommandDescriptorObjects(subText),
-  ]);
+  const paths = [
+    "src/cli/program/command-registry.ts",
+    "src/cli/program/register.subclis.ts",
+    "src/cli/program/core-command-descriptors.ts",
+    "src/cli/program/subcli-descriptors.ts",
+    "src/cli/program/command-registry-core.ts",
+    "src/cli/program/register.subclis-core.ts",
+  ];
+  const chunks = await Promise.all(paths.map((p) => loadOptionalOfficialText(p)));
+  const official = mergeOfficialNames(...chunks);
+  if (official.size === 0) {
+    fail(
+      `No official command names parsed (${OFFICIAL_TAG}). Check network or set OPENCLAW_LOCAL_REPO to an openclaw clone at this tag.`,
+    );
+    return;
+  }
   const local = readLocalTopLevelCommands();
 
   const missing = [...official].filter((x) => !local.has(x)).sort();

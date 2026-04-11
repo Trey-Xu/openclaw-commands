@@ -27,11 +27,11 @@ A comprehensive CLI command reference website for [OpenClaw](https://github.com/
 | Skills & Plugins | `skills`, `plugins`, `hooks` |
 | Gateway & Services | `gateway`, `daemon`, `node`, `nodes`, `devices` |
 | Agent & Messaging | `agent`, `agents`, `message`, `acp` |
-| Model Management | `models` (list/status/set/scan/auth/aliases/fallbacks) |
+| Model Management | `models`, `infer`, `capability` (list/status/set/scan/auth/aliases/fallbacks + provider capabilities) |
 | Automation | `cron`, `webhooks`, `sandbox` |
-| System & Maintenance | `status`, `health`, `sessions`, `tasks`, `logs`, `system`, `update`, `reset`, `security`, `secrets`, `qa`, and more |
+| System & Maintenance | `status`, `health`, `sessions`, `tasks`, `logs`, `system`, `update`, `reset`, `security`, `secrets`, `exec-policy`, `qa`, and more |
 
-OpenClaw **v2026.3.28+** (current reference **v2026.4.5**) no longer exposes top-level `openclaw browser` or `openclaw memory` CLI commands; browser control and memory features are integrated via the Gateway and agent tools (see [official docs](https://docs.openclaw.ai/)).
+OpenClaw **v2026.3.28+** (current reference **v2026.4.10**) no longer exposes top-level `openclaw browser` or `openclaw memory` CLI commands; browser control and memory features are integrated via the Gateway and agent tools (see [official docs](https://docs.openclaw.ai/)).
 
 ## Tech Stack
 

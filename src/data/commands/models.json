@@ -44,6 +44,50 @@
         { "name": "auth paste-token", "description": "粘贴令牌", "descriptionEn": "Paste token" },
         { "name": "auth order get|set|clear", "description": "认证优先级管理", "descriptionEn": "Auth priority management" }
       ]
+    },
+    {
+      "name": "infer",
+      "description": "通过稳定 CLI 接口运行各类 provider 能力（与 `capability` 为同一命令）",
+      "descriptionEn": "Run provider-backed inference commands (same command as `capability`)",
+      "syntax": "openclaw infer <subcommand> [options]",
+      "options": [],
+      "examples": [
+        { "description": "列出能力 ID 与传输方式", "descriptionEn": "List capability ids and transports", "code": "openclaw infer list --json" },
+        { "description": "单次文本推理", "descriptionEn": "One-shot model run", "code": "openclaw infer model run --prompt \"Hello\" --json" },
+        { "description": "图像生成", "descriptionEn": "Image generation", "code": "openclaw infer image generate --prompt \"A lobster\"" }
+      ],
+      "subcommands": [
+        { "name": "list", "description": "列出规范能力 id 与支持传输", "descriptionEn": "List canonical capability ids and transports" },
+        { "name": "inspect", "description": "查看某一能力元数据；需 --name <id>", "descriptionEn": "Inspect one capability; requires --name" },
+        { "name": "model …", "description": "文本推理与模型目录：run、list、inspect、providers、auth …", "descriptionEn": "Text inference and catalog: run, list, inspect, providers, auth, …" },
+        { "name": "image …", "description": "图像生成/编辑/描述等", "descriptionEn": "Image generate, edit, describe, …" },
+        { "name": "audio …", "description": "音频转写等", "descriptionEn": "Audio transcribe, …" },
+        { "name": "tts …", "description": "语音合成与音色", "descriptionEn": "TTS convert, voices, providers, …" },
+        { "name": "video …", "description": "视频生成与描述", "descriptionEn": "Video generate, describe, …" },
+        { "name": "web …", "description": "web_search、web_fetch 等", "descriptionEn": "web search, fetch, providers, …" },
+        { "name": "embedding …", "description": "向量嵌入", "descriptionEn": "Embedding create, providers, …" }
+      ]
+    },
+    {
+      "name": "capability",
+      "description": "`infer` 的别名：同一套 provider 能力 CLI",
+      "descriptionEn": "Alias for `infer` — same provider-backed capability CLI",
+      "syntax": "openclaw capability <subcommand> [options]",
+      "options": [],
+      "examples": [
+        { "description": "同 infer", "descriptionEn": "Same as infer", "code": "openclaw capability list" }
+      ],
+      "subcommands": [
+        { "name": "list", "description": "同 infer list", "descriptionEn": "Same as infer list" },
+        { "name": "inspect", "description": "同 infer inspect", "descriptionEn": "Same as infer inspect" },
+        { "name": "model …", "description": "同 infer model …", "descriptionEn": "Same as infer model …" },
+        { "name": "image …", "description": "同 infer image …", "descriptionEn": "Same as infer image …" },
+        { "name": "audio …", "description": "同 infer audio …", "descriptionEn": "Same as infer audio …" },
+        { "name": "tts …", "description": "同 infer tts …", "descriptionEn": "Same as infer tts …" },
+        { "name": "video …", "description": "同 infer video …", "descriptionEn": "Same as infer video …" },
+        { "name": "web …", "description": "同 infer web …", "descriptionEn": "Same as infer web …" },
+        { "name": "embedding …", "description": "同 infer embedding …", "descriptionEn": "Same as infer embedding …" }
+      ]
     }
   ]
 }
