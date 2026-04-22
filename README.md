@@ -31,7 +31,7 @@ A comprehensive CLI command reference website for [OpenClaw](https://github.com/
 | Automation | `cron`, `webhooks`, `sandbox` |
 | System & Maintenance | `status`, `health`, `sessions`, `tasks`, `logs`, `system`, `update`, `reset`, `security`, `secrets`, `exec-policy`, `qa`, and more |
 
-OpenClaw **v2026.3.28+** (current reference **v2026.4.10**) no longer exposes top-level `openclaw browser` or `openclaw memory` CLI commands; browser control and memory features are integrated via the Gateway and agent tools (see [official docs](https://docs.openclaw.ai/)).
+| OpenClaw **v2026.3.28+** (current reference **v2026.4.21**) no longer exposes top-level `openclaw browser` or `openclaw memory` CLI commands; browser control and memory features are integrated via the Gateway and agent tools (see [official docs](https://docs.openclaw.ai/)).
 
 ## Tech Stack
 

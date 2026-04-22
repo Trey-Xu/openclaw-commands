@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.6] - 2026-04-22
+
+### Changed
+
+- **OpenClaw 版本**: 跟踪至 [v2026.4.21](https://github.com/openclaw/openclaw/releases/tag/v2026.4.21)
+- **命令参考**: 同步 v2026.4.21 — OpenAI/images 图像生成改进、Plugins/doctor 修复、Image generation 日志优化、Auth/commands 权限修复、Slack 线程别名保留、Browser 可访问性引用修复、npm/install 依赖链优化
+- **校验脚本**: 默认 tag `v2026.4.21`
+
 ## [1.2.5] - 2026-04-11
 
 ### Fixed

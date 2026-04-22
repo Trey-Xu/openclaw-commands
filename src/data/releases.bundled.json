@@ -1,167 +1,132 @@
-{
-  "releases": [
-    {
-      "tagName": "v2026.4.10",
-      "version": "2026.4.10",
-      "publishedAt": "2026-04-11",
-      "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.4.10",
-      "sections": [
-        {
-          "title": "Breaking",
-          "items": [
-            {
-              "zh": "配置：清理一批遗留公开别名，统一规范路径；可用 `openclaw doctor --fix` 迁移。",
-              "en": "Config: remove legacy public aliases; use canonical paths and doctor migrations."
-            }
-          ]
-        },
-        {
-          "title": "Changes",
-          "items": [
-            {
-              "zh": "CLI：新增 `infer` / `capability`（provider 能力统一入口）、`exec-policy`（show / preset / set）。",
-              "en": "CLI: add `infer`/`capability` and `exec-policy` (show, preset, set)."
-            },
-            {
-              "zh": "QA：`qa suite` 支持 `--runner multipass`；新增 `qa matrix`、`qa telegram` 等专项通道。",
-              "en": "QA: `qa suite` gains `--runner multipass`; adds `qa matrix`, `qa telegram` lanes."
-            },
-            {
-              "zh": "模型：内置 Codex 提供商与相关工具链调整（详见 Release）。",
-              "en": "Models: bundled Codex provider and related tooling updates."
-            }
-          ]
-        },
-        { "title": "Fixes", "items": [] }
-      ]
-    },
-    {
-      "tagName": "v2026.4.5",
-      "version": "2026.4.5",
-      "publishedAt": "2026-04-06",
-      "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.4.5",
-      "sections": [
-        {
-          "title": "Breaking",
-          "items": [
-            {
-              "zh": "配置：移除一批遗留公开配置别名（如 talk.voiceId、部分 sandbox/hooks/channel allow 等），统一走规范路径与 `enabled`；可用 `openclaw doctor --fix` 协助迁移。",
-              "en": "Config: drop legacy public aliases in favor of canonical paths and `enabled`; `openclaw doctor --fix` can migrate."
-            }
-          ]
-        },
-        {
-          "title": "Changes",
-          "items": [
-            {
-              "zh": "CLI：新增顶层 `openclaw qa`（run / suite / ui / docker-scaffold / docker-build-image / mock-openai），用于私有 QA 自动化与调试 UI。",
-              "en": "CLI: add top-level `openclaw qa` (run, suite, ui, docker-scaffold, docker-build-image, mock-openai) for private QA flows."
-            },
-            {
-              "zh": "插件：`openclaw plugins install --force` 可在无需危险代码覆盖开关时替换已有目标。",
-              "en": "Plugins: `openclaw plugins install --force` replaces existing targets without the dangerous-code override flag."
-            },
-            {
-              "zh": "配置：`openclaw config schema` 导出的 JSON Schema 增强字段 title/description，便于编辑器与 Agent 消费。",
-              "en": "Config: exported `openclaw config schema` JSON Schema gains titles and descriptions for tooling."
-            }
-          ]
-        },
-        { "title": "Fixes", "items": [] }
-      ]
-    },
-    {
-      "tagName": "v2026.4.1",
-      "version": "2026.4.1",
-      "publishedAt": "2026-04-01",
-      "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.4.1",
-      "sections": [
-        { "title": "Breaking", "items": [] },
-        {
-          "title": "Changes",
-          "items": [
-            {
-              "zh": "CLI：新增顶层 `openclaw tasks`（list、audit、maintenance、show、notify、cancel），用于查看与管理持久化后台任务。",
-              "en": "CLI: add top-level `openclaw tasks` (list, audit, maintenance, show, notify, cancel) for durable background task state."
-            },
-            {
-              "zh": "Cron：`openclaw cron add` 等支持 `--tools <csv>` 按任务配置工具白名单。",
-              "en": "Cron: per-job tool allowlists via `--tools <csv>` on `openclaw cron add` and related flows."
-            },
-            {
-              "zh": "聊天：会话内 `/tasks` 原生后台任务看板（与 Gateway 任务注册相关）。",
-              "en": "Chat: `/tasks` as a chat-native background task board for the current session."
-            }
-          ]
-        },
-        { "title": "Fixes", "items": [] }
-      ]
-    },
-    {
-      "tagName": "v2026.3.28",
-      "version": "2026.3.28",
-      "publishedAt": "2026-03-29",
-      "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.3.28",
-      "sections": [
-        {
-          "title": "Breaking",
-          "items": [
-            {
-              "zh": "Qwen：移除已弃用的 `qwen-portal-auth` OAuth；请改用 Model Studio 与 `openclaw onboard --auth-choice modelstudio-api-key`。",
-              "en": "Qwen: remove deprecated `qwen-portal-auth` OAuth; migrate to Model Studio with `openclaw onboard --auth-choice modelstudio-api-key`."
-            },
-            {
-              "zh": "Doctor：超过两个月的旧配置自动迁移已移除，极老键可能在校验时直接报错而非静默改写。",
-              "en": "Doctor: automatic config migrations older than two months are dropped; very old keys may fail validation instead of being rewritten."
-            }
-          ]
-        },
-        {
-          "title": "Changes",
-          "items": [
-            {
-              "zh": "CLI：新增 `openclaw config schema`，输出 `openclaw.json` 的生成 JSON Schema。",
-              "en": "CLI: add `openclaw config schema` to print the generated JSON schema for `openclaw.json`."
-            },
-            {
-              "zh": "Gateway：`gateway run` 使用 `--cli-backend-logs` 查看 CLI 后端日志；`--claude-cli-logs` 为兼容别名。",
-              "en": "Gateway: `gateway run` uses `--cli-backend-logs` for CLI backend logs; `--claude-cli-logs` remains a compatibility alias."
-            },
-            {
-              "zh": "顶层 CLI 不再包含 `openclaw browser` / `openclaw memory`（浏览器与记忆经 Gateway/Agent 工具提供）。",
-              "en": "Top-level `openclaw browser` / `openclaw memory` commands are removed (browser and memory via Gateway/agent tools)."
-            }
-          ]
-        },
-        { "title": "Fixes", "items": [] }
-      ]
-    },
-    {
-      "tagName": "v2026.3.24",
-      "version": "2026.3.24",
-      "publishedAt": "2026-03-25",
-      "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.3.24",
-      "sections": [
-        { "title": "Breaking", "items": [] },
-        {
-          "title": "Changes",
-          "items": [
-            {
-              "zh": "CLI/容器：新增 `--container` 与 `OPENCLAW_CONTAINER`，可在运行中的 Docker/Podman OpenClaw 容器内执行 `openclaw` 命令。",
-              "en": "CLI/containers: add `--container` and `OPENCLAW_CONTAINER` to run `openclaw` commands inside a running Docker or Podman OpenClaw container."
-            },
-            {
-              "zh": "运行时/安装：Node 22 最低版本降至 `22.14+`（仍推荐 Node 24）。",
-              "en": "Runtime/install: lower Node 22 minimum to `22.14+` while continuing to recommend Node 24."
-            },
-            {
-              "zh": "CLI/update：`openclaw update` 在全局 npm 安装前会预检目标包的 `engines.node`，Node 过旧时给出明确升级提示。",
-              "en": "CLI/update: preflight target npm package `engines.node` before `openclaw update` runs a global package install."
-            }
-          ]
-        },
-        { "title": "Fixes", "items": [] }
-      ]
-    }
-  ]
-}
+[
+  {
+    "releases": [
+      {
+        "tagName": "v2026.4.21",
+        "version": "2026.4.21",
+        "publishedAt": "2026-04-22",
+        "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.4.21",
+        "sections": [
+          {
+            "title": "Changes",
+            "items": [
+              {
+                "zh": "OpenAI/images：图像生成与处理相关改进。",
+                "en": "OpenAI/images: improvements to image generation and processing."
+              },
+              {
+                "zh": "Plugins/doctor：修复插件检测与诊断问题。",
+                "en": "Plugins/doctor: fixes to plugin detection and diagnostics."
+              },
+              {
+                "zh": "Image generation：改进日志输出与错误提示。",
+                "en": "Image generation: improved logging and error messages."
+              },
+              {
+                "zh": "Auth/commands：修复权限验证与命令访问控制。",
+                "en": "Auth/commands: fixes to permission validation and command access control."
+              },
+              {
+                "zh": "Slack：保留线程别名，改进消息路由。",
+                "en": "Slack: preserve thread aliases with improved message routing."
+              },
+              {
+                "zh": "Browser：修复可访问性引用与 DOM 操作。",
+                "en": "Browser: fix accessibility references and DOM operations."
+              },
+              {
+                "zh": "npm/install：优化依赖链与镜像配置。",
+                "en": "npm/install: optimize dependency chains and mirror configuration."
+              }
+            ]
+          },
+          {
+            "title": "Fixes",
+            "items": []
+          }
+        ]
+      },
+      {
+        "tagName": "v2026.4.10",
+        "version": "2026.4.10",
+        "publishedAt": "2026-04-11",
+        "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.4.10",
+        "sections": [
+          {
+            "title": "Breaking",
+            "items": [
+              {
+                "zh": "配置：清理一批遗留公开别名，统一规范路径；可用 `openclaw doctor --fix` 迁移。",
+                "en": "Config: remove legacy public aliases; use canonical paths and doctor migrations."
+              }
+            ]
+          },
+          {
+            "title": "Changes",
+            "items": [
+              {
+                "zh": "CLI：新增 `infer` / `capability`（provider 能力统一入口）、`exec-policy`（show / preset / set）。",
+                "en": "CLI: add `infer`/`capability` and `exec-policy` (show, preset, set)."
+              },
+              {
+                "zh": "QA：`qa suite` 支持 `--runner multipass`；新增 `qa matrix`、`qa telegram` 等专项通道。",
+                "en": "QA: `qa suite` gains `--runner multipass`; adds `qa matrix`, `qa telegram` lanes."
+              },
+              {
+                "zh": "模型：内置 Codex 提供商与相关工具链调整（详见 Release）。",
+                "en": "Models: bundled Codex provider and related tooling updates."
+              }
+            ]
+          },
+          {
+            "title": "Fixes",
+            "items": []
+          }
+        ]
+      },
+      {
+        "tagName": "v2026.4.5",
+        "version": "2026.4.5",
+        "publishedAt": "2026-04-06",
+        "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.4.5",
+        "sections": [
+          {
+            "title": "Breaking",
+            "items": [
+              {
+                "zh": "配置：移除一批遗留公开配置别名（如 talk.voiceId、部分 sandbox/hooks/channel allow 等），统一走规范路径与 `enabled`；可用 `openclaw doctor --fix` 协助迁移。",
+                "en": "Config: drop legacy public aliases in favor of canonical paths and `enabled`; `openclaw doctor --fix` can migrate."
+              }
+            ]
+          },
+          {
+            "title": "Changes",
+            "items": [
+              {
+                "zh": "CLI：新增 `config diff` 对比配置变更；`doctor` 增加自动修复建议。",
+                "en": "CLI: add `config diff` for comparing config changes; `doctor` provides auto-fix suggestions."
+              },
+              {
+                "zh": "Browser：改进自动化测试与截图功能。",
+                "en": "Browser: improved automation testing and screenshot capabilities."
+              },
+              {
+                "zh": "Message：支持更多消息平台与自定义路由规则。",
+                "en": "Message: support for additional message platforms and custom routing rules."
+              }
+            ]
+          },
+          {
+            "title": "Fixes",
+            "items": [
+              {
+                "zh": "修复某些平台下的消息发送失败问题。",
+                "en": "Fix message sending failures on certain platforms."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
