@@ -2,7 +2,8 @@
 
 **同步时间**: 2026-04-22  
 **同步版本**: v2026.4.21  
-**当前版本**: 2026.4.10 → 2026.4.21
+**当前版本**: 2026.4.10 → 2026.4.21  
+**本站版本**: 1.2.5 → 1.2.6
 
 ---
 
@@ -14,7 +15,8 @@
 
 ### 2. 发行说明更新
 - ✅ 添加 v2026.4.21 的发行说明到 `src/data/releases.bundled.json`
-- 包含 7 个主要改进点：
+- ✅ 更新 `CHANGELOG.md` 添加本站版本 1.2.6
+- ✅ 包含 7 个主要改进点：
   - OpenAI/images 图像生成改进
   - Plugins/doctor 修复
   - Image generation 日志优化
@@ -23,9 +25,22 @@
   - Browser 可访问性引用修复
   - npm/install 依赖链优化
 
-### 3. 构建验证
-- ✅ 构建成功 (640ms)
-- ✅ 深度同步检查通过
+### 3. PWA 缓存更新
+- ✅ 更新 `public/sw.js` 缓存版本 v6 → v7
+
+### 4. 文档更新
+- ✅ 更新 `README.md` 中的参考站版本
+
+### 5. 质量闸门
+- ✅ `npm run lint` - 通过
+- ✅ `npm run build` - 构建成功 (658ms)
+
+### 6. 发布到 GitHub
+- ✅ `git add -A`
+- ✅ `git commit -m "chore(release): v1.2.6 — sync OpenClaw CLI reference to v2026.4.21"`
+- ✅ `git tag -a v1.2.6 -m "openclaw-commands v1.2.6 — OpenClaw v2026.4.21"`
+- ✅ `git push origin main`
+- ✅ `git push origin v1.2.6`
 
 ---
 
@@ -39,7 +54,7 @@
 - 官方 v2026.4.21 的 `proxy` 命令可能未完全发布
 
 **解决方案**: 
-- 使用 `check:cli-deep-sync` 进行深度验证（已通过）
+- 使用 `check:cli-deep-sync` 进行深度验证（已通过）✅
 - 参考站的分类结构更符合实际使用场景
 
 ---
@@ -71,32 +86,44 @@ system.json (23 个命令)
 
 ## 🚀 下一步建议
 
-1. **发布准备**: 
-   - 确认 `proxy` 命令问题不影响使用
-   - 考虑更新校验脚本以适配分类结构
+1. **验证发布**: 
+   - 访问 https://trey-xu.github.io/openclaw-commands/ 查看新版本
+   - 检查 PWA 缓存是否更新
+   - 确认 Release Notes 页面显示 v2026.4.21
 
-2. **用户通知**:
-   - 在首页显示更新日志
-   - 更新 PWA 缓存（如果启用）
-
-3. **持续监控**:
+2. **持续监控**:
    - 定期检查官方新版本
    - 监控校验脚本输出
+
+3. **用户通知**:
+   - 在相关渠道发布更新通知
 
 ---
 
 ## 📝 技术细节
 
-### 文件修改
+### 文件修改 (9 个)
 1. `src/config/version.js` - 版本常量
 2. `scripts/check-official-cli-sync.mjs` - 默认 tag
 3. `scripts/check-official-cli-deep-sync.mjs` - 默认 tag
 4. `src/data/releases.bundled.json` - 发行说明
+5. `CHANGELOG.md` - 本站版本记录
+6. `package.json` - 本站版本号
+7. `public/sw.js` - PWA 缓存版本
+8. `README.md` - 参考站版本说明
+9. `SYNC_REPORT.md` - 同步报告（新增）
 
 ### 构建产物
 - `dist/index.html` (1.37 kB)
 - `dist/assets/` (静态资源)
 
+### Git 信息
+- **Commit**: ed08531
+- **Tag**: v1.2.6
+- **Message**: chore(release): v1.2.6 — sync OpenClaw CLI reference to v2026.4.21
+
 ---
 
-**状态**: ✅ 同步完成，可继续使用
+**状态**: ✅ 同步完成，已发布到 GitHub
+
+**Pages 部署**: 自动触发中，预计 2-3 分钟后上线
