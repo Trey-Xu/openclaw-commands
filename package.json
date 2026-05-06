@@ -1,26 +1,25 @@
-     1|{
-     2|  "name": "openclaw-commands",
-     3|  "private": true,
-     4|  "version": "2026.4.23",
-     5|  "type": "module",
-     6|  "scripts": {
-     7|    "dev": "vite",
-     8|    "build": "vite build",
-     9|    "preview": "vite preview",
-    10|    "lint": "eslint src --ext .vue,.js",
-    11|    "check:cli-sync": "node scripts/check-official-cli-sync.mjs",
-    12|    "check:cli-deep-sync": "node scripts/check-official-cli-deep-sync.mjs"
-    13|  },
-    14|  "dependencies": {
-    15|    "prismjs": "^1.30.0",
-    16|    "vue": "^3.5.30",
-    17|    "vue-router": "^4.6.4"
-    18|  },
-    19|  "devDependencies": {
-    20|    "@vitejs/plugin-vue": "^5.2.4",
-    21|    "eslint": "^8.57.1",
-    22|    "eslint-plugin-vue": "^9.33.0",
-    23|    "vite": "^5.4.21"
-    24|  }
-    25|}
-    26|
+{
+  "name": "openclaw-commands",
+  "private": true,
+  "version": "2026.5.5",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext .vue,.js",
+    "check:cli-sync": "node scripts/check-official-cli-sync.mjs",
+    "check:cli-deep-sync": "node scripts/check-official-cli-deep-sync.mjs"
+  },
+  "dependencies": {
+    "prismjs": "^1.30.0",
+    "vue": "^3.5.30",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.4",
+    "eslint": "^8.57.1",
+    "eslint-plugin-vue": "^9.33.0",
+    "vite": "^5.4.21"
+  }
+}
