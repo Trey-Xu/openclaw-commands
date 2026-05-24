@@ -6,6 +6,12 @@
     <description>OpenClaw CLI 命令参考站更新与发布说明</description>
     <atom:link href="https://trey-xu.github.io/openclaw-commands/feed.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>2026.5.22</title>
+      <link>https://github.com/Trey-Xu/openclaw-commands/releases/tag/v2026.5.22</link>
+      <description>**Agent 自动化**：Skill 三件套（`SKILL.md` / `reference.md` / `troubleshooting.md`）；sync-only / release 模式; **脚本**：`detect-upstream-drift`、`bump-openclaw-version`、`update-bundled-release`；drift 工作流自动开 `openclaw-sync` Issue; **OpenClaw 版本**: 跟踪至 [v2026.5.22](https://github.com/openclaw/openclaw/releases/tag/v2026.5.22); **命令参考**: 顶层 CLI 与官方 v2026.5.22 对齐（55 命令）；离线 Release Notes 已更新</description>
+      <pubDate>Sun, 24 May 2026 12:00:00 GMT</pubDate>
+    </item>
+    <item>
       <title>2026.5.21-alpha.1</title>
       <link>https://github.com/Trey-Xu/openclaw-commands/releases/tag/v2026.5.21-alpha.1</link>
       <description>**OpenClaw 版本**: 跟踪至 [v2026.5.21-alpha.1](https://github.com/openclaw/openclaw/releases/tag/v2026.5.21-alpha.1); **命令参考**: 同步 v2026.5.21-alpha.1 — 自动同步官方最新版本; **校验脚本**: 默认 tag `v2026.5.21-alpha.1`</description>

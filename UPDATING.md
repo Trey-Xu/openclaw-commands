@@ -1,44 +1,47 @@
 # 随 OpenClaw 更新本参考站
 
-本文档说明当 [OpenClaw](https://github.com/openclaw/openclaw) 发布新版本时，如何更新本命令参考网站。
+当 [OpenClaw](https://github.com/openclaw/openclaw) 发布新版本时，更新本命令参考网站。
 
-供 Cursor Agent 使用的逐步清单（Skill）：[`.cursor/skills/openclaw-reference-sync/SKILL.md`](.cursor/skills/openclaw-reference-sync/SKILL.md)。
+## Agent 自动化（推荐）
+
+Cursor Agent Skill（完整 Phase + DoD）：
+
+- [SKILL.md](.cursor/skills/openclaw-reference-sync/SKILL.md) — 主流程（sync-only / release）
+- [reference.md](.cursor/skills/openclaw-reference-sync/reference.md) — 命令映射、JSON 模板
+- [troubleshooting.md](.cursor/skills/openclaw-reference-sync/troubleshooting.md) — 校验失败修复
+
+```bash
+npm run detect:drift                              # 是否落后官方 latest
+node scripts/bump-openclaw-version.mjs --latest   # bump 版本号 + README
+npm run check:cli-sync                            # 修命令 JSON 直到通过
+node scripts/update-bundled-release.mjs --latest  # 更新离线 Release Notes
+npm run check                                     # 全部门禁
+```
+
+GitHub 每周 workflow 检测 drift 时会开带 `openclaw-sync` 标签的 Issue，Agent 可按 Issue 内说明执行。
 
 ## 1. 更新版本号
 
-- **`src/config/version.js`**  
-  修改 `OPENCLAW_VERSION` 为最新版本（如 `2026.4.10`）。  
-  全站「基于 OpenClaw vX.X.X」和版本徽章链接会自动同步。
+- **`src/config/version.js`** — `OPENCLAW_VERSION`（或用 `npm run bump:openclaw -- vX.Y.Z`）
+- **`package.json`** / **`package-lock.json`** — 与上相同 CalVer
 
-- **本地对照官方源码（可选）**  
-  若已 `git clone` [openclaw/openclaw](https://github.com/openclaw/openclaw) 到本机，可设置环境变量后离线跑校验，无需拉 raw GitHub：  
-  `OPENCLAW_LOCAL_REPO=/path/to/openclaw npm run check:cli-sync`  
-  可与 `OPENCLAW_OFFICIAL_TAG=v2026.3.28` 联用，表示检出到该 tag 的目录。
+可选离线校验：`OPENCLAW_LOCAL_REPO=/path/to/openclaw npm run check:cli-sync`
 
 ## 2. 更新系统要求（如有变更）
 
-- **`src/data/commands/deployment.json`**  
-  在「系统要求」命令中，根据官方 README 更新 Node.js 等要求（当前为 Node 24 推荐或 22.14+）。
+- **`src/data/commands/deployment.json`** — Node 等（指南条目 `"kind": "guide"`）
 
 ## 3. 核对命令数据
 
-- 本地安装新版本 CLI：  
-  `npm install -g openclaw@latest`
-- 运行 `npm run check:cli-sync` / `check:cli-deep-sync`（或加上 `OPENCLAW_LOCAL_REPO` 指向上游仓库）。
-- 运行 `openclaw --help` 及各子命令的 `--help`，对照 **`src/data/commands/*.json`**：
-  - 新增命令：在对应分类 JSON 中新增条目。
-  - 删除/重命名命令：删除或修改对应条目。
-  - 选项/子命令/语法变更：更新对应命令的 `syntax`、`options`、`subcommands`、`examples`。
-- 可参考官方文档：<https://docs.openclaw.ai/cli>。
+- `npm run check:cli-sync` / `check:cli-deep-sync`
+- 可选：`npm install -g openclaw@latest` 后 `openclaw --help` 对照 JSON
+- 官方文档：<https://docs.openclaw.ai/cli>
 
-## 4. 发布本参考站新版本
+## 4. 发布
 
-- 在 **`CHANGELOG.md`** 的 `[Unreleased]` 下记录本次变更（含 OpenClaw 版本与命令/文案更新）。
-- 按 **`RELEASING.md`** 执行：更新 `src/config/version.js` 与 `package.json`（CalVer 一致）、提交、打 tag、推送。  
-- 推送前运行 **`npm run check`**（版本一致性、命令 JSON、CLI 同步、单测、lint、build）。  
-  GitHub Actions 会自动部署 Pages 并创建 Release。
+- **`CHANGELOG.md`**、`npm run check`
+- **`RELEASING.md`** — commit、tag `v${version}`、push（仅 release 模式）
 
-## 5. 可选：订阅 OpenClaw 更新
+## 5. 订阅上游
 
-- 在 GitHub 上 Watch [openclaw/openclaw](https://github.com/openclaw/openclaw) 的 Releases，或使用 RSS：  
-  `https://github.com/openclaw/openclaw/releases.atom`
+- Watch [openclaw/openclaw Releases](https://github.com/openclaw/openclaw/releases) 或 RSS：`https://github.com/openclaw/openclaw/releases.atom`

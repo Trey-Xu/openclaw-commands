@@ -2,6 +2,39 @@
   {
     "releases": [
       {
+        "tagName": "v2026.5.22",
+        "version": "2026.5.22",
+        "publishedAt": "2026-05-24",
+        "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.5.22",
+        "sections": [
+          {
+            "title": "Changes",
+            "items": [
+              {
+                "zh": "Gateway 启动与插件元数据多项性能优化。",
+                "en": "Gateway/perf: reuse channel catalog reads, lazy-load plugin work, and cache plugin metadata snapshots."
+              },
+              {
+                "zh": "Meeting Notes 外部插件与 `openclaw meeting-notes` CLI（Discord 语音为首源）。",
+                "en": "Meeting Notes: external meeting-notes plugin with read-only `openclaw meeting-notes` CLI."
+              },
+              {
+                "zh": "Control UI 会话选择器支持搜索与 Load More 分页。",
+                "en": "Control UI/chat: search and Load More pagination in the chat session picker."
+              },
+              {
+                "zh": "裸 `openclaw` 无配置时进入经典 onboarding；已配置安装走 Crestodian。",
+                "en": "CLI/onboarding: bare `openclaw` starts classic onboarding before authored config exists."
+              },
+              {
+                "zh": "子 Agent 默认 bootstrap 上下文限定为 AGENTS.md 与 TOOLS.md。",
+                "en": "Agents/subagents: limit default sub-agent bootstrap context to AGENTS.md and TOOLS.md."
+              }
+            ]
+          }
+        ]
+      },
+      {
         "tagName": "v2026.5.21-alpha.1",
         "version": "2026.5.21-alpha.1",
         "publishedAt": "2026-05-22",

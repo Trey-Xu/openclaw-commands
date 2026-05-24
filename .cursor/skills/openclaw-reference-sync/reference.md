@@ -1,65 +1,135 @@
-# 同步任务参考清单
+# 同步参考清单（Agent）
+
+## 一键脚本
+
+| 命令 | 作用 |
+|------|------|
+| `npm run detect:drift` | 对比官方 latest vs 本站 `version.js` |
+| `node scripts/bump-openclaw-version.mjs vX` / `--latest` | bump 版本 + README 跟踪句 |
+| `node scripts/update-bundled-release.mjs --tag vX` / `--latest` | 头部追加 bundled release |
+| `npm run check` | 全部门禁 |
 
 ## 常改文件
 
 | 区域 | 路径 |
 |------|------|
-| 跟踪的官方版本（唯一真相） | `src/config/version.js` |
-| 命令数据 | `src/data/commands/*.json`, `src/data/commands/index.js` |
+| 版本唯一真相 | `src/config/version.js` |
+| 命令数据 | `src/data/commands/*.json`, `index.js` |
 | 深度校验 spec | `scripts/deep-sync-spec.json` |
-| Release Notes 离线包 | `src/data/releases.bundled.json` |
-| 本站变更日志 | `CHANGELOG.md` |
+| 离线 Release Notes | `src/data/releases.bundled.json` |
+| 变更日志 | `CHANGELOG.md` |
 | 站点版本 | `package.json`, `package-lock.json` |
-| Service Worker 源模板 | `public/sw.js`（CACHE 在 build 时自动注入） |
-| RSS | `public/feed.xml`（`npm run prebuild` 从 CHANGELOG 生成） |
-| 部署说明文案 | `src/data/commands/deployment.json`（指南条目 `kind: "guide"`） |
-| 对外 README | `README.md`, `README.zh-CN.md` |
 
-## 官方对照源（校验脚本拉取或 LOCAL_REPO）
+## 顶层命令 → JSON 文件（新增时用）
 
-- `src/cli/program/command-registry.ts` + `command-registry-core.ts`  
-- `src/cli/program/register.subclis.ts` + `register.subclis-core.ts`  
-- `src/cli/program/core-command-descriptors.ts` + `subcli-descriptors.ts`  
-- 深度校验还读：`scripts/deep-sync-spec.json` 中列出的各 `register.*.ts` / `*-cli.ts`
+| 文件 | 典型顶层命令 |
+|------|----------------|
+| `setup.json` | `crestodian`, `setup`, `onboard`, `configure`, `config`, `migrate`, `doctor`, `completion` |
+| `channels.json` | `channels`, `pairing`, `directory`（若仅渠道相关可放 channels；当前 directory 在 system.json） |
+| `skills.json` | `skills`, `plugins`, `hooks` |
+| `gateway.json` | `gateway`, `daemon`, `node`, `nodes`, `devices`, `dns` |
+| `agent.json` | `agent`, `agents`, `message`, `acp`, `mcp` |
+| `models.json` | `models`, `infer`, `capability` |
+| `automation.json` | `cron`, `webhooks`, `sandbox` |
+| `system.json` | `status`, `health`, `sessions`, `commitments`, `tasks`, `logs`, `system`, `backup`, `update`, `reset`, `security`, `secrets`, `exec-policy`, `approvals`, `qa`, `proxy`, `tui`, `terminal`, `chat`, `dashboard`, `directory`, `qr`, `docs`, `clawbot`, `uninstall` |
+| `deployment.json` | **仅** `"kind": "guide"` 部署指南，不计入 CLI sync |
 
-## 校验命令
+不确定时：拉官方 `core-command-descriptors.ts` / `subcli-descriptors.ts` 看描述，或按语义最接近的分类放入。
 
-```bash
-npm run check                    # 全部门禁
-npm run check:version-consistency
-npm run check:commands
-npm run check:cli-sync
-npm run check:cli-deep-sync
-npm run test
+## CLI 命令 JSON 最小模板
+
+```json
+{
+  "name": "example",
+  "description": "中文简述",
+  "descriptionEn": "English summary",
+  "syntax": "openclaw example [options]",
+  "options": [
+    { "flag": "--json", "description": "JSON 输出", "descriptionEn": "JSON output" }
+  ],
+  "examples": [
+    { "description": "示例说明", "descriptionEn": "Example", "code": "openclaw example --json" }
+  ],
+  "subcommands": []
+}
 ```
 
-## 版本一致性检查项
+有子命令时在 `subcommands` 加 `{ "name", "description", "descriptionEn" }`；语法含子命令时用 `openclaw foo <subcommand> [options]`。
 
-| 文件 | 字段 / 内容 | 期望 |
-|------|-------------|------|
-| `src/config/version.js` | `OPENCLAW_VERSION` | 官方 CalVer |
-| `package.json` | `version` | 与上相同 |
-| `README.md` / `README.zh-CN.md` | `当前跟踪 **vX**` | `v${OPENCLAW_VERSION}` |
-| `releases.bundled.json` | `releases[0].version` | 与上相同 |
+## 部署指南模板（不计入 sync）
 
-## CI / 部署
+```json
+{
+  "kind": "guide",
+  "name": "安装 OpenClaw",
+  "nameEn": "Install OpenClaw",
+  "description": "...",
+  "descriptionEn": "...",
+  "syntax": "...",
+  "options": [],
+  "examples": [],
+  "subcommands": []
+}
+```
 
-- `.github/workflows/quality-gates.yml` — 可复用质量闸门（CI 与 Pages 部署均调用）  
-- `.github/workflows/upstream-drift.yml` — 每周对比官方 latest release（仅 warning）  
-- **勿提交**：`SYNC_REPORT.md`、`memory/`（已 gitignore）
+## releases.bundled.json 条目模板
 
-## 共享脚本库
+```json
+{
+  "tagName": "v2026.5.21-alpha.1",
+  "version": "2026.5.21-alpha.1",
+  "publishedAt": "2026-05-22",
+  "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.5.21-alpha.1",
+  "sections": [
+    {
+      "title": "Changes",
+      "items": [
+        { "zh": "中文要点", "en": "English bullet" }
+      ]
+    }
+  ]
+}
+```
 
-| 模块 | 路径 |
+优先用 `node scripts/update-bundled-release.mjs --tag vX`；Agent 可后补 `zh` 翻译。
+
+## 官方 registry 路径
+
+**必需：** `command-registry.ts`, `register.subclis.ts`  
+**可选：** `core-command-descriptors.ts`, `subcli-descriptors.ts`, `command-registry-core.ts`, `register.subclis-core.ts`  
+**deep-sync：** `scripts/deep-sync-spec.json` 中的 `*-cli.ts` / `register.*.ts`
+
+## 版本一致性（`check:version-consistency`）
+
+| 文件 | 期望 |
 |------|------|
-| 版本读取 | `scripts/lib/version.mjs` |
-| 同步工具 | `scripts/lib/cli-sync-utils.mjs` |
-| TS 解析（可单测） | `scripts/lib/cli-parsers.mjs` |
+| `version.js` | `OPENCLAW_VERSION` |
+| `package.json` | 同上 |
+| README / README.zh-CN | 含 `**v${OPENCLAW_VERSION}**` |
+| `releases.bundled.json` | `releases[0].version` 同上 |
 
-## 提交信息示例
+## deep-sync 范围说明
+
+仅校验 spec 内 6 个命令的子命令与 flags：`update`, `qr`, `mcp`, `directory`, `backup`, `sessions`。  
+`check:cli-sync` 通过只代表 **顶层命令名** 对齐；其余子命令/选项需 Release notes、`openclaw <cmd> --help` 或扩展 spec。
+
+## CI / 自动化
+
+- `quality-gates.yml` — CI 与 Pages 共用
+- `upstream-drift.yml` — 检测 drift 并开 Issue（标签 `openclaw-sync`）
+- 勿提交：`SYNC_REPORT.md`, `memory/`
+
+## Issue 触发标准 Prompt
+
+```
+目标：将 openclaw-commands 同步到 OpenClaw {latestTag}。
+模式：sync-only（不要 push，除非本 Issue 明确要求 release）。
+请阅读并执行 .cursor/skills/openclaw-reference-sync/SKILL.md 全部 Phase。
+完成后回复：变更摘要、npm run check 结果、是否 ready to release。
+```
+
+## 提交信息
 
 ```
 chore(release): v2026.5.21-alpha.1 — sync OpenClaw CLI reference to v2026.5.21-alpha.1
 ```
-
-正文可写：对齐命令 JSON；更新 bundled release notes；校验与 CI 闸门。

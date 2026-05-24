@@ -5,20 +5,75 @@ on:
     - cron: "0 8 * * 1"
   workflow_dispatch:
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   drift:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Compare with latest OpenClaw release
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Detect drift
+        id: detect
         run: |
-          LATEST=$(curl -fsSL https://api.github.com/repos/openclaw/openclaw/releases/latest | jq -r .tag_name)
-          LOCAL=$(node -e "import('./scripts/lib/version.mjs').then(m=>m.loadOpenClawVersion()).then(v=>console.log('v'+v))")
-          echo "Latest upstream: $LATEST"
-          echo "Local tracked:   $LOCAL"
-          if [ "$LATEST" != "$LOCAL" ]; then
-            echo "::warning::OpenClaw $LATEST is available; this site tracks $LOCAL. Run the openclaw-reference-sync skill."
+          node scripts/detect-upstream-drift.mjs --json > drift.json
+          echo "status=$(jq -r .status drift.json)" >> "$GITHUB_OUTPUT"
+          echo "latest=$(jq -r .latestTag drift.json)" >> "$GITHUB_OUTPUT"
+          cat drift.json
+
+      - name: Ensure label exists
+        if: steps.detect.outputs.status == 'drift'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label list --json name --jq '.[].name' | grep -qx 'openclaw-sync' \
+            || gh label create openclaw-sync --description 'OpenClaw CLI reference sync needed' --color 0E8A16
+
+      - name: Open sync issue
+        if: steps.detect.outputs.status == 'drift'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          LATEST="${{ steps.detect.outputs.latest }}"
+          TITLE="Sync OpenClaw CLI reference to ${LATEST}"
+          if gh issue list --state open --search "$TITLE in:title" --json title --jq '.[].title' | grep -Fx "$TITLE"; then
+            echo "Issue already open: $TITLE"
             exit 0
           fi
-          echo "Site is up to date with latest OpenClaw release."
+          PROMPT=$(jq -r .agentPrompt drift.json)
+          gh issue create \
+            --title "$TITLE" \
+            --label openclaw-sync \
+            --body "$(cat <<EOF
+## Upstream drift detected
+
+- **Latest OpenClaw release:** ${LATEST}
+- **Site currently tracks:** $(jq -r .localTag drift.json)
+
+## Agent instructions
+
+${PROMPT}
+
+### Standard workflow
+
+1. Read \`.cursor/skills/openclaw-reference-sync/SKILL.md\` (sync-only mode).
+2. \`node scripts/bump-openclaw-version.mjs ${LATEST}\`
+3. Fix command JSON until \`npm run check\` passes.
+4. \`node scripts/update-bundled-release.mjs --tag ${LATEST}\`
+5. Reply here with summary + check output.
+
+Do **not** push unless this issue or a maintainer explicitly requests **release** mode.
+
+See \`.cursor/skills/openclaw-reference-sync/troubleshooting.md\` if checks fail.
+EOF
+)"
+
+      - name: Up to date
+        if: steps.detect.outputs.status == 'current'
+        run: echo "Site tracks latest OpenClaw release."

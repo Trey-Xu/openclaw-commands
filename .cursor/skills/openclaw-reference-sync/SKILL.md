@@ -1,92 +1,99 @@
 ---
 name: openclaw-reference-sync
 description: >-
-  Syncs the openclaw-commands CLI reference site (Trey-Xu/openclaw-commands) with a new
-  openclaw/openclaw release: version constants, command JSON, bundled release notes, checks,
-  PWA cache bump, and git release. Use when the user mentions syncing OpenClaw, updating
-  the command reference site, OPENCLAW_VERSION, check:cli-sync, or a new official OpenClaw tag.
+  Syncs openclaw-commands with openclaw/openclaw releases. Modes: sync-only (default, no git push)
+  or release (commit/tag/push when user explicitly asks). Triggers: sync OpenClaw, update CLI
+  reference, OPENCLAW_VERSION, check:cli-sync, upstream drift Issue, or npm run detect:drift.
 ---
 
-# OpenClaw 参考站与官方发版同步
+# OpenClaw 参考站同步（Agent 版）
 
-适用于本仓库（Vue 命令参考站）。上游：<https://github.com/openclaw/openclaw>。
+仓库：Vue CLI 参考站。上游：<https://github.com/openclaw/openclaw>。
 
-## 版本策略
+## 模式（必遵）
 
-- **OpenClaw 跟踪版本**：`src/config/version.js` 的 `OPENCLAW_VERSION`（CalVer，无 `v` 前缀）为**唯一真相**。
-- **本站版本**：`package.json` 的 `version` 与 `OPENCLAW_VERSION` **保持一致**（同为 CalVer，如 `2026.5.21-alpha.1`）。
-- **Git tag**：`v${OPENCLAW_VERSION}`（如 `v2026.5.21-alpha.1`），推送后触发 Release 工作流。
-- 校验脚本默认 tag 从 `version.js` **自动推导**；仅调试时用 `OPENCLAW_OFFICIAL_TAG` 覆盖。
+| 模式 | 何时 | Git |
+|------|------|-----|
+| **sync-only** | 默认；用户只说「同步/更新参考站」 | **禁止** commit / tag / push，除非用户明确要求 |
+| **release** | 用户说「发布/推送/commit/tag」 | 允许 commit → tag `v${OPENCLAW_VERSION}` → push |
 
-## 执行前确认
+## Phase 0 — 探测
 
-- 目标官方版本：Release 页最新 tag，或 `OPENCLAW_OFFICIAL_TAG`（带 `v`）。
-- 可选：`OPENCLAW_LOCAL_REPO=/abs/path/to/openclaw`（检出到目标 tag），离线跑校验。
+```bash
+npm run detect:drift          # 或 node scripts/detect-upstream-drift.mjs --json
+```
 
-## 工作流（按顺序）
+- `status: "current"` → **停止**，报告已是最新。
+- `status: "drift"` → 记下 `latestTag`，继续 Phase 1。
+- 用户指定 tag 时跳过探测，直接用该 tag。
 
-1. **版本常量**  
-   - 编辑 `src/config/version.js`：`OPENCLAW_VERSION` 与官方 CalVer 一致。  
-   - 同步 `package.json` / `package-lock.json` 的 `version` 为同一值。
+## Phase 1 —  bump 版本
 
-2. **跑校验并修数据**  
-   ```bash
-   npm run check:cli-sync
-   npm run check:cli-deep-sync
-   ```  
-   - 缺顶层命令：在 `src/data/commands/*.json` 补齐（更新 `index.js` import/分类若新增文件）。  
-   - **extra** 本地命令：以官方 registry + descriptor 文件为准（见 `reference.md`）；官方已移除的 CLI 从本站删除或改 README 说明。  
-   - 部署指南类条目用 `"kind": "guide"`，勿计入 CLI 同步。  
-   - 对照 Release notes / `--help` 更新 `options`、`subcommands`、`examples`。  
-   - 深度校验 spec：`scripts/deep-sync-spec.json`（扩展子命令/flags 时改此文件）。
+```bash
+node scripts/bump-openclaw-version.mjs vX.Y.Z   # 或 --latest
+```
 
-3. **发行说明与离线 fallback**  
-   - `src/data/releases.bundled.json`：在 `releases` 数组**头部**追加新版本。  
-   - `CHANGELOG.md`：在 `[Unreleased]` 下记录，或新增 `## [X.Y.Z] - date` 段。  
-   - `npm run prebuild` 会由 `generate-feed.mjs` 刷新 `public/feed.xml`（也可单独运行）。
+写入：`src/config/version.js`、`package.json`、`package-lock.json`、README 跟踪版本句。  
+**不要**再手改校验脚本默认 tag（已从 `version.js` 推导）。
 
-4. **系统要求（若官方 README 变更）**  
-   - `src/data/commands/deployment.json` 中 Node 等要求。
+## Phase 2 — 修命令 JSON（循环直到通过）
 
-5. **文档**  
-   - `README.md` / `README.zh-CN.md`：更新「当前跟踪 **vX**」一句；分类表与「已移除 CLI」说明。  
-   - `UPDATING.md`：示例版本号可顺手更新。
+```bash
+npm run check:cli-sync
+npm run check:cli-deep-sync
+```
 
-6. **质量闸门**  
-   ```bash
-   npm run check
-   ```  
-   包含：版本一致性、命令 JSON 校验、CLI 同步、深度同步、单测、lint、build。  
-   Service Worker 缓存名在 build 时从 `package.json.version` 自动注入，**无需手改** `public/sw.js`。
-
-7. **发布到 GitHub**（见 `RELEASING.md`）  
-   ```bash
-   git add -A
-   git commit -m "chore(release): vA.B.C — sync OpenClaw CLI reference to vA.B.C"
-   git tag -a vA.B.C -m "openclaw-commands vA.B.C — OpenClaw vA.B.C"
-   git push origin main
-   git push origin vA.B.C
-   ```
-
-## 故障排查
-
-| 现象 | 处理 |
+| 输出 | 动作 |
 |------|------|
-| `No official command names parsed` | 检查网络；或设 `OPENCLAW_LOCAL_REPO` 指向已 checkout 目标 tag 的 openclaw 克隆 |
-| `Failed to load official source … empty` | 上游文件路径变更；更新 `scripts/lib/cli-sync-utils.mjs` 的 `OFFICIAL_REGISTRY_PATHS` |
-| `check:version-consistency` 失败 | 对齐 `version.js`、`package.json`、README 跟踪版本句、`releases.bundled.json` 最新项 |
-| Missing / extra 命令 | 改命令 JSON；勿把 deployment 指南当 CLI 命令（用 `kind: "guide"`） |
+| `Missing commands: a, b` | 在对应 JSON 新增条目（见 [reference.md](reference.md) 映射表 + 模板） |
+| `Extra local commands: x` | 删除 JSON 条目或改 README「已移除 CLI」 |
+| deep-sync 失败 | 改 `src/data/commands/*.json` 和/或 `scripts/deep-sync-spec.json` |
 
-## 环境变量速查
+**规则：** 部署指南用 `"kind": "guide"`；顶层对齐 ≠ 全量 `--help` 对齐（deep-sync 仅 6 命令，见 reference）。
 
-| 变量 | 作用 |
-|------|------|
-| `OPENCLAW_OFFICIAL_TAG` | 覆盖校验用的官方 tag（默认从 `version.js` 推导） |
-| `OPENCLAW_LOCAL_REPO` | 官方仓库根目录，优先读本地文件 |
-| `OPENCLAW_COMMANDS_DIR` | 覆盖命令 JSON 目录 |
+## Phase 3 — 发行说明与文档
+
+```bash
+node scripts/update-bundled-release.mjs --tag vX.Y.Z   # 或 --latest；可 --zh/--en 覆盖摘要
+```
+
+- `CHANGELOG.md`：在 `[Unreleased]` 记录，或新增版本段。
+- `README.md` / `README.zh-CN.md`：分类表若有新顶层命令则更新。
+- `feed.xml`：由 `npm run prebuild` 自动生成，勿手改。
+
+## Phase 4 — 质量闸门
+
+```bash
+npm run check
+```
+
+失败 → 修数据/脚本 → 重复 Phase 2–4，直到 exit 0。
+
+## Phase 5 — 发布（仅 release 模式）
+
+```bash
+git add -A
+git commit -m "chore(release): vA.B.C — sync OpenClaw CLI reference to vA.B.C"
+git tag -a vA.B.C -m "openclaw-commands vA.B.C — OpenClaw vA.B.C"
+git push origin main
+git push origin vA.B.C
+```
+
+## Definition of Done
+
+- [ ] `npm run detect:drift` 为 `current`（或目标 tag 已与 `version.js` 一致）
+- [ ] `npm run check` exit 0
+- [ ] `releases.bundled.json` 最新 `version` = `OPENCLAW_VERSION`
+- [ ] sync-only：工作区有改动但未 push（或用户已确认不发布）
+- [ ] release：`main` 与 `v${OPENCLAW_VERSION}` 已 push
+
+## 自动化触发
+
+- **GitHub Issue** 标题 `Sync OpenClaw CLI reference to v…` + 标签 `openclaw-sync` → 读本 skill，**sync-only** 跑完全流程，回复 Issue 摘要；不 push 除非 Issue/用户要求 release。
+- **upstream-drift 工作流** 每周检测并开 Issue（见 reference.md）。
 
 ## 延伸阅读
 
-- 人读维护说明：[UPDATING.md](UPDATING.md)  
-- 打 tag 与 Conventional Commits：[RELEASING.md](RELEASING.md)  
-- 文件清单与 CI 说明：[reference.md](reference.md)
+- 文件清单、JSON 模板、命令映射：[reference.md](reference.md)
+- 网络/404/missing 逐步修复：[troubleshooting.md](troubleshooting.md)
+- 人读说明：[UPDATING.md](../../UPDATING.md) · 发布：[RELEASING.md](../../RELEASING.md)

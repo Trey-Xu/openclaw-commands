@@ -31,7 +31,7 @@
 | 自动化 | `cron`, `webhooks`, `sandbox` |
 | 系统与维护 | `status`, `health`, `sessions`, `commitments`, `tasks`, `logs`, `system`, `update`, `reset`, `security`, `secrets`、`exec-policy`、`qa`、`tui`、`terminal`、`chat`、`proxy` 等 |
 
-自 OpenClaw **v2026.3.28** 起（本站当前跟踪 **v2026.5.21-alpha.1**），官方 CLI 已不再提供顶层 `openclaw browser`、`openclaw memory`；浏览器与记忆能力通过 Gateway / Agent 工具使用，详见[官方文档](https://docs.openclaw.ai/)。
+自 OpenClaw **v2026.3.28** 起（本站当前跟踪 **v2026.5.22**），官方 CLI 已不再提供顶层 `openclaw browser`、`openclaw memory`；浏览器与记忆能力通过 Gateway / Agent 工具使用，详见[官方文档](https://docs.openclaw.ai/)。
 
 ## 技术栈
 
