@@ -1,0 +1,24 @@
+name: Upstream drift check
+
+on:
+  schedule:
+    - cron: "0 8 * * 1"
+  workflow_dispatch:
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compare with latest OpenClaw release
+        run: |
+          LATEST=$(curl -fsSL https://api.github.com/repos/openclaw/openclaw/releases/latest | jq -r .tag_name)
+          LOCAL=$(node -e "import('./scripts/lib/version.mjs').then(m=>m.loadOpenClawVersion()).then(v=>console.log('v'+v))")
+          echo "Latest upstream: $LATEST"
+          echo "Local tracked:   $LOCAL"
+          if [ "$LATEST" != "$LOCAL" ]; then
+            echo "::warning::OpenClaw $LATEST is available; this site tracks $LOCAL. Run the openclaw-reference-sync skill."
+            exit 0
+          fi
+          echo "Site is up to date with latest OpenClaw release."

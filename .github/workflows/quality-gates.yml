@@ -1,0 +1,23 @@
+name: Quality gates
+
+on:
+  workflow_call:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npm run check:version-consistency
+      - run: npm run check:commands
+      - run: npm run check:cli-sync
+      - run: npm run check:cli-deep-sync
+      - run: npm run test
+      - run: npm run lint

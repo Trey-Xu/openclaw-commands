@@ -15,6 +15,10 @@ dist-ssr
 # Cursor — 项目规则仅本地使用，不提交到 GitHub
 .cursor/rules/
 
+# Ephemeral sync artifacts (regenerate locally; do not commit)
+SYNC_REPORT.md
+memory/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

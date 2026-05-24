@@ -34,7 +34,8 @@
 ## 4. 发布本参考站新版本
 
 - 在 **`CHANGELOG.md`** 的 `[Unreleased]` 下记录本次变更（含 OpenClaw 版本与命令/文案更新）。
-- 按 **`RELEASING.md`** 执行：更新 `package.json` 版本号、提交、打 tag、推送。  
+- 按 **`RELEASING.md`** 执行：更新 `src/config/version.js` 与 `package.json`（CalVer 一致）、提交、打 tag、推送。  
+- 推送前运行 **`npm run check`**（版本一致性、命令 JSON、CLI 同步、单测、lint、build）。  
   GitHub Actions 会自动部署 Pages 并创建 Release。
 
 ## 5. 可选：订阅 OpenClaw 更新

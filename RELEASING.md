@@ -1,5 +1,15 @@
 # 发布流程 / Release Process
 
+## 版本策略
+
+本站采用与 OpenClaw 一致的 **CalVer**（如 `2026.5.21-alpha.1`）：
+
+- `src/config/version.js` → `OPENCLAW_VERSION`（跟踪上游）
+- `package.json` → `version`（与上相同）
+- Git tag → `v${version}`（如 `v2026.5.21-alpha.1`）
+
+历史 semver 版本（`1.2.x`）见 `CHANGELOG.md` 旧条目。
+
 ## 提交规范 (Commit Convention)
 
 采用 [Conventional Commits](https://www.conventionalcommits.org/) 格式：
@@ -10,43 +20,31 @@
 [optional body]
 ```
 
-**常用 type：**
-
-| Type | 说明 |
-|------|------|
-| `feat` | 新功能 |
-| `fix` | 修复 |
-| `docs` | 文档 |
-| `style` | 格式（不影响逻辑） |
-| `refactor` | 重构 |
-| `chore` | 构建/工具等 |
-
-**示例：**
-```
-feat(search): add Ctrl+F shortcut
-fix(footer): right-align footer links
-docs: update CHANGELOG for v1.0.0
-```
+**常用 type：** `feat` | `fix` | `docs` | `style` | `refactor` | `chore`
 
 ## 发布新版本
 
-1. **更新 CHANGELOG.md**
-   - 在 `## [Unreleased]` 下记录本次改动（如有）
-   - 或新增 `## [x.y.z] - YYYY-MM-DD` 段
+1. **更新 CHANGELOG.md**  
+   - 在 `## [Unreleased]` 下记录改动，或新增 `## [version] - YYYY-MM-DD`
 
-2. **更新版本号**
-   - `package.json` 中的 `version`
-   - 若涉及 OpenClaw 版本：`src/config/version.js` 中的 `OPENCLAW_VERSION`
+2. **更新版本号**  
+   - `src/config/version.js` → `OPENCLAW_VERSION`  
+   - `package.json` / `package-lock.json` → 相同 CalVer
 
-3. **提交并打 tag**
+3. **质量闸门**  
    ```bash
-   git add .
-   git commit -m "chore(release): v1.0.0"
-   git tag v1.0.0
-   git push origin main
-   git push origin v1.0.0
+   npm run check
    ```
 
-4. **自动创建 Release**
-   - 推送 tag 后，`.github/workflows/release.yml` 会自动创建 GitHub Release
-   - Release 说明从 `CHANGELOG.md` 中对应版本段落提取
+4. **提交并打 tag**  
+   ```bash
+   git add .
+   git commit -m "chore(release): v2026.5.21-alpha.1 — sync OpenClaw CLI reference"
+   git tag -a v2026.5.21-alpha.1 -m "openclaw-commands v2026.5.21-alpha.1"
+   git push origin main
+   git push origin v2026.5.21-alpha.1
+   ```
+
+5. **自动流程**  
+   - 推送 `main` → CI + GitHub Pages 部署（均跑 quality gates）  
+   - 推送 tag → `.github/workflows/release.yml` 从 CHANGELOG 创建 GitHub Release

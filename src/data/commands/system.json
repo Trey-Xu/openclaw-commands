@@ -68,6 +68,27 @@
       ]
     },
     {
+      "name": "commitments",
+      "description": "列出与管理推断出的后续跟进事项",
+      "descriptionEn": "List and manage inferred follow-up commitments",
+      "syntax": "openclaw commitments [options] | openclaw commitments <subcommand> [options]",
+      "options": [
+        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "Output JSON instead of text" },
+        { "flag": "--agent <id>", "description": "指定 Agent", "descriptionEn": "Agent id to inspect" },
+        { "flag": "--status <status>", "description": "按状态筛选：pending、sent、dismissed、snoozed、expired", "descriptionEn": "Filter by status (pending, sent, dismissed, snoozed, expired)" },
+        { "flag": "--all", "description": "显示所有状态", "descriptionEn": "Show all statuses" }
+      ],
+      "examples": [
+        { "description": "列出待处理跟进", "descriptionEn": "List pending follow-ups", "code": "openclaw commitments" },
+        { "description": "列出全部跟进", "descriptionEn": "List all follow-ups", "code": "openclaw commitments --all" },
+        { "description": "忽略跟进项", "descriptionEn": "Dismiss a follow-up", "code": "openclaw commitments dismiss cm_abc123" }
+      ],
+      "subcommands": [
+        { "name": "list", "description": "列出推断出的跟进事项", "descriptionEn": "List inferred follow-up commitments" },
+        { "name": "dismiss <ids...>", "description": "忽略指定跟进事项", "descriptionEn": "Dismiss inferred follow-up commitments" }
+      ]
+    },
+    {
       "name": "tasks",
       "description": "查看与管理持久化后台任务状态",
       "descriptionEn": "Inspect durable background task state",
@@ -464,6 +485,34 @@
       "subcommands": []
     },
     {
+      "name": "terminal",
+      "description": "打开本地终端 UI（`tui --local` 的别名）",
+      "descriptionEn": "Open a local terminal UI (alias for tui --local)",
+      "syntax": "openclaw terminal [options]",
+      "options": [
+        { "flag": "--session <id>", "description": "会话 ID", "descriptionEn": "Session ID" },
+        { "flag": "--message <msg>", "description": "初始消息", "descriptionEn": "Initial message" }
+      ],
+      "examples": [
+        { "description": "打开本地终端 UI", "descriptionEn": "Open local terminal UI", "code": "openclaw terminal" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "chat",
+      "description": "打开本地终端 UI（`tui --local` 的别名）",
+      "descriptionEn": "Open a local terminal UI (alias for tui --local)",
+      "syntax": "openclaw chat [options]",
+      "options": [
+        { "flag": "--session <id>", "description": "会话 ID", "descriptionEn": "Session ID" },
+        { "flag": "--message <msg>", "description": "初始消息", "descriptionEn": "Initial message" }
+      ],
+      "examples": [
+        { "description": "打开本地聊天 UI", "descriptionEn": "Open local chat UI", "code": "openclaw chat" }
+      ],
+      "subcommands": []
+    },
+    {
       "name": "dashboard",
       "description": "打开 Web 仪表盘",
       "descriptionEn": "Open web dashboard",
@@ -472,7 +521,33 @@
       "examples": [
         { "description": "打开仪表盘", "descriptionEn": "Open dashboard", "code": "openclaw dashboard" }
       ],
-      "subcommands": []
+      "subcommands": [      ]
+    },
+    {
+      "name": "proxy",
+      "description": "运行 OpenClaw 调试代理并检查捕获流量",
+      "descriptionEn": "Run the OpenClaw debug proxy and inspect captured traffic",
+      "syntax": "openclaw proxy <subcommand> [options]",
+      "options": [
+        { "flag": "--host <host>", "description": "绑定主机（默认 127.0.0.1）", "descriptionEn": "Bind host (default 127.0.0.1)" },
+        { "flag": "--port <port>", "description": "绑定端口", "descriptionEn": "Bind port" },
+        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "Print machine-readable JSON" }
+      ],
+      "examples": [
+        { "description": "启动调试代理", "descriptionEn": "Start debug proxy", "code": "openclaw proxy start" },
+        { "description": "通过代理运行子命令", "descriptionEn": "Run command with capture enabled", "code": "openclaw proxy run -- openclaw status" },
+        { "description": "校验网络代理配置", "descriptionEn": "Validate network proxy", "code": "openclaw proxy validate --json" }
+      ],
+      "subcommands": [
+        { "name": "start", "description": "启动本地显式调试代理", "descriptionEn": "Start the local explicit debug proxy" },
+        { "name": "run", "description": "启用捕获后运行子命令（参数在 `--` 之后）", "descriptionEn": "Run a child command with debug proxy capture enabled" },
+        { "name": "validate", "description": "校验运维配置的网络代理", "descriptionEn": "Validate the operator-managed network proxy" },
+        { "name": "coverage", "description": "查看捕获覆盖情况", "descriptionEn": "Inspect capture coverage" },
+        { "name": "sessions", "description": "列出捕获会话", "descriptionEn": "List capture sessions" },
+        { "name": "query", "description": "查询捕获记录", "descriptionEn": "Query captured traffic" },
+        { "name": "blob", "description": "导出捕获 blob", "descriptionEn": "Export capture blob" },
+        { "name": "purge", "description": "清理捕获数据", "descriptionEn": "Purge captured data" }
+      ]
     },
     {
       "name": "directory",

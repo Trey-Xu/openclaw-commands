@@ -6,16 +6,70 @@
     <description>OpenClaw CLI 命令参考站更新与发布说明</description>
     <atom:link href="https://trey-xu.github.io/openclaw-commands/feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>v1.1.0</title>
-      <link>https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.1.0</link>
-      <description>Prism 语法高亮、搜索高亮、SEO、打印样式、ESLint、CI、部署指南卸载、无代码背景、GitHub 图标链接修正</description>
-      <pubDate>Tue, 11 Mar 2025 00:00:00 GMT</pubDate>
+      <title>2026.5.21-alpha.1</title>
+      <link>https://github.com/Trey-Xu/openclaw-commands/releases/tag/v2026.5.21-alpha.1</link>
+      <description>**OpenClaw 版本**: 跟踪至 [v2026.5.21-alpha.1](https://github.com/openclaw/openclaw/releases/tag/v2026.5.21-alpha.1); **命令参考**: 同步 v2026.5.21-alpha.1 — 自动同步官方最新版本; **校验脚本**: 默认 tag `v2026.5.21-alpha.1`</description>
+      <pubDate>Fri, 22 May 2026 12:00:00 GMT</pubDate>
     </item>
     <item>
-      <title>v1.0.0</title>
-      <link>https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.0.0</link>
-      <description>首次发布：Ctrl+F 搜索、侧边栏自动展开、动态标题、同类命令、回到顶部、404、路由过渡、集中版本配置</description>
-      <pubDate>Mon, 10 Mar 2025 00:00:00 GMT</pubDate>
+      <title>2026.5.18-beta.1</title>
+      <link>https://github.com/Trey-Xu/openclaw-commands/releases/tag/v2026.5.18-beta.1</link>
+      <description>Auto-sync from official OpenClaw CLI</description>
+      <pubDate>Tue, 19 May 2026 12:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>1.2.7</title>
+      <link>https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.7</link>
+      <description>**OpenClaw 版本**: 跟踪至 [v2026.5.5](https://github.com/openclaw/openclaw/releases/tag/v2026.5.5); **命令参考**: 同步 v2026.5.5 — 自动同步官方最新版本; **校验脚本**: 默认 tag `v2026.5.5`</description>
+      <pubDate>Thu, 07 May 2026 12:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>1.2.6</title>
+      <link>https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.6</link>
+      <description>**OpenClaw 版本**: 跟踪至 [v2026.4.21](https://github.com/openclaw/openclaw/releases/tag/v2026.4.21); **命令参考**: 同步 v2026.4.21 — OpenAI/images 图像生成改进、Plugins/doctor 修复、Image generation 日志优化、Auth/commands 权限修复、Slack 线程别名保留、Browser 可访问性引用修复、npm/install 依赖链优化; **校验脚本**: 默认 tag `v2026.4.21`</description>
+      <pubDate>Wed, 22 Apr 2026 12:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>1.2.5</title>
+      <link>https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.5</link>
+      <description>**PWA**: Service Worker 缓存版本升为 `openclaw-commands-v6`; **OpenClaw 版本**: 跟踪至 [v2026.4.10](https://github.com/openclaw/openclaw/releases/tag/v2026.4.10); **命令参考**: 新增 `infer` / `capability`、`exec-policy`；`qa` 补充 matrix/telegram/suite multipass；`qr` 文案与官方一致；**CLI 同步脚本**支持上游拆分后的 `core-command-descriptors.ts`、`subcli-descriptors.ts`、`command-registry-core.ts`、`register.subclis-core.ts`; **校验脚本**: 默认 tag `v2026.4.10`</description>
+      <pubDate>Sat, 11 Apr 2026 12:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>1.2.4</title>
+      <link>https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.4</link>
+      <description>**PWA**: Service Worker 缓存版本升为 `openclaw-commands-v5`; **OpenClaw 版本**: 跟踪至 [v2026.4.5](https://github.com/openclaw/openclaw/releases/tag/v2026.4.5); **命令参考**: 新增顶层 `qa` 及子命令；`plugins install` 说明 `--force`；校验脚本默认 tag `v2026.4.5`</description>
+      <pubDate>Mon, 06 Apr 2026 12:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>1.2.3</title>
+      <link>https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.3</link>
+      <description>**PWA**: Service Worker 缓存版本升为 `openclaw-commands-v4`; **OpenClaw 版本**: 跟踪至 [v2026.4.1](https://github.com/openclaw/openclaw/releases/tag/v2026.4.1); **命令参考**: 新增顶层 `tasks`（list / audit / maintenance / show / notify / cancel）；`cron` 补充 `--tools` 工具白名单说明；校验脚本默认 tag `v2026.4.1`</description>
+      <pubDate>Wed, 01 Apr 2026 12:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>1.2.2</title>
+      <link>https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.2</link>
+      <description>**PWA**: Service Worker 缓存版本升为 `openclaw-commands-v3`，避免已安装用户长期命中旧缓存; **OpenClaw 版本**: 跟踪至 [v2026.3.28](https://github.com/openclaw/openclaw/releases/tag/v2026.3.28); **命令参考**: 新增 `config schema`；`gateway run` 补充 `--cli-backend-logs` / `--claude-cli-logs`（弃用别名）、`--password-file`、`--ws-log`、`--raw-stream` 等；移除已不在官方 CLI 中的顶层 `browser`、`memory` 分类（见 README 说明）; **校验脚本**: 默认对比官方 tag `v2026.3.28`；支持 `OPENCLAW_LOCAL_REPO` 从本机 openclaw 源码目录读取，便于离线对照; **UPDATING.md**: 补充本地源码目录与校验命令的用法</description>
+      <pubDate>Mon, 30 Mar 2026 12:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>1.2.1</title>
+      <link>https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.1</link>
+      <description>**GitHub Pages**: 调整 Service Worker 缓存策略，避免发布新版本后因缓存旧 `index.html` 导致白屏</description>
+      <pubDate>Thu, 26 Mar 2026 12:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>1.2.0</title>
+      <link>https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.2.0</link>
+      <description>**版本注记**: 新增「Release Notes」页面（GitHub Releases 拉取 + 离线 fallback），支持按版本切换与中英文显示; **同步校验**: 新增 `check:cli-sync` / `check:cli-deep-sync` 并接入 CI，防止命令参考与官方差异扩大; **无障碍**: 键盘焦点 `:focus-visible` 样式、跳过主内容链接; **性能**: 首屏字体 preload、路由懒加载; **PWA**: manifest + Service Worker，可安装与离线访问</description>
+      <pubDate>Thu, 26 Mar 2026 12:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>1.1.0</title>
+      <link>https://github.com/Trey-Xu/openclaw-commands/releases/tag/v1.1.0</link>
+      <description>**CodeBlock**: Prism.js 语法高亮（bash/shell）; **Deployment**: 部署指南新增「卸载 OpenClaw」; **Search**: 搜索结果关键词高亮（命令名、描述）</description>
+      <pubDate>Tue, 11 Mar 2025 12:00:00 GMT</pubDate>
     </item>
   </channel>
 </rss>

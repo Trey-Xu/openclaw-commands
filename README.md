@@ -22,16 +22,16 @@ A comprehensive CLI command reference website for [OpenClaw](https://github.com/
 | Category | Commands |
 |----------|----------|
 | Deployment Guide | Install, Uninstall, System Requirements, Quick Start, AI Models, Chat Channels, Gateway, Remote, Security |
-| Setup & Configuration | `setup`, `onboard`, `configure`, `config`, `doctor`, `completion` |
+| Setup & Configuration | `setup`, `crestodian`, `onboard`, `configure`, `config`, `migrate`, `doctor`, `completion` |
 | Channels | `channels` (list/status/logs/add/remove/login/logout) |
 | Skills & Plugins | `skills`, `plugins`, `hooks` |
 | Gateway & Services | `gateway`, `daemon`, `node`, `nodes`, `devices` |
 | Agent & Messaging | `agent`, `agents`, `message`, `acp` |
 | Model Management | `models`, `infer`, `capability` (list/status/set/scan/auth/aliases/fallbacks + provider capabilities) |
 | Automation | `cron`, `webhooks`, `sandbox` |
-| System & Maintenance | `status`, `health`, `sessions`, `tasks`, `logs`, `system`, `update`, `reset`, `security`, `secrets`, `exec-policy`, `qa`, and more |
+| System & Maintenance | `status`, `health`, `sessions`, `commitments`, `tasks`, `logs`, `system`, `update`, `reset`, `security`, `secrets`, `exec-policy`, `qa`, `tui`, `terminal`, `chat`, `proxy`, and more |
 
-| OpenClaw **v2026.3.28+** (current reference **v2026.4.21**) no longer exposes top-level `openclaw browser` or `openclaw memory` CLI commands; browser control and memory features are integrated via the Gateway and agent tools (see [official docs](https://docs.openclaw.ai/)).
+| OpenClaw **v2026.3.28+** (current reference **v2026.5.21-alpha.1**) no longer exposes top-level `openclaw browser` or `openclaw memory` CLI commands; browser control and memory features are integrated via the Gateway and agent tools (see [official docs](https://docs.openclaw.ai/)).
 
 ## Tech Stack
 

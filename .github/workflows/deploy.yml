@@ -15,7 +15,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  quality:
+    uses: ./.github/workflows/quality-gates.yml
+
   build:
+    needs: quality
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,7 +30,6 @@ jobs:
           cache: npm
 
       - run: npm ci
-      - run: npm run lint
       - run: npm run build
 
       - uses: actions/upload-pages-artifact@v3

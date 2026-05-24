@@ -2,14 +2,38 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
-## [2026.5.18-beta.1] - 2026-05-19
-### Added
-- Auto-sync from official OpenClaw CLI
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+Site versions follow OpenClaw CalVer (see `src/config/version.js`); legacy semver entries (`1.2.x`) remain below.
 
 ## [Unreleased]
+
+### Added
+
+- **维护工具**：`scripts/lib/*` 共享库；`check:version-consistency`、`check:commands`、`npm run check`；`node --test` 解析器单测
+- **CI**：可复用 `quality-gates.yml`；Pages 部署同样跑同步校验；每周 `upstream-drift` 工作流
+- **深度校验 spec**：`scripts/deep-sync-spec.json`（自 `check-official-cli-deep-sync.mjs` 外置）
+- **部署指南**：`deployment.json` 条目显式 `kind: "guide"`；RSS 由 CHANGELOG 自动生成
+
+### Changed
+
+- **命令参考**：补齐 v2026.5.21-alpha.1 新增 CLI — `crestodian`、`migrate`、`commitments`、`chat`、`terminal`、`proxy`
+- **版本源**：校验脚本从 `version.js` 推导官方 tag，不再硬编码
+- **PWA**：Service Worker 缓存名在 build 时从 `package.json.version` 注入
+- **命令索引**：`getAllCommands()` 模块级缓存，搜索不再重复 flatten
+
+## [2026.5.21-alpha.1] - 2026-05-22
+
+### Changed
+
+- **OpenClaw 版本**: 跟踪至 [v2026.5.21-alpha.1](https://github.com/openclaw/openclaw/releases/tag/v2026.5.21-alpha.1)
+- **命令参考**: 同步 v2026.5.21-alpha.1 — 自动同步官方最新版本
+- **校验脚本**: 默认 tag `v2026.5.21-alpha.1`
+
+## [2026.5.18-beta.1] - 2026-05-19
+
+### Added
+
+- Auto-sync from official OpenClaw CLI
 
 ## [1.2.7] - 2026-05-07
 

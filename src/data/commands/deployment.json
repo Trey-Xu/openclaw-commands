@@ -7,6 +7,7 @@
   "descriptionEn": "Installation, deployment, and production environment configuration for OpenClaw",
   "commands": [
     {
+      "kind": "guide",
       "name": "安装 OpenClaw",
       "nameEn": "Install OpenClaw",
       "description": "通过一键脚本或 npm 全局安装 OpenClaw CLI",
@@ -21,6 +22,7 @@
       "subcommands": []
     },
     {
+      "kind": "guide",
       "name": "卸载 OpenClaw",
       "nameEn": "Uninstall OpenClaw",
       "description": "卸载 Gateway 服务、本地数据，以及 CLI 本身",
@@ -45,6 +47,7 @@
       "subcommands": []
     },
     {
+      "kind": "guide",
       "name": "系统要求",
       "nameEn": "System Requirements",
       "description": "运行 OpenClaw 的系统环境要求",
@@ -64,6 +67,7 @@
       "subcommands": []
     },
     {
+      "kind": "guide",
       "name": "容器内运行 CLI",
       "nameEn": "Run CLI inside a container",
       "description": "在已运行的 Docker 或 Podman OpenClaw 容器内执行 CLI（无需在宿主机重复装依赖）",
@@ -80,6 +84,7 @@
       "subcommands": []
     },
     {
+      "kind": "guide",
       "name": "快速启动",
       "nameEn": "Quick Start",
       "description": "5 分钟内完成 OpenClaw 基本部署和首次对话",
@@ -96,6 +101,7 @@
       "subcommands": []
     },
     {
+      "kind": "guide",
       "name": "配置 AI 模型",
       "nameEn": "Configure AI Models",
       "description": "在引导过程中或之后配置 LLM 提供商认证",
@@ -113,6 +119,7 @@
       "subcommands": []
     },
     {
+      "kind": "guide",
       "name": "接入聊天渠道",
       "nameEn": "Connect Chat Channels",
       "description": "连接 WhatsApp、Telegram、Discord 等聊天平台",
@@ -136,6 +143,7 @@
       "subcommands": []
     },
     {
+      "kind": "guide",
       "name": "Gateway 服务管理",
       "nameEn": "Gateway Service Management",
       "description": "安装、管理和监控 Gateway 后台服务",
@@ -157,6 +165,7 @@
       "subcommands": []
     },
     {
+      "kind": "guide",
       "name": "远程 Gateway 部署",
       "nameEn": "Remote Gateway Deployment",
       "description": "在远程服务器或 VPS 上部署 Gateway 并从本地连接",
@@ -172,6 +181,7 @@
       "subcommands": []
     },
     {
+      "kind": "guide",
       "name": "安全加固",
       "nameEn": "Security Hardening",
       "description": "生产环境的安全最佳实践",

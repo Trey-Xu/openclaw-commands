@@ -22,16 +22,16 @@
 | 类别 | 包含命令 |
 |------|----------|
 | 部署指南 | 安装、卸载、系统要求、快速启动、AI 模型配置、接入聊天渠道、Gateway 管理、远程部署、安全加固 |
-| 初始化与配置 | `setup`, `onboard`, `configure`, `config`, `doctor`, `completion` |
+| 初始化与配置 | `setup`, `crestodian`, `onboard`, `configure`, `config`, `migrate`, `doctor`, `completion` |
 | 接入渠道 | `channels` (list/status/logs/add/remove/login/logout) |
 | 技能与插件 | `skills`, `plugins`, `hooks` |
 | Gateway 服务 | `gateway`, `daemon`, `node`, `nodes`, `devices` |
 | Agent 与消息 | `agent`, `agents`, `message`, `acp` |
 | 模型管理 | `models`、`infer`、`capability`（模型管理与 provider 能力 CLI） |
 | 自动化 | `cron`, `webhooks`, `sandbox` |
-| 系统与维护 | `status`, `health`, `sessions`, `tasks`, `logs`, `system`, `update`, `reset`, `security`, `secrets`、`exec-policy`、`qa` 等 |
+| 系统与维护 | `status`, `health`, `sessions`, `commitments`, `tasks`, `logs`, `system`, `update`, `reset`, `security`, `secrets`、`exec-policy`、`qa`、`tui`、`terminal`、`chat`、`proxy` 等 |
 
-自 OpenClaw **v2026.3.28** 起（本站当前跟踪 **v2026.4.10**），官方 CLI 已不再提供顶层 `openclaw browser`、`openclaw memory`；浏览器与记忆能力通过 Gateway / Agent 工具使用，详见[官方文档](https://docs.openclaw.ai/)。
+自 OpenClaw **v2026.3.28** 起（本站当前跟踪 **v2026.5.21-alpha.1**），官方 CLI 已不再提供顶层 `openclaw browser`、`openclaw memory`；浏览器与记忆能力通过 Gateway / Agent 工具使用，详见[官方文档](https://docs.openclaw.ai/)。
 
 ## 技术栈
 

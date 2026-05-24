@@ -2,6 +2,40 @@
   {
     "releases": [
       {
+        "tagName": "v2026.5.21-alpha.1",
+        "version": "2026.5.21-alpha.1",
+        "publishedAt": "2026-05-22",
+        "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.5.21-alpha.1",
+        "sections": [
+          {
+            "title": "Changes",
+            "items": [
+              {
+                "zh": "自动同步官方 OpenClaw CLI 最新版本。",
+                "en": "Auto-sync with the latest official OpenClaw CLI release."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tagName": "v2026.5.18-beta.1",
+        "version": "2026.5.18-beta.1",
+        "publishedAt": "2026-05-19",
+        "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.5.18-beta.1",
+        "sections": [
+          {
+            "title": "Changes",
+            "items": [
+              {
+                "zh": "官方 CLI 中间 beta 版本。",
+                "en": "Intermediate official CLI beta release."
+              }
+            ]
+          }
+        ]
+      },
+      {
         "tagName": "v2026.4.21",
         "version": "2026.4.21",
         "publishedAt": "2026-04-22",

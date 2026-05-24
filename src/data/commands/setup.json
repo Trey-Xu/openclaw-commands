@@ -7,6 +7,23 @@
   "descriptionEn": "Initialize OpenClaw environment, configure workspace, and run health checks",
   "commands": [
     {
+      "name": "crestodian",
+      "description": "打开交互式安装与修复助手（Crestodian）",
+      "descriptionEn": "Open the interactive setup and repair assistant (Crestodian)",
+      "syntax": "openclaw crestodian [options]",
+      "options": [
+        { "flag": "-m, --message <text>", "description": "执行单次 Crestodian 请求", "descriptionEn": "Run one Crestodian request" },
+        { "flag": "--yes", "description": "批准本次请求的持久化配置写入", "descriptionEn": "Approve persistent config writes for this request" },
+        { "flag": "--json", "description": "以 JSON 输出启动概览", "descriptionEn": "Output startup overview as JSON" }
+      ],
+      "examples": [
+        { "description": "启动 Crestodian", "descriptionEn": "Start Crestodian", "code": "openclaw crestodian" },
+        { "description": "单次状态查询", "descriptionEn": "One-shot status request", "code": "openclaw crestodian -m \"status\"" },
+        { "description": "应用配置写入", "descriptionEn": "Apply a typed config write", "code": "openclaw crestodian -m \"set default model openai/gpt-5.2\" --yes" }
+      ],
+      "subcommands": []
+    },
+    {
       "name": "setup",
       "description": "初始化配置和工作区",
       "descriptionEn": "Initialize config and workspace",
@@ -136,6 +153,35 @@
         { "description": "自动修复（不提示）", "descriptionEn": "Apply recommended repairs", "code": "openclaw doctor --repair" }
       ],
       "subcommands": []
+    },
+    {
+      "name": "migrate",
+      "description": "从其他 Agent 系统导入状态",
+      "descriptionEn": "Import state from another agent system",
+      "syntax": "openclaw migrate [options] | openclaw migrate <subcommand> [options]",
+      "options": [
+        { "flag": "--from <path>", "description": "源目录路径", "descriptionEn": "Source directory to migrate from" },
+        { "flag": "--include-secrets", "description": "导入支持的凭据与密钥", "descriptionEn": "Import supported credentials and secrets" },
+        { "flag": "--overwrite", "description": "冲突时覆盖目标文件（会先备份单项）", "descriptionEn": "Overwrite conflicting target files after item-level backups" },
+        { "flag": "--dry-run", "description": "仅预览，不实际应用", "descriptionEn": "Preview only; do not apply changes" },
+        { "flag": "--yes", "description": "预览后直接应用，不再提示", "descriptionEn": "Apply without prompting after preview" },
+        { "flag": "--skill <name>", "description": "按名称选择要迁移的技能（可重复）", "descriptionEn": "Select skill(s) to migrate by name; repeat for multiple" },
+        { "flag": "--plugin <name>", "description": "按名称选择要迁移的 Codex 插件（可重复）", "descriptionEn": "Select Codex plugin(s) to migrate; repeat for multiple" },
+        { "flag": "--backup-output <path>", "description": "迁移前备份归档路径或目录", "descriptionEn": "Pre-migration backup archive path or directory" },
+        { "flag": "--no-backup", "description": "跳过迁移前 OpenClaw 备份", "descriptionEn": "Skip the pre-migration OpenClaw backup" },
+        { "flag": "--force", "description": "允许 --no-backup 等危险选项", "descriptionEn": "Allow dangerous options such as --no-backup" },
+        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "Output JSON" }
+      ],
+      "examples": [
+        { "description": "列出迁移提供方", "descriptionEn": "List migration providers", "code": "openclaw migrate list --json" },
+        { "description": "预览迁移计划", "descriptionEn": "Preview migration plan", "code": "openclaw migrate plan codex --from ~/old-agent" },
+        { "description": "应用迁移", "descriptionEn": "Apply migration after backup", "code": "openclaw migrate apply codex --from ~/old-agent --yes" }
+      ],
+      "subcommands": [
+        { "name": "list", "description": "列出可用的迁移提供方", "descriptionEn": "List migration providers" },
+        { "name": "plan <provider>", "description": "预览迁移，不修改 OpenClaw 状态", "descriptionEn": "Preview a migration without changing OpenClaw state" },
+        { "name": "apply <provider>", "description": "在已验证备份后应用迁移", "descriptionEn": "Apply a migration after a verified backup" }
+      ]
     },
     {
       "name": "completion",

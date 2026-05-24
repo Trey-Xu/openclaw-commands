@@ -20,15 +20,17 @@ export const categories = [
   system
 ]
 
+const allCommands = categories.flatMap(cat =>
+  cat.commands.map(cmd => ({
+    ...cmd,
+    categoryId: cat.id,
+    categoryName: cat.name,
+    categoryNameEn: cat.nameEn
+  }))
+)
+
 export function getAllCommands() {
-  return categories.flatMap(cat =>
-    cat.commands.map(cmd => ({
-      ...cmd,
-      categoryId: cat.id,
-      categoryName: cat.name,
-      categoryNameEn: cat.nameEn
-    }))
-  )
+  return allCommands
 }
 
 export function getCategoryById(id) {
@@ -52,7 +54,7 @@ export function getCommandByName(name) {
 export function searchCommands(query) {
   if (!query) return []
   const q = query.toLowerCase()
-  return getAllCommands().filter(cmd => {
+  return allCommands.filter(cmd => {
     if (cmd.name.toLowerCase().includes(q)) return true
     if (cmd.nameEn?.toLowerCase().includes(q)) return true
     if (cmd.description.toLowerCase().includes(q)) return true

@@ -1,0 +1,56 @@
+{
+  "update": {
+    "rel": "src/cli/update-cli.ts",
+    "subcommands": ["wizard", "status"],
+    "flags": [
+      "--json",
+      "--no-restart",
+      "--dry-run",
+      "--channel",
+      "--tag",
+      "--timeout",
+      "--yes"
+    ]
+  },
+  "qr": {
+    "rel": "src/cli/qr-cli.ts",
+    "subcommands": [],
+    "flags": [
+      "--remote",
+      "--url",
+      "--public-url",
+      "--token",
+      "--password",
+      "--setup-code-only",
+      "--no-ascii",
+      "--json"
+    ]
+  },
+  "mcp": {
+    "rel": "src/cli/mcp-cli.ts",
+    "subcommands": ["list", "show [name]", "set <name> <json>", "unset <name>"],
+    "flags": ["--json"]
+  },
+  "directory": {
+    "rel": "src/cli/directory-cli.ts",
+    "subcommands": ["self", "peers list", "groups list", "groups members"],
+    "flags": ["--channel", "--account", "--json", "--query", "--limit", "--group-id"]
+  },
+  "backup": {
+    "rel": "src/cli/program/register.backup.ts",
+    "subcommands": ["create", "verify <archive>"],
+    "flags": [
+      "--output",
+      "--json",
+      "--dry-run",
+      "--verify",
+      "--only-config",
+      "--no-include-workspace"
+    ]
+  },
+  "sessions": {
+    "rel": "src/cli/program/register.status-health-sessions.ts",
+    "subcommands": ["cleanup"],
+    "flags": ["--store", "--agent", "--all-agents", "--active", "--json", "--verbose"]
+  }
+}

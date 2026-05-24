@@ -1,4 +1,4 @@
-const CACHE = 'openclaw-commands-v8'
+const CACHE = 'openclaw-commands-v8' // overwritten at build from package.json version
 const BASE = '/openclaw-commands/'
 
 self.addEventListener('install', (e) => {
