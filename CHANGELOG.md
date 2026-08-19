@@ -7,6 +7,13 @@ Site versions follow OpenClaw CalVer (see `src/config/version.js`); legacy semve
 
 ## [Unreleased]
 
+## [2026.7.1-2] - 2026-08-04
+
+### Changed
+
+- **OpenClaw 版本**: 跟踪至 [v2026.7.1-2](https://github.com/openclaw/openclaw/releases/tag/v2026.7.1-2)
+- **命令参考**: 新增 `attach`、`audit`、`exec-approvals`、`promos`、`transcripts`、`worktrees`（共 61 顶层 CLI）
+
 ## [2026.5.22] - 2026-05-24
 
 ### Added

@@ -1,7 +1,7 @@
 {
   "name": "openclaw-commands",
   "private": true,
-  "version": "2026.5.22",
+  "version": "2026.7.1-2",
   "type": "module",
   "scripts": {
     "dev": "vite",

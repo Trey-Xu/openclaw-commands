@@ -317,6 +317,64 @@
       ]
     },
     {
+      "name": "exec-approvals",
+      "description": "管理 exec 审批（`approvals` 的别名）",
+      "descriptionEn": "Manage exec approvals (alias for approvals)",
+      "syntax": "openclaw exec-approvals <subcommand> [options]",
+      "options": [],
+      "examples": [
+        { "description": "获取审批设置", "descriptionEn": "Get approval settings", "code": "openclaw exec-approvals get" },
+        { "description": "设置审批模式", "descriptionEn": "Set approval mode", "code": "openclaw exec-approvals set auto" }
+      ],
+      "subcommands": [
+        { "name": "get", "description": "获取审批设置", "descriptionEn": "Get approval settings" },
+        { "name": "set", "description": "设置审批模式", "descriptionEn": "Set approval mode" },
+        { "name": "allowlist add", "description": "添加到允许列表", "descriptionEn": "Add to allowlist" },
+        { "name": "allowlist remove", "description": "从允许列表移除", "descriptionEn": "Remove from allowlist" }
+      ]
+    },
+    {
+      "name": "audit",
+      "description": "检查仅含元数据的 Agent 运行与工具操作记录",
+      "descriptionEn": "Inspect metadata-only agent run and tool action records",
+      "syntax": "openclaw audit [options]",
+      "options": [
+        { "flag": "--agent <id>", "description": "按 Agent ID 筛选", "descriptionEn": "Filter by agent id" },
+        { "flag": "--session <key>", "description": "按精确 session key 筛选", "descriptionEn": "Filter by exact session key" },
+        { "flag": "--run <id>", "description": "按 run id 筛选", "descriptionEn": "Filter by run id" },
+        { "flag": "--kind <kind>", "description": "按类型筛选（agent_run 或 tool_action）", "descriptionEn": "Filter by kind (agent_run or tool_action)" },
+        { "flag": "--after <timestamp>", "description": "包含该 ISO 时间或 Unix 毫秒之后的记录", "descriptionEn": "Include records at/after ISO time or Unix ms" },
+        { "flag": "--before <timestamp>", "description": "包含该 ISO 时间或 Unix 毫秒之前的记录", "descriptionEn": "Include records at/before ISO time or Unix ms" },
+        { "flag": "--cursor <sequence>", "description": "从上一页 cursor 继续", "descriptionEn": "Continue from a previous result cursor" },
+        { "flag": "--limit <count>", "description": "最大记录数（1–500，默认 100）", "descriptionEn": "Maximum records (1-500, default 100)" },
+        { "flag": "--json", "description": "输出有界 JSON 分页结果", "descriptionEn": "Output a bounded JSON page" }
+      ],
+      "examples": [
+        { "description": "查看最近审计记录", "descriptionEn": "View recent audit records", "code": "openclaw audit --json" },
+        { "description": "按 Agent 筛选", "descriptionEn": "Filter by agent", "code": "openclaw audit --agent work --limit 50" }
+      ],
+      "subcommands": []
+    },
+    {
+      "name": "transcripts",
+      "description": "检查本地存储的 transcript 元数据与摘要",
+      "descriptionEn": "Inspect stored transcripts",
+      "syntax": "openclaw transcripts <subcommand> [options]",
+      "options": [
+        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "JSON output" }
+      ],
+      "examples": [
+        { "description": "列出 transcript 会话", "descriptionEn": "List transcript sessions", "code": "openclaw transcripts list" },
+        { "description": "查看某会话详情", "descriptionEn": "Show session details", "code": "openclaw transcripts show 2026-08-04/transcript-2026-08-04T..." },
+        { "description": "打印存储路径", "descriptionEn": "Print storage path", "code": "openclaw transcripts path 2026-08-04/my-session" }
+      ],
+      "subcommands": [
+        { "name": "list", "description": "列出已存储 transcript", "descriptionEn": "List stored transcripts" },
+        { "name": "show", "description": "显示 transcript 详情/摘要", "descriptionEn": "Show transcript details or summary" },
+        { "name": "path", "description": "显示 transcript 目录或文件路径", "descriptionEn": "Show transcript directory or file paths" }
+      ]
+    },
+    {
       "name": "exec-policy",
       "description": "查看或同步请求的 exec 策略与主机 exec 审批文件",
       "descriptionEn": "Show or synchronize requested exec policy with host approvals",

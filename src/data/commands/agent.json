@@ -97,6 +97,22 @@
         { "description": "启动 ACP 桥接", "descriptionEn": "Start ACP bridge", "code": "openclaw acp" }
       ],
       "subcommands": []
+    },
+    {
+      "name": "attach",
+      "description": "将 Claude Code 附着到 Gateway 会话，并授予 scoped MCP 工具",
+      "descriptionEn": "Attach Claude Code to a gateway session with scoped MCP tools",
+      "syntax": "openclaw attach [options]",
+      "options": [
+        { "flag": "--session <key>", "description": "要绑定的 Gateway 会话键（默认 main session）", "descriptionEn": "Gateway session key to bind (default: main session)" },
+        { "flag": "--ttl <ms>", "description": "授权 TTL（毫秒，默认走 Gateway 策略）", "descriptionEn": "Grant TTL in milliseconds (default: gateway policy)" },
+        { "flag": "--bin <path>", "description": "要启动的 Claude Code 可执行文件（默认 claude）", "descriptionEn": "Claude Code binary to spawn (default: claude)" }
+      ],
+      "examples": [
+        { "description": "附着到默认会话", "descriptionEn": "Attach to default session", "code": "openclaw attach" },
+        { "description": "指定会话与二进制", "descriptionEn": "Attach with session and binary", "code": "openclaw attach --session agent:main:main --bin claude" }
+      ],
+      "subcommands": []
     }
   ]
 }

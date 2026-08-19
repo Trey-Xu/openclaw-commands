@@ -70,6 +70,23 @@
         { "name": "install <name>", "description": "安装钩子", "descriptionEn": "Install a hook" },
         { "name": "update <name>", "description": "更新钩子", "descriptionEn": "Update a hook" }
       ]
+    },
+    {
+      "name": "promos",
+      "description": "发现并领取 ClawHub 上的促销模型优惠",
+      "descriptionEn": "Discover and claim promotional model offers from ClawHub",
+      "syntax": "openclaw promos <subcommand> [options]",
+      "options": [
+        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "JSON output" }
+      ],
+      "examples": [
+        { "description": "列出可用促销", "descriptionEn": "List available promos", "code": "openclaw promos list --json" },
+        { "description": "领取促销", "descriptionEn": "Claim a promo", "code": "openclaw promos claim <id>" }
+      ],
+      "subcommands": [
+        { "name": "list", "description": "列出促销优惠", "descriptionEn": "List promotional offers" },
+        { "name": "claim", "description": "领取指定促销", "descriptionEn": "Claim a promotional offer" }
+      ]
     }
   ]
 }

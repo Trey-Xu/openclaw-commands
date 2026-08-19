@@ -184,6 +184,27 @@
       ]
     },
     {
+      "name": "worktrees",
+      "description": "创建、查看、恢复与清理托管 worktree",
+      "descriptionEn": "Create, inspect, restore, and clean up managed worktrees",
+      "syntax": "openclaw worktrees <subcommand> [options]",
+      "options": [
+        { "flag": "--json", "description": "JSON 输出", "descriptionEn": "JSON output" }
+      ],
+      "examples": [
+        { "description": "列出 worktree", "descriptionEn": "List worktrees", "code": "openclaw worktrees list" },
+        { "description": "创建 worktree", "descriptionEn": "Create a worktree", "code": "openclaw worktrees create my-feature" },
+        { "description": "垃圾回收", "descriptionEn": "Garbage-collect stale worktrees", "code": "openclaw worktrees gc" }
+      ],
+      "subcommands": [
+        { "name": "list", "description": "列出托管 worktree", "descriptionEn": "List managed worktrees" },
+        { "name": "create", "description": "创建 worktree", "descriptionEn": "Create a worktree" },
+        { "name": "remove", "description": "移除 worktree", "descriptionEn": "Remove a worktree" },
+        { "name": "restore", "description": "恢复 worktree 状态", "descriptionEn": "Restore a worktree" },
+        { "name": "gc", "description": "清理过期 worktree", "descriptionEn": "Garbage-collect stale worktrees" }
+      ]
+    },
+    {
       "name": "completion",
       "description": "生成 Shell 自动补全脚本",
       "descriptionEn": "Generate shell auto-completion script",

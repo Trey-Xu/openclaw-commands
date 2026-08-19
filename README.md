@@ -6,7 +6,7 @@ A comprehensive CLI command reference website for [OpenClaw](https://github.com/
 
 ## Features
 
-- **40+ commands** organized into **9 categories** with full syntax, options, subcommands, and examples
+- **60+ commands** organized into **9 categories** with full syntax, options, subcommands, and examples
 - **Bilingual support** — switch between Chinese and English with one click
 - **Real-time search** — search across command names, descriptions, and subcommands (substring match)
 - **Dark theme** — terminal-inspired design with OpenClaw's lobster color palette
@@ -22,16 +22,16 @@ A comprehensive CLI command reference website for [OpenClaw](https://github.com/
 | Category | Commands |
 |----------|----------|
 | Deployment Guide | Install, Uninstall, System Requirements, Quick Start, AI Models, Chat Channels, Gateway, Remote, Security |
-| Setup & Configuration | `setup`, `crestodian`, `onboard`, `configure`, `config`, `migrate`, `doctor`, `completion` |
+| Setup & Configuration | `setup`, `crestodian`, `onboard`, `configure`, `config`, `migrate`, `worktrees`, `doctor`, `completion` |
 | Channels | `channels` (list/status/logs/add/remove/login/logout) |
-| Skills & Plugins | `skills`, `plugins`, `hooks` |
+| Skills & Plugins | `skills`, `plugins`, `hooks`, `promos` |
 | Gateway & Services | `gateway`, `daemon`, `node`, `nodes`, `devices` |
-| Agent & Messaging | `agent`, `agents`, `message`, `acp` |
+| Agent & Messaging | `agent`, `agents`, `message`, `acp`, `attach` |
 | Model Management | `models`, `infer`, `capability` (list/status/set/scan/auth/aliases/fallbacks + provider capabilities) |
 | Automation | `cron`, `webhooks`, `sandbox` |
-| System & Maintenance | `status`, `health`, `sessions`, `commitments`, `tasks`, `logs`, `system`, `update`, `reset`, `security`, `secrets`, `exec-policy`, `qa`, `tui`, `terminal`, `chat`, `proxy`, and more |
+| System & Maintenance | `status`, `health`, `sessions`, `commitments`, `tasks`, `logs`, `audit`, `transcripts`, `system`, `update`, `reset`, `security`, `secrets`, `exec-policy`, `approvals`, `exec-approvals`, `qa`, `tui`, `terminal`, `chat`, `proxy`, and more |
 
-| OpenClaw **v2026.3.28+** (current reference **v2026.5.22**) no longer exposes top-level `openclaw browser` or `openclaw memory` CLI commands; browser control and memory features are integrated via the Gateway and agent tools (see [official docs](https://docs.openclaw.ai/)).
+| OpenClaw **v2026.3.28+** (current reference **v2026.7.1-2**) no longer exposes top-level `openclaw browser` or `openclaw memory` CLI commands; browser control and memory features are integrated via the Gateway and agent tools (see [official docs](https://docs.openclaw.ai/)).
 
 ## Tech Stack
 

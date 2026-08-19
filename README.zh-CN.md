@@ -6,7 +6,7 @@
 
 ## 功能特性
 
-- **40+ 命令** 分为 **9 大类**，包含完整的语法、选项、子命令和使用示例
+- **60+ 命令** 分为 **9 大类**，包含完整的语法、选项、子命令和使用示例
 - **双语支持** —— 中英文一键切换
 - **实时搜索** —— 按命令名、描述和子命令关键词搜索（子串匹配）
 - **暗色主题** —— 终端风格设计，采用 OpenClaw 龙虾配色方案
@@ -22,16 +22,16 @@
 | 类别 | 包含命令 |
 |------|----------|
 | 部署指南 | 安装、卸载、系统要求、快速启动、AI 模型配置、接入聊天渠道、Gateway 管理、远程部署、安全加固 |
-| 初始化与配置 | `setup`, `crestodian`, `onboard`, `configure`, `config`, `migrate`, `doctor`, `completion` |
+| 初始化与配置 | `setup`, `crestodian`, `onboard`, `configure`, `config`, `migrate`, `worktrees`, `doctor`, `completion` |
 | 接入渠道 | `channels` (list/status/logs/add/remove/login/logout) |
-| 技能与插件 | `skills`, `plugins`, `hooks` |
+| 技能与插件 | `skills`, `plugins`, `hooks`, `promos` |
 | Gateway 服务 | `gateway`, `daemon`, `node`, `nodes`, `devices` |
-| Agent 与消息 | `agent`, `agents`, `message`, `acp` |
+| Agent 与消息 | `agent`, `agents`, `message`, `acp`, `attach` |
 | 模型管理 | `models`、`infer`、`capability`（模型管理与 provider 能力 CLI） |
 | 自动化 | `cron`, `webhooks`, `sandbox` |
-| 系统与维护 | `status`, `health`, `sessions`, `commitments`, `tasks`, `logs`, `system`, `update`, `reset`, `security`, `secrets`、`exec-policy`、`qa`、`tui`、`terminal`、`chat`、`proxy` 等 |
+| 系统与维护 | `status`, `health`, `sessions`, `commitments`, `tasks`, `logs`, `audit`, `transcripts`, `system`, `update`, `reset`, `security`, `secrets`、`exec-policy`、`approvals`、`exec-approvals`、`qa`、`tui`、`terminal`、`chat`、`proxy` 等 |
 
-自 OpenClaw **v2026.3.28** 起（本站当前跟踪 **v2026.5.22**），官方 CLI 已不再提供顶层 `openclaw browser`、`openclaw memory`；浏览器与记忆能力通过 Gateway / Agent 工具使用，详见[官方文档](https://docs.openclaw.ai/)。
+自 OpenClaw **v2026.3.28** 起（本站当前跟踪 **v2026.7.1-2**），官方 CLI 已不再提供顶层 `openclaw browser`、`openclaw memory`；浏览器与记忆能力通过 Gateway / Agent 工具使用，详见[官方文档](https://docs.openclaw.ai/)。
 
 ## 技术栈
 

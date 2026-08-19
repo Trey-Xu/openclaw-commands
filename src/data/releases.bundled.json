@@ -2,6 +2,23 @@
   {
     "releases": [
       {
+        "tagName": "v2026.7.1-2",
+        "version": "2026.7.1-2",
+        "publishedAt": "2026-08-19",
+        "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.7.1-2",
+        "sections": [
+          {
+            "title": "Changes",
+            "items": [
+              {
+                "zh": "同步 OpenClaw CLI 参考至 v2026.7.1-2",
+                "en": "Sync openclaw-commands to OpenClaw v2026.7.1-2"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "tagName": "v2026.5.22",
         "version": "2026.5.22",
         "publishedAt": "2026-05-24",
